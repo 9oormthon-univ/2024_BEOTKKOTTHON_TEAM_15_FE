@@ -12,13 +12,13 @@ const Index = () => {
     if (permission !== 'granted') return 
  
     const firebaseApp = initializeApp({
-      apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-      authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-      appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-      measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+      apiKey: "AIzaSyCx0GFCssAQcT8OxA51k1ACmSkFLaqIFAY",
+      authDomain: "goorm-notification.firebaseapp.com",
+      projectId: "goorm-notification",
+      storageBucket: "goorm-notification.appspot.com",
+      messagingSenderId: "1029982305361",
+      appId: "1:1029982305361:web:6ad251e9e5fda0d5ca0c70",
+      measurementId: "G-3VBYE8EYJL"
     })
  
     const messaging = getMessaging(firebaseApp)
