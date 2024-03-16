@@ -1,5 +1,5 @@
 'use client';
-
+// FCM 테스트 파일
 import React, { useEffect } from 'react'
 import { initializeApp } from 'firebase/app'
 import { getMessaging, onMessage, getToken } from 'firebase/messaging'
