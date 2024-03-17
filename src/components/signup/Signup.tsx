@@ -4,11 +4,15 @@ import styled from 'styled-components';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
 
-const Login = () => {
+const Signup = () => {
+	const [name, setName] = useState('');
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
 	const router = useRouter();
+	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setName(e.target.value);
+	};
 
 	const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setId(e.target.value);
@@ -19,7 +23,7 @@ const Login = () => {
 	};
 
 	const onClick = () => {
-		router.push('/home');
+		router.push('/onBoarding');
 	};
 
 	return (
@@ -29,11 +33,12 @@ const Login = () => {
 				<Explain>우리의 더 효율적인 의사소통</Explain>
 			</TitleWrapper>
 			<DivisionWrapper>
-				<div>회원가입</div>
+				<div className="select">회원가입</div>
 				<div>|</div>
-				<div className="select">로그인</div>
+				<div>로그인</div>
 			</DivisionWrapper>
 			<SignupWrapper>
+				<Input onChange={handleNameChange} placeholder="성함을 입력해주세요!" />
 				<Input onChange={handleIdChange} placeholder="ID를 입력해주세요!" />
 				<Input onChange={handlePwChange} placeholder="PW를 입력해주세요!" type="password" />
 			</SignupWrapper>
@@ -44,7 +49,7 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Signup;
 
 const Wrapper = styled.div`
 	width: 100%;
