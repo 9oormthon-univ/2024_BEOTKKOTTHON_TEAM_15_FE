@@ -1,1 +1,5 @@
-// 세팅용 파일
+export enum TABS {
+	HOME,
+	GROUP,
+	MY_PAGE,
+}
