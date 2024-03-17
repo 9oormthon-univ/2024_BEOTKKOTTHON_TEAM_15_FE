@@ -51,6 +51,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
+    /* background: linear-gradient(to bottom, #93613B 50%, #FFF5E0 50%); */
     /* 드래그 방지 */
     -webkit-user-select: none;
     -moz-user-select: none;
