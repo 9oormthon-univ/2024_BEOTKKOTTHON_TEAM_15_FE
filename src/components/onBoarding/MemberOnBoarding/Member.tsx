@@ -1,37 +1,26 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
+import GroupCard from './GroupCard';
 
-const OnBoarding = () => {
-	const router = useRouter();
-
-	const onLeader = () => {
-		router.push('/onBoarding/leader');
-	};
-
-	const onMember = () => {
-		router.push('/onBoarding/member');
-	};
+const Member = () => {
 	return (
 		<Wrapper>
 			<Container>
 				<TextWrapper>
-					<Text>가정통신문에 오신 것을 환영합니다!</Text>
-					<Ask>OOO님은 가정통신문을 어떻게 활용하실 예정인가요?</Ask>
+					<Text>OOO멤버님 환영합니다</Text>
+					<Ask>OOO님이 속한 그룹은 어디인가요?</Ask>
 				</TextWrapper>
-				<BtnWrapper>
-					<Btn onClick={onLeader}>리더</Btn>
-					<Btn onClick={onMember}>멤버</Btn>
-				</BtnWrapper>
+				<div>ㅇㅇ</div>
+				<GroupCard />
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />
 		</Wrapper>
 	);
 };
 
-export default OnBoarding;
+export default Member;
 
 const Wrapper = styled.div`
 	height: 100vh;
@@ -48,7 +37,7 @@ const Container = styled.div`
 	align-items: flex-start;
 	gap: 10rem;
 	margin-top: 7%;
-	margin-left: 20%;
+	margin-left: 15%;
 	@media (max-width: 1200px) {
 		margin-top: 13%;
 		margin-left: 10%;
@@ -68,21 +57,6 @@ const Text = styled.div`
 
 const Ask = styled.div`
 	font-size: 3rem;
-`;
-
-const BtnWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-`;
-
-const Btn = styled.div`
-	padding: 4rem 10rem;
-	border-radius: 12px;
-	background-color: #f4e6c8;
-	font-size: 2rem;
-	cursor: pointer;
-	box-shadow: 1px 1px 0px 0px black;
 `;
 
 const Character = styled.img`
