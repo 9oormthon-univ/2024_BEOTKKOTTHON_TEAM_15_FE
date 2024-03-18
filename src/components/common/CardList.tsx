@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NoticeCard from './NoticeCard';
 import { SampleType } from '@/utils/constant';
+import { FaChevronDown } from "react-icons/fa6";
 
 const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
 	const [selectedDataSet, setSelectedDataSet] = useState(dataList);
-	const [groupList, setGroupList] = useState(['전체']);
-	const [selectedGroup, setSelectedGroup] = useState('전체');
+	const [groupList, setGroupList] = useState<string[]>(['전체']);
+	const [selectedGroup, setSelectedGroup] = useState<string>('전체');
+	const [visibleCount, setVisibleCount] = useState<number>(4);
 
 	useEffect(() => {
 		if (dataList) {
@@ -19,11 +21,16 @@ const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
 	const handleSelectBtn = (groupName: string) => {
 		setSelectedGroup(groupName);
 		if (groupName === '전체') {
-			setSelectedDataSet(dataList); // 전체를 선택하면 모든 공지사항을 선택
+			setSelectedDataSet(dataList || []);
 		} else {
 			const filteredData = dataList?.filter((item) => item.group === groupName);
-			setSelectedDataSet(filteredData); // 선택된 그룹에 해당하는 공지사항만 선택
+			setSelectedDataSet(filteredData || []);
 		}
+		setVisibleCount(4);
+	};
+
+	const handleShowMore = () => {
+		setVisibleCount((prevCount) => prevCount + 4);
 	};
 
 	return (
@@ -36,8 +43,17 @@ const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
 				))}
 			</BtnGroup>
 			<CardWrapper>
-				{selectedDataSet && selectedDataSet.map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
+				{selectedDataSet &&
+					selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
 			</CardWrapper>
+			<Bottom>
+				{selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
+					<ShowMoreButton onClick={handleShowMore}>
+						더보기
+						<FaChevronDown size="1.2rem" color="white" />
+					</ShowMoreButton>
+				)}
+			</Bottom>
 		</Main>
 	);
 };
@@ -77,4 +93,22 @@ const GroupSortBtn = styled.div<{ $active: boolean }>`
 	border-radius: 2rem;
 	font-size: 1.2rem;
 	cursor: pointer;
+`;
+const Bottom = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+`;
+const ShowMoreButton = styled.div`
+	background-color: #4f7b59;
+	color: white;
+	padding: 0.4rem 1.3rem;
+	border-radius: 2rem;
+	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	gap: 0.2rem;
 `;

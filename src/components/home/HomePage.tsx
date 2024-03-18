@@ -16,7 +16,6 @@ const HomePage = () => {
                 <NewNoticeSection/>
 			</Section>
 			<Section>
-				<SectionTitle>놓치기 아쉬운 정보</SectionTitle>
                 <InfoSection/>
 			</Section>
 			<Section>
