@@ -5,7 +5,7 @@ import NoneNoticeCard from '../common/NoneNoticeCard';
 const MyGroupStateSection = () => {
 	return (
 		<Main>
-			<NoneNoticeCard text="생성된 그룹이 없습니다" />
+			<NoneNoticeCard text="아직 생성된 그룹이 없어요!" />
 		</Main>
 	);
 };

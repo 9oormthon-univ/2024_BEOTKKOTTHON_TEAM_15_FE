@@ -58,7 +58,7 @@ const NavBox = styled.div`
 	background-color: white;
 	position: fixed;
 	bottom: 0;
-	z-index: 1;
+	z-index: 99;
 	height: 5rem;
 	box-shadow: 4px 4px 14px -1px rgba(0, 0, 0, 0.4);
 	display: flex;

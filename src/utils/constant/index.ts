@@ -9,6 +9,7 @@ export interface SampleType {
 	group: string;
 	leader: string;
 	limit_time: string;
+	content: string;
 	check: number;
 	no_check: number;
 }

@@ -19,7 +19,7 @@ const HomePage = () => {
                 <InfoSection/>
 			</Section>
 			<Section>
-				<SectionTitle>OOO님이 발행한 가정통신문</SectionTitle>
+				<SectionTitle>미르미님이 발행한 가정통신문</SectionTitle>
                 <IssuedNoticeSection/>
 			</Section>
 			<Section>
@@ -39,7 +39,7 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-    gap: 3.3rem;
+    gap: 3rem;
 `;
 
 const Section = styled.div`

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoneNoticeCard from '../common/NoneNoticeCard';
 import CardList from '../common/CardList';
 import sampleDataList from '@/utils/MOCK_DATA.json';
 

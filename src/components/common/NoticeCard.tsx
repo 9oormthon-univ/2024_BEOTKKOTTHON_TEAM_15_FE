@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import { LuArrowRightCircle } from 'react-icons/lu';
 
 const NoticeCard = ({ notice }: { notice: SampleType }) => {
+	const formatContent = (content: string) => {
+		return content.split(/\\n|\n/).map((line, index) => (
+			<React.Fragment key={index}>
+				{line}
+				<br />
+			</React.Fragment>
+		));
+	};
+
 	return (
 		<Main>
 			<Card>
@@ -16,7 +25,10 @@ const NoticeCard = ({ notice }: { notice: SampleType }) => {
 						<span id="limit-time">00:45:30</span>
 					</Span>
 				</Top>
-				<Middle></Middle>
+				<Middle id="middle">
+					<Content>{formatContent(notice.content)}</Content>
+					<Mosaic />
+				</Middle>
 				<Bottom>
 					<CheckCount id="check">
 						<div>확인 {notice.check}명</div>
@@ -51,18 +63,18 @@ const Card = styled.div`
 	border-radius: 20px;
 	border: 3px solid #c9bca2;
 	padding: 2rem 0rem;
-	transition: background-color 0.4s, border-color 0.4s;
+	/* transition: background-color 0.4s, border-color 0.4s; */
 	cursor: pointer;
 	&:hover {
 		background-color: #4f7b59;
 		border: 3px solid #4f7b59;
-		#top {
+		#top,
+		#middle {
 			opacity: 0;
-			transition: opacity 0.2s;
 		}
 		#check {
 			opacity: 1;
-			transition: opacity 0.2s;
+			transition: opacity 0.3s;
 		}
 	}
 `;
@@ -77,11 +89,11 @@ const Top = styled.div`
 const Title = styled.div`
 	font-weight: 600;
 	font-size: 2rem;
-	margin-bottom: 1rem;
+	margin-bottom: 1.2rem;
 	width: 90%;
 `;
 const Span = styled.span`
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-weight: 600;
 	width: 90%;
 	.tag {
@@ -100,19 +112,45 @@ const Span = styled.span`
 `;
 
 const Middle = styled.div`
+	width: 100%;
+	font-size: 1.2rem;
+	font-weight: 400;
+	margin-top: 1rem;
+	height: 18rem;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	position: relative;
+`;
+const Content = styled.div`
 	width: 90%;
+`;
+const Mosaic = styled.div`
+	position: absolute;
+	background: linear-gradient(182deg, rgba(255, 255, 255, 0) 3.97%, #fff5e0 95.42%);
+	z-index: 2;
+	top: 0;
+	width: 100%;
+	height: 100%;
 `;
 
 const Bottom = styled.div`
 	display: flex;
 	align-items: end;
 	width: 90%;
-	justify-content: space-between;
+	justify-content: flex-end;
+	position: relative;
+	padding-top: 0.2rem;
 `;
+
 const CheckCount = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 	opacity: 0;
 	font-weight: 600;
 	font-size: 2.5rem;
-
+	position: absolute;
+	z-index: 2;
 	color: #fff9ee;
 `;
