@@ -1,19 +1,26 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
 
 type BtnProps = {
 	text: string;
+	routerName: string;
 };
 
 const Btn = (props: BtnProps) => {
-	return <Wrapper>{props.text}</Wrapper>;
+	const router = useRouter();
+
+	const handleClick = () => {
+		router.push(`/${props.routerName}`);
+	};
+	return <Wrapper onClick={handleClick}>{props.text}</Wrapper>;
 };
 
 export default Btn;
 
 const Wrapper = styled.div`
-	width: 50%;
-	min-width: 300px;
+	width: 55%;
+	min-width: 280px;
 	border-radius: 30px;
 	text-align: center;
 	border: 1px solid black;
