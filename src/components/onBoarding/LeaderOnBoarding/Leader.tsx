@@ -26,7 +26,7 @@ const Leader = () => {
 					<GroupPurpose placeholder="그룹 생성 목적을 입력해주세요. *(최대 50자)" />
 				</Information>
 				<BtnWrapper>
-					<button onClick={onModal}>생성하기</button>
+					<JoinBtn onClick={onModal}>생성하기</JoinBtn>
 				</BtnWrapper>
 			</Container>
 		</Wrapper>
@@ -56,20 +56,6 @@ const Title = styled.div`
 	font-size: 2.8rem;
 	color: white;
 	font-weight: bold;
-`;
-
-const ImgWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 2rem;
-	img {
-		width: 50%;
-	}
-	div {
-		font-size: 2rem;
-	}
 `;
 
 const Information = styled.div`
@@ -104,4 +90,18 @@ const BtnWrapper = styled.div`
 	width: 57rem;
 	display: flex;
 	justify-content: flex-end;
+`;
+
+const JoinBtn = styled.div`
+	width: 60px;
+	text-align: center;
+	padding: 0.5rem 2rem;
+	border: 1px solid #4f7b59;
+	border-radius: 2.5rem;
+	font-size: 1.5rem;
+	color: #4f7b59;
+	&:hover {
+		color: white;
+		background-color: #4f7b59;
+	}
 `;
