@@ -52,6 +52,7 @@ const HeaderBox = styled.div`
 	width: 100%;
 	height: 5rem;
 	padding-top: 1rem;
+	padding-bottom: 1rem;
 `;
 
 const Logo = styled.img`

@@ -113,6 +113,6 @@ const CheckCount = styled.div`
 	opacity: 0;
 	font-weight: 600;
 	font-size: 2.5rem;
-	margin-bottom: 1rem;
-  color:#FFF9EE;
+
+	color: #fff9ee;
 `;
