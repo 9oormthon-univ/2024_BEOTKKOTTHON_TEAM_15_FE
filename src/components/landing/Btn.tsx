@@ -5,6 +5,7 @@ import styled from 'styled-components';
 type BtnProps = {
 	text: string;
 	routerName: string;
+	color: string;
 };
 
 const Btn = (props: BtnProps) => {
@@ -13,22 +14,22 @@ const Btn = (props: BtnProps) => {
 	const handleClick = () => {
 		router.push(`/${props.routerName}`);
 	};
-	return <Wrapper onClick={handleClick}>{props.text}</Wrapper>;
+	return (
+		<Wrapper color={props.color} onClick={handleClick}>
+			{props.text}
+		</Wrapper>
+	);
 };
 
 export default Btn;
 
 const Wrapper = styled.div`
-	width: 55%;
-	min-width: 280px;
+	min-width: 350px;
 	border-radius: 30px;
 	text-align: center;
-	border: 1px solid black;
 	font-size: 2rem;
 	padding: 1rem 2rem;
-	&:hover {
-		color: white;
-		background-color: #8b5e3c;
-		border: 1px solid #8b5e3c;
-	}
+	background: ${(props) => props.color};
+	color: white;
+	cursor: pointer;
 `;

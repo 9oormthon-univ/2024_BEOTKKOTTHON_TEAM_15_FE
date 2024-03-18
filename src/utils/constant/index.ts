@@ -3,3 +3,13 @@ export enum TABS {
 	GROUP,
 	MY_PAGE,
 }
+
+export interface SampleType {
+	title: string;
+	group: string;
+	leader: string;
+	limit_time: string;
+	content: string;
+	check: number;
+	no_check: number;
+}

@@ -27,15 +27,16 @@ const Main = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: #fff9ee;
+	background-color: #FFF9EE;
 `;
 
 const MainBox = styled.div`
 	background-color: #fff9ee;
-	width: 100%;
+	width: 98%;
 	min-height: 95vh;
 	height: fit-content;
 	font-family: Pretendard;
+  padding-bottom: 6rem;
 	@media (min-width: 0px) {
 		html {
 			font-size: 8px;
