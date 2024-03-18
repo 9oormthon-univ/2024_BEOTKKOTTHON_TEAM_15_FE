@@ -56,7 +56,7 @@ const getInitialTab = (pathname: string): number => {
 const NavBox = styled.div`
 	width: 100%;
 	background-color: white;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	z-index: 1;
 	height: 5rem;

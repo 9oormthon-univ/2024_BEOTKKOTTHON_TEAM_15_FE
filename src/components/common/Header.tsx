@@ -55,7 +55,7 @@ const HeaderBox = styled.div`
 `;
 
 const Logo = styled.img`
-	height: 40%;
+	height: 35%;
 `;
 
 const LogoGroup = styled.div`
