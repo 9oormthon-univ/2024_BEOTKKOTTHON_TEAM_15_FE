@@ -11,11 +11,12 @@ const Landing = () => {
 		<Wrapper>
 			<TitleWrapper>
 				<Logo />
-				<Explain>우리의 더 효율적인 의사소통</Explain>
+				<Explain>대학생들의 효율적인 의사소통을 위해</Explain>
 			</TitleWrapper>
+			<Character src="/img/PaperRun.png" alt={'ch'} />
 			<BtnWrapper>
-				<Btn routerName="login" text="로그인하기" />
-				<Btn routerName="signup" text="회원가입하기" />
+				<Btn color="#4F7B59" routerName="login" text="로그인하기" />
+				<Btn color="#93613B" routerName="signup" text="회원가입하기" />
 				<TermsWrapper>
 					<div>서비스이용약관</div>
 					<div>|</div>
@@ -43,8 +44,14 @@ const TitleWrapper = styled.div`
 `;
 
 const Explain = styled.div`
-	font-size: 2.5rem;
-	font-weight: bold;
+	font-size: 2.3rem;
+	font-weight: 400;
+	color: #93613b;
+`;
+
+const Character = styled.img`
+	width: 250px;
+	min-width: 250px;
 `;
 
 const BtnWrapper = styled.div`
