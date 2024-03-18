@@ -43,7 +43,7 @@ const Signup = () => {
 				<Input onChange={handlePwChange} placeholder="PW를 입력해주세요!" type="password" />
 			</SignupWrapper>
 			<CheckWrapper>
-				<button onClick={onClick}>확인</button>
+				<JoinBtn onClick={onClick}>가입하기</JoinBtn>
 			</CheckWrapper>
 		</Wrapper>
 	);
@@ -95,8 +95,9 @@ const Input = styled.input`
 	padding: 1.4rem 2rem;
 	font-size: 16px;
 	border-radius: 7px;
-	background-color: #d9d9d9;
-	border: 1px solid #d9d9d9;
+	background-color: #f4e6c8;
+	border: 1px solid #f4e6c8;
+	outline: none;
 `;
 
 const CheckWrapper = styled.div`
@@ -104,4 +105,18 @@ const CheckWrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
+`;
+
+const JoinBtn = styled.div`
+	width: 45px;
+	text-align: center;
+	padding: 0.5rem 2rem;
+	border: 1px solid #4f7b59;
+	border-radius: 2.5rem;
+	font-size: 1.2rem;
+	color: #4f7b59;
+	&:hover {
+		color: white;
+		background-color: #4f7b59;
+	}
 `;
