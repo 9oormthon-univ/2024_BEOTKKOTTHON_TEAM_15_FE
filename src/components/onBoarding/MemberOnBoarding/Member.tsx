@@ -1,19 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
+import MemberModal from './MemberModal';
 
 const Member = () => {
+	const [modal, setModal] = useState(false);
+
+	const onModal = () => {
+		setModal(true);
+	};
 	return (
 		<Wrapper>
+			{modal && <MemberModal />}
 			<Container>
 				<TextWrapper>
 					<Text>OOO멤버님 환영합니다</Text>
 					<Ask>OOO님이 속한 그룹은 어디인가요?</Ask>
 				</TextWrapper>
 				<div>ㅇㅇ</div>
-				<GroupCard />
+				<GroupCard onModal={onModal} />
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />
 		</Wrapper>
