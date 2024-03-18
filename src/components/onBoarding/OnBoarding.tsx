@@ -22,8 +22,8 @@ const OnBoarding = () => {
 					<Ask>OOO님은 가정통신문을 어떻게 활용하실 예정인가요?</Ask>
 				</TextWrapper>
 				<BtnWrapper>
-					<Btn onClick={onLeader}>리더</Btn>
-					<Btn onClick={onMember}>멤버</Btn>
+					<Btn onClick={onLeader}>리더 👑</Btn>
+					<Btn onClick={onMember}>멤버 🧑‍🤝‍🧑</Btn>
 				</BtnWrapper>
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />

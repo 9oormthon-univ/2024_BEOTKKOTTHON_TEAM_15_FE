@@ -38,7 +38,7 @@ const Login = () => {
 				<Input onChange={handlePwChange} placeholder="PW를 입력해주세요!" type="password" />
 			</SignupWrapper>
 			<CheckWrapper>
-				<button onClick={onClick}>확인</button>
+				<LoginBtn onClick={onClick}>로그인</LoginBtn>
 			</CheckWrapper>
 		</Wrapper>
 	);
@@ -86,17 +86,33 @@ const DivisionWrapper = styled.div`
 `;
 
 const Input = styled.input`
-	width: 280px;
+	width: 320px;
 	padding: 1.4rem 2rem;
 	font-size: 16px;
-	border-radius: 7px;
-	background-color: #d9d9d9;
-	border: 1px solid #d9d9d9;
+	border-radius: 2rem;
+	background-color: #f4e6c8;
+	border: 1px solid #f4e6c8;
+	outline: none;
 `;
 
 const CheckWrapper = styled.div`
-	width: 310px;
+	width: 350px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
+`;
+
+const LoginBtn = styled.div`
+	width: 80px;
+	text-align: center;
+	padding: 1rem 1rem;
+	border: 1px solid #4f7b59;
+	border-radius: 2.5rem;
+	font-size: 1.5rem;
+	color: #4f7b59;
+	&:hover {
+		color: white;
+		background-color: #4f7b59;
+	}
+	cursor: pointer;
 `;
