@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const GroupCard = () => {
+type CardProps = {
+	onModal: React.MouseEventHandler<HTMLDivElement>;
+};
+
+const GroupCard = (props: CardProps) => {
 	return (
 		<Wrapper>
 			<ProfileImg alt="groupProfile" src="/img/goorm.png" />
@@ -10,8 +14,8 @@ const GroupCard = () => {
 				<GroupLeader>리더: 000</GroupLeader>
 			</GroupWrapper>
 			<BtnWrapper>
-				<JoinBtn>리더로 참여하기</JoinBtn>
-				<JoinBtn>멤버로 참여하기</JoinBtn>
+				<JoinBtn onClick={props.onModal}>리더로 참여하기</JoinBtn>
+				<JoinBtn onClick={props.onModal}>멤버로 참여하기</JoinBtn>
 			</BtnWrapper>
 		</Wrapper>
 	);
