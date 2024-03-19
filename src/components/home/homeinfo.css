@@ -16,11 +16,10 @@
     background-size: cover;
   }
   
-  .swiper-slide img {
+  .swiper-slide {
     display: block;
     width: 100%;
     height: 60%;
-    border-radius: 12px;
   }
   
   .swiper-pagination-bullet {

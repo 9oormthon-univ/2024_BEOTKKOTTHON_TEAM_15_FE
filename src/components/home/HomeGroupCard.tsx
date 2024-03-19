@@ -50,7 +50,7 @@ const Card = styled.div`
 const ProfileCircle = styled.div`
 	height: 100%;
 	aspect-ratio: 1 / 1;
-	background-color: #a9a9a9;
+	background-color: #c9bca2;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;

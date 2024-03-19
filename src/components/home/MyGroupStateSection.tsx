@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NoneNoticeCard from '../common/NoneNoticeCard';
 import GroupList from './GroupList';
 
-const sample = [{
+export const groupSample = [{
     group : '구름톤구름톤구름톤구름톤구름톤구름톤구름',
     profile: '/img/nothingLogo.png',
     count: 22
@@ -38,7 +38,7 @@ const MyGroupStateSection = () => {
 	return (
 		<Main>
 			{/* <NoneNoticeCard text="아직 생성된 그룹이 없어요!" /> */}
-			<GroupList dataList={sample}/>
+			<GroupList dataList={groupSample}/>
 		</Main>
 	);
 };
