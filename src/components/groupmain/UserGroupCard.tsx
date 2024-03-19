@@ -73,11 +73,12 @@ const Column = styled.div`
 	flex-direction: column;
     width: 60%;
     padding-top: 0.5rem;
+	color: #555555;
 `;
 
 const Tag = styled.div`
 	background-color: #c9bca2;
-	padding: 0.3rem 0.5rem;
+	padding: 0.3rem 0.8rem;
 	border-radius: 15px;
     width: fit-content;
     font-size: 1rem;
