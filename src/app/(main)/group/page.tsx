@@ -1,9 +1,12 @@
-import React from 'react'
+import GroupMainPage from '@/components/groupmain/GroupMainPage';
+import React from 'react';
 
 const page = () => {
-  return (
-    <div>group</div>
-  )
-}
+	return (
+		<>
+			<GroupMainPage />
+		</>
+	);
+};
 
-export default page
+export default page;
