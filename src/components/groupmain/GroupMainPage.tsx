@@ -6,14 +6,16 @@ import UnreadNoticeSection from './UnreadNoticeSection';
 import GroupSection from './GroupSection';
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPeople } from "react-icons/go";
+import { useRouter } from 'next/navigation';
 
 const GroupMainPage = () => {
+	const router = useRouter();
 	return (
 		<Main>
 			<Section>
                 <BtnGroup>
-                    <Btn><LuPlusCircle size='1.5rem'/>새 가정통신문 만들기</Btn>
-                    <Btn><GoPeople id='people' size='1.5rem' />새 그룹 생성하기</Btn>
+                    <Btn onClick={()=>{router.push('post')}}><LuPlusCircle size='1.5rem'/>새 가정통신문 만들기</Btn>
+                    <Btn onClick={()=>{router.push('new')}}><GoPeople id='people' size='1.5rem' />새 그룹 생성하기</Btn>
                 </BtnGroup>
 				<SectionTitle>{`{닉네임}`}님이 속해있는 그룹</SectionTitle>
 				<GroupSection />

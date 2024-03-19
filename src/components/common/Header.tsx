@@ -20,13 +20,13 @@ const Header = () => {
 		<HeaderBox>
 			<Logo src="/img/Group.png" />
 			{tab === TABS.HOME ? (
-				<LuBell cursor="pointer" size="2rem" color="#93613B" />
+				<LuBell cursor="pointer" size="2rem" color="#93613B" onClick={()=>{router.push(`${pathname}/alert`)}}/>
 			) : tab === TABS.GROUP ? (
 				<SearchHeaderBar />
 			) : (
 				<LogoGroup>
-					<FiSettings cursor="pointer" size="2rem" color="#93613B"/>
-					<LuBell cursor="pointer" size="2rem" color="#93613B" />
+					<FiSettings cursor="pointer" size="2rem" color="#93613B" onClick={()=>{router.push(`${pathname}/setting`)}}/>
+					<LuBell cursor="pointer" size="2rem" color="#93613B" onClick={()=>{router.push(`${pathname}/alert`)}}/>
 				</LogoGroup>
 			)}
 		</HeaderBox>
