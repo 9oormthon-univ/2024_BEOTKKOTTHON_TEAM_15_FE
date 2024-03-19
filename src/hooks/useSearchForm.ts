@@ -40,6 +40,7 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 				return;
 			}
 			setValues({ ...values, searchOnboardingInput: values[name], searchHeaderInput: '' });
+			router.replace(`/group/search/?q=${values[name]}`);
 		}
 	};
 
