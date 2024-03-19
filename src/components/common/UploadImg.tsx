@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const UploadImg = () => {
+type ImgProps = {
+	text?: string;
+};
+
+const UploadImg = (props: ImgProps) => {
 	const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 	const [previewImg, setPreviewImg] = useState('/img/BasicImg.png');
 
@@ -29,15 +33,26 @@ const UploadImg = () => {
 	return (
 		<UploadWrapper>
 			<ImgSection>
-				<PreviewImg src={previewImg} />
 				<ImgInput
 					type="file"
 					accept="image/jpg, image/jpeg, image/png"
 					id="imageInput"
 					onChange={(e) => insertImg(e)}
+					style={{ display: 'none' }}
+				/>
+				<PreviewImg
+					src={previewImg}
+					onClick={() => {
+						const inputElement = document.getElementById('imageInput') as HTMLInputElement;
+						if (inputElement) {
+							inputElement.click();
+						}
+					}}
+					alt="preview"
+					style={{ cursor: 'pointer' }}
 				/>
 			</ImgSection>
-			<ImgLabel htmlFor="imageInput">이미지 업로드</ImgLabel>
+			{props.text && <ImgLabel htmlFor="imageInput">{props.text}</ImgLabel>}
 		</UploadWrapper>
 	);
 };
@@ -56,8 +71,8 @@ const ImgSection = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 190px;
-	height: 190px;
+	width: 180px;
+	height: 180px;
 	overflow: hidden;
 	border-radius: 50%;
 `;
