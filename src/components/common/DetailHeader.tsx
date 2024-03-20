@@ -15,7 +15,31 @@ const DetailHeader = () => {
 
 	return (
 		<HeaderBox>
-			{tab === 'post' ? (
+			{tab === 'privacy' ? (
+				<Content>
+					<FaChevronLeft
+						cursor="pointer"
+						size="1.5rem"
+						onClick={() => {
+							router.push(`/`);
+						}}
+					/>
+					<Text>개인정보처리방침</Text>
+					<div></div>
+				</Content>
+			) : tab === 'service' ? (
+				<Content>
+					<FaChevronLeft
+						cursor="pointer"
+						size="1.5rem"
+						onClick={() => {
+							router.push(`/`);
+						}}
+					/>
+					<Text>서비스 이용 약관</Text>
+					<div></div>
+				</Content>
+			) : tab === 'post' ? (
 				<Content>
 					<FaChevronLeft
 						cursor="pointer"
@@ -130,6 +154,12 @@ const getInitialTab = (pathname: string): string => {
 	} else if (pathname.includes('group') && pathname.includes('setting')) {
 		// 그룹설정 페이지
 		return 'group-setting';
+	} else if (pathname.includes('privacy')) {
+		// 그룹설정 페이지
+		return 'privacy';
+	} else if (pathname.includes('service')) {
+		// 그룹설정 페이지
+		return 'service';
 	} else {
 		return '';
 	}

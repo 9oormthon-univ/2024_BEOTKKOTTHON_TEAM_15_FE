@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type ImgProps = {
 	text?: string;
+	id: string;
 };
 
 const UploadImg = (props: ImgProps) => {
@@ -36,14 +37,14 @@ const UploadImg = (props: ImgProps) => {
 				<ImgInput
 					type="file"
 					accept="image/jpg, image/jpeg, image/png"
-					id="imageInput"
+					id={props.id}
 					onChange={(e) => insertImg(e)}
 					style={{ display: 'none' }}
 				/>
 				<PreviewImg
 					src={previewImg}
 					onClick={() => {
-						const inputElement = document.getElementById('imageInput') as HTMLInputElement;
+						const inputElement = document.getElementById(props.id) as HTMLInputElement;
 						if (inputElement) {
 							inputElement.click();
 						}

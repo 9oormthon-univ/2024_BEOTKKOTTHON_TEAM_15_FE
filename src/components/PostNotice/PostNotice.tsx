@@ -1,9 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import DatePicker from './DatePick';
+import UploadImg from '../common/UploadImg';
 
 const PostNotice = () => {
+	const [title, setTitle] = useState<string>('');
+	const [info, setInfo] = useState<string>('');
+	const [time, setTime] = useState<string>('');
+
 	return (
 		<Wrapper>
 			<TitleWrapper>
@@ -14,7 +20,15 @@ const PostNotice = () => {
 				<Title>가정통신문 내용</Title>
 				<InfoInput placeholder="내용을 입력해주세요." />
 			</InfoWrapper>
-			<DeadLineWrapper></DeadLineWrapper>
+			<Title>이미지 업로드</Title>
+			<UploadWrappr>
+				<UploadImg id={'imageInput1'} />
+				<UploadImg id={'imageInput2'} />
+			</UploadWrappr>
+			<DeadLineWrapper>
+				<Title>열람기한</Title>
+				<DatePicker time={time} setTime={setTime} />
+			</DeadLineWrapper>
 		</Wrapper>
 	);
 };
@@ -41,10 +55,10 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.div`
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 	margin-left: 1rem;
 	font-weight: 600;
-	gap: 2rem;
+	gap: 1rem;
 `;
 
 const TitleInput = styled.input`
@@ -77,4 +91,16 @@ const InfoWrapper = styled.div`
 
 const DeadLineWrapper = styled.div`
 	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
+`;
+
+const UploadWrappr = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
 `;
