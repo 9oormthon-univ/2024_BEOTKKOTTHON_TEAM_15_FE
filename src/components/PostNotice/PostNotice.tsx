@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DatePicker from './DatePick';
-import UploadImg from '../common/UploadImg';
+import UploadImg from '../common/ProfileImg';
 
 const PostNotice = () => {
 	const [title, setTitle] = useState<string>('');

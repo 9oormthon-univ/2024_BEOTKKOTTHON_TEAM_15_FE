@@ -6,13 +6,13 @@ type ImgProps = {
 	id: string;
 };
 
-const UploadImg = (props: ImgProps) => {
+const ProfileImg = (props: ImgProps) => {
 	const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-	const [previewImg, setPreviewImg] = useState('/img/upload.png');
+	const [previewImg, setPreviewImg] = useState('/img/BasicImg.png');
 
 	const insertImg = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.files || e.target.files.length === 0) {
-			setPreviewImg('/img/upload.png');
+			setPreviewImg('/img/BasicImg.png');
 			return;
 		}
 
@@ -58,7 +58,7 @@ const UploadImg = (props: ImgProps) => {
 	);
 };
 
-export default UploadImg;
+export default ProfileImg;
 
 const UploadWrapper = styled.div`
 	display: flex;

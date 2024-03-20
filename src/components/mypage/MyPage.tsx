@@ -4,7 +4,7 @@ import { isLoginAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import UploadImg from '../common/UploadImg';
+import UploadImg from '../common/ProfileImg';
 
 const MyPage = () => {
 	const isLogin = useRecoilValue(isLoginAtom);
