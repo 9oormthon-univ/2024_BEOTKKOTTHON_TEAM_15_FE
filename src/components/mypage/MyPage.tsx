@@ -15,7 +15,7 @@ const MyPage = () => {
 		<>
 			<Wrapper>
 				<ProfileWrapper>
-					<UploadImg text={'이미지 변경'} />
+					<UploadImg id={'imageInput'} text={'이미지 변경'} />
 					<Name>[닉네임]</Name>
 					<Email>cjy3458@naver.com</Email>
 				</ProfileWrapper>
