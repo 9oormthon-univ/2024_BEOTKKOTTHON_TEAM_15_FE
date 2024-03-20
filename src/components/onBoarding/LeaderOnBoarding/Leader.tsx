@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ShareBtn from '../ShareBtn';
 import { useRouter } from 'next/navigation';
-import UploadImg from '../../common/UploadImg';
 import LeaderModal from './LeaderModal';
+import UploadImg from '@/components/common/UploadImg';
 
 const Leader = () => {
 	const [modal, setModal] = useState(false);
@@ -20,7 +19,7 @@ const Leader = () => {
 			{modal && <LeaderModal />}
 			<Container>
 				<Title>그룹 생성을 위한 기본적인 정보를 입력해주세요.</Title>
-				<UploadImg text={'이미지 업로드'} />
+				<UploadImg id={'imageInput'} text={'이미지 업로드'} />
 				<Information>
 					<GroupName placeholder="그룹명을 입력해주세요. *(최대 20자)" />
 					<GroupPurpose placeholder="그룹 생성 목적을 입력해주세요. *(최대 50자)" />
