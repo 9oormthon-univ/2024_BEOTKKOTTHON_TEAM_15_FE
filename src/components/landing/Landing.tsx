@@ -7,6 +7,12 @@ import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
 
 const Landing = () => {
+	const router = useRouter();
+
+	const handleClick = (routerName: string) => {
+		router.push(`/${routerName}`);
+	};
+
 	return (
 		<Wrapper>
 			<TitleWrapper>
@@ -18,9 +24,9 @@ const Landing = () => {
 				<Btn color="#4F7B59" routerName="login" text="로그인하기" />
 				<Btn color="#93613B" routerName="signup" text="회원가입하기" />
 				<TermsWrapper>
-					<div>서비스이용약관</div>
+					<div onClick={() => handleClick('service')}>서비스이용약관</div>
 					<div>|</div>
-					<div>개인정보처리방침</div>
+					<div onClick={() => handleClick('privacy')}>개인정보처리방침</div>
 				</TermsWrapper>
 			</BtnWrapper>
 		</Wrapper>

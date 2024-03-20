@@ -2,8 +2,6 @@
 
 import StyledComponentsRegistry from '../lib/registry';
 import styled from 'styled-components';
-import NavBar from '@/components/common/NavBar';
-import Header from '@/components/common/Header';
 import DetailHeader from '@/components/common/DetailHeader';
 
 export default function layout({ children }: { children: React.ReactNode }) {
@@ -14,7 +12,6 @@ export default function layout({ children }: { children: React.ReactNode }) {
 					<DetailHeader />
 					{children}
 				</MainBox>
-				<NavBar />
 			</Main>
 		</StyledComponentsRegistry>
 	);
