@@ -18,7 +18,6 @@ const Signup = () => {
 		username: name,
 		email: id,
 		password: pw,
-		fcmToken: deviceToken,
 	};
 
 	const router = useRouter();
