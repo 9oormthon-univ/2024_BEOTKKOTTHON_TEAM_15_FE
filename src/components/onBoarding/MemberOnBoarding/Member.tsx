@@ -1,16 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
 import MemberModal from './MemberModal';
+import { LuSearch } from 'react-icons/lu';
 
 const Member = () => {
+	const inputText = useRef<HTMLInputElement>(null);
 	const [modal, setModal] = useState(false);
 
 	const onModal = () => {
 		setModal(true);
 	};
+
+	// 엔터키 눌렀을때
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			// Enter 키가 눌렸을 때 검색 함수 호출
+		}
+	};
+	// 검색 아이콘 눌렀을때
+	const handleClick = () => {
+		if (typeof window !== 'undefined') {
+			window.scrollTo(0, 0);
+		}
+		// 검색함수 호출
+	};
+
 	return (
 		<Wrapper>
 			{modal && <MemberModal />}
@@ -19,7 +36,10 @@ const Member = () => {
 					<Text>OOO멤버님 환영합니다</Text>
 					<Ask>OOO님이 속한 그룹은 어디인가요?</Ask>
 				</TextWrapper>
-				<div>ㅇㅇ</div>
+				<SearchBox>
+					<LuSearch size="2rem" color="#93613B" style={{ strokeWidth: 3 }} onClick={handleClick} />
+					<SearchInput className="searchInputBox" ref={inputText} onKeyDown={handleKeyDown} />
+				</SearchBox>
 				<GroupCard onModal={onModal} />
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />
@@ -42,7 +62,7 @@ const Container = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	gap: 10rem;
+	gap: 6rem;
 	margin-top: 7%;
 	margin-left: 15%;
 	@media (max-width: 1200px) {
@@ -76,4 +96,25 @@ const Character = styled.img`
 		top: 20rem;
 		right: 2rem;
 	}
+`;
+const SearchBox = styled.div`
+	height: 4rem;
+	width: 100%;
+	background-color: #fff5e0;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 1rem;
+	margin-bottom: 2rem;
+`;
+
+const SearchInput = styled.input`
+	width: 100%;
+	height: 100%;
+	font-size: 2rem;
+	border: none;
+	outline: none;
+	padding-left: 1rem;
+	background-color: transparent;
 `;
