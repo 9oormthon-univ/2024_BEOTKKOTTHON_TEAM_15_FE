@@ -4,13 +4,10 @@ import axios from 'axios';
 
 const baseURL = 'http://beotkkotthon-env.eba-3tgmsdgp.ap-northeast-2.elasticbeanstalk.com';
 
-interface FcmInfo {
-	token: string;
-}
 interface LoginInfo {
 	email: string;
 	password: string;
-	token: string;
+	token?: string;
 }
 
 interface SignupInfo extends LoginInfo {
@@ -38,7 +35,18 @@ export const login = async (body: LoginInfo) => {
 		const tokenBody = {
 			token: token,
 		};
-		const data = await postFcm(tokenBody);
+		try {
+			const accessToken = localStorage.getItem('access');
+			console.log(accessToken);
+			const response = await axios.post(`${baseURL}/notification`, tokenBody, {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
 		return result;
 	} catch (error) {
 		console.log(error);
@@ -46,17 +54,13 @@ export const login = async (body: LoginInfo) => {
 	}
 };
 
-export const postFcm = async (tokenBody: FcmInfo) => {
-	try {
-		const accessToken = localStorage.getItem('access');
-		console.log(accessToken);
-		const response = await axios.post(`${baseURL}/notification`, tokenBody, {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${accessToken}`,
-			},
-		});
-	} catch (error) {
-		console.log(error);
-	}
-};
+// export const postFcm = async (token: string) => {
+// 	const accessToken = localStorage.getItem('access');
+// 	const result = await axios.post(`${baseURL}/notification`, token, {
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			Authorization: `Bearer ${accessToken}`,
+// 		},
+// 	});
+// 	return result;
+// };
