@@ -21,7 +21,7 @@ const DetailHeader = () => {
 						cursor="pointer"
 						size="1.5rem"
 						onClick={() => {
-							router.push(`/`);
+							router.back();
 						}}
 					/>
 					<Text>개인정보처리방침</Text>
@@ -33,7 +33,7 @@ const DetailHeader = () => {
 						cursor="pointer"
 						size="1.5rem"
 						onClick={() => {
-							router.push(`/`);
+							router.back();
 						}}
 					/>
 					<Text>서비스 이용 약관</Text>
