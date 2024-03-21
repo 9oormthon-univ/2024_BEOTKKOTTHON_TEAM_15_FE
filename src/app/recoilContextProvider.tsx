@@ -5,7 +5,7 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
- // 예시 아톰 나중에 수정
+// 예시 아톰 나중에 수정
 export const isLoginAtom = atom({
 	key: 'isLogin',
 	default: false,
@@ -32,6 +32,12 @@ export const userPhotoAtom = atom({
 
 export const userRoleAtom = atom({
 	key: 'userRole',
+	default: '',
+	effects_UNSTABLE: [persistAtom],
+});
+
+export const userDeviceAtom = atom({
+	key: 'userDevice',
 	default: '',
 	effects_UNSTABLE: [persistAtom],
 });
