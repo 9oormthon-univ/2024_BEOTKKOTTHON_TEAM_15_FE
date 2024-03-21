@@ -1,11 +1,12 @@
-import NoticeViewPage from '@/components/noticeview/NoticeViewPage'
-import React from 'react'
+import NoticeViewPage from '@/components/noticeview/NoticeViewPage';
+import React from 'react';
 
 const page = () => {
-  return (
-    <>
-    <NoticeViewPage/></>
-  )
-}
+	return (
+		<>
+			<NoticeViewPage />
+		</>
+	);
+};
 
-export default page
+export default page;
