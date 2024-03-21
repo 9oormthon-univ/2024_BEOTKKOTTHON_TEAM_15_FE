@@ -3,11 +3,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import GroupNoticeSection from './GroupNoticeSection';
-import { useRouter, usePathname} from 'next/navigation';
+import { useRouter, usePathname, useParams} from 'next/navigation';
 
 const GroupDetailPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
+	const params = useParams<{ id: string}>();
+	const groupId = params.id;
+	console.log(groupId);
 	return (
 		<Main>
 			<GroupProfile>

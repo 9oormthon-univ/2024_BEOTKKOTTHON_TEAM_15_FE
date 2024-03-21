@@ -1,9 +1,12 @@
-import React from 'react'
+import GroupSettingPage from '@/components/groupsetting/GroupSettingPage';
+import React from 'react';
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+	return (
+		<>
+			<GroupSettingPage />
+		</>
+	);
+};
 
-export default page
+export default page;
