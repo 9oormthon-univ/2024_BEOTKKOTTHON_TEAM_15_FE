@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HomeGroupCard from './HomeGroupCard';
 
 export interface Group {
+	id: number;
 	group: string;
 	profile: string;
 	count: number;

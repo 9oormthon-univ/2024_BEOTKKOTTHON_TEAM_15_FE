@@ -30,13 +30,13 @@ const Wrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 1.5rem;
+	gap: 1rem;
 `;
 
 const Drop = styled.select`
 	padding: 0.5rem 1rem;
 	width: 90px;
-	border-radius: 1.5rem;
+	border-radius: 1.3rem;
 	border: 1px solid #c9bca2;
 	background-color: #fff5e0;
 	outline: none;
@@ -45,4 +45,5 @@ const Drop = styled.select`
 
 const Label = styled.label`
 	font-size: 1.3rem;
+	margin-right: 2rem;
 `;

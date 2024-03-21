@@ -2,8 +2,10 @@ import { SampleType } from '@/utils/constant';
 import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRightCircle } from 'react-icons/lu';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const NoticeCard = ({ notice }: { notice: SampleType }) => {
+	const router = useRouter();
 	const formatContent = (content: string) => {
 		return content.split(/\\n|\n/).map((line, index) => (
 			<React.Fragment key={index}>
@@ -15,7 +17,7 @@ const NoticeCard = ({ notice }: { notice: SampleType }) => {
 
 	return (
 		<Main>
-			<Card>
+			<Card onClick={()=>{router.push(`/notice/${notice.id}`)}}>
 				<Top id="top">
 					<Title>{notice.title}</Title>
 					<Span>
@@ -63,6 +65,7 @@ const Card = styled.div`
 	border-radius: 20px;
 	border: 3px solid #c9bca2;
 	padding: 2rem 0rem;
+	cursor: pointer;
 	/* transition: background-color 0.4s, border-color 0.4s; */
 	cursor: pointer;
 	&:hover {

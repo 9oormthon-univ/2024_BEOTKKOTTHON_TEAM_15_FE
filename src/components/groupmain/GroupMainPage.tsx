@@ -13,12 +13,12 @@ const GroupMainPage = () => {
 	return (
 		<Main>
 			<Section>
-                <BtnGroup>
+				<SectionTitle>{`{닉네임}`}님이 속해있는 그룹</SectionTitle>
+				<GroupSection />
+				<BtnGroup>
                     <Btn onClick={()=>{router.push('post')}}><LuPlusCircle size='1.5rem'/>새 가정통신문 만들기</Btn>
                     <Btn onClick={()=>{router.push('new')}}><GoPeople id='people' size='1.5rem' />새 그룹 생성하기</Btn>
                 </BtnGroup>
-				<SectionTitle>{`{닉네임}`}님이 속해있는 그룹</SectionTitle>
-				<GroupSection />
 			</Section>
 			<Section>
 				<SectionTitle>읽지 않은 가정통신문</SectionTitle>
@@ -56,18 +56,17 @@ const BtnGroup = styled.div`
 	justify-content: flex-start;
 	gap: 1rem;
     margin-top: 1rem;
-    margin-bottom: 1.5rem;
 `;
 
 const Btn = styled.div`
 	cursor: pointer;
     align-items: center;
-	padding: 0.7rem 1.5rem;
+	padding: 1rem 1.5rem;
 	color: white;
 	background-color: #4f7b59;
     font-size: 1.3rem;
     font-weight: 500;
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     gap: 5px;
     #people{

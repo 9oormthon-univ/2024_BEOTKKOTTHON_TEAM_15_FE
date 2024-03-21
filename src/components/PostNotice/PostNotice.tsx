@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DatePicker from './DatePick';
-import UploadImg from '../common/ProfileImg';
+import UploadImg from '../common/UploadImg';
 
 const PostNotice = () => {
 	const [title, setTitle] = useState<string>('');
@@ -21,14 +21,17 @@ const PostNotice = () => {
 				<InfoInput placeholder="내용을 입력해주세요." />
 			</InfoWrapper>
 			<Title>이미지 업로드</Title>
-			<UploadWrappr>
+			<UploadWrapper>
 				<UploadImg id={'imageInput1'} />
 				<UploadImg id={'imageInput2'} />
-			</UploadWrappr>
+			</UploadWrapper>
 			<DeadLineWrapper>
 				<Title>열람기한</Title>
 				<DatePicker time={time} setTime={setTime} />
 			</DeadLineWrapper>
+			<BtnWrapper>
+				<Btn>작성하기</Btn>
+			</BtnWrapper>
 		</Wrapper>
 	);
 };
@@ -63,7 +66,7 @@ const Title = styled.div`
 
 const TitleInput = styled.input`
 	width: 83%;
-	padding: 1rem 2rem;
+	padding: 1rem 2.7rem;
 	border-radius: 2rem;
 	border: 1px solid #c9bca2;
 	background-color: #fff5e0;
@@ -74,7 +77,7 @@ const TitleInput = styled.input`
 const InfoInput = styled.textarea`
 	width: 83%;
 	height: 100px;
-	padding: 2rem 2rem;
+	padding: 2rem 2.7rem;
 	border-radius: 2rem;
 	border: 1px solid #c9bca2;
 	background-color: #fff5e0;
@@ -97,10 +100,32 @@ const DeadLineWrapper = styled.div`
 	margin-top: 1rem;
 `;
 
-const UploadWrappr = styled.div`
-	width: 100%;
+const UploadWrapper = styled.div`
+	width: 93%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 2rem;
+`;
+
+const BtnWrapper = styled.div`
+	width: 91%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	margin-top: 3rem;
+`;
+
+const Btn = styled.div`
+	width: 60px;
+	text-align: center;
+	padding: 0.5rem 2rem;
+	border: 1px solid #4f7b59;
+	border-radius: 2.5rem;
+	font-size: 1.5rem;
+	color: #4f7b59;
+	&:hover {
+		color: white;
+		background-color: #4f7b59;
+	}
 `;
