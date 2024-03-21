@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import { BiBell } from 'react-icons/bi';
 import { BiBellOff } from 'react-icons/bi';
+import { useRouter } from 'next/navigation';
 
 const Settings = () => {
 	const [alert, setAlert] = useState(true);
+	const router = useRouter();
 
 	const logOut = () => {
 		console.log('Aa');
@@ -27,11 +29,11 @@ const Settings = () => {
 				<div>웹 푸시 알람 설정</div>
 				{alert ? <BiBell size="26px" /> : <BiBellOff size="26px" />}
 			</ListBox>
-			<ListBox>
+			<ListBox onClick={() => router.push('/service')}>
 				<div>서비스 이용약관</div>
 				<FiChevronRight size="26px" />
 			</ListBox>
-			<ListBox>
+			<ListBox onClick={() => router.push('/privacy')}>
 				<div>개인정보 처리방침</div>
 				<FiChevronRight size="26px" />
 			</ListBox>
