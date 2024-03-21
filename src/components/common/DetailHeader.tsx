@@ -45,7 +45,7 @@ const DetailHeader = () => {
 						cursor="pointer"
 						size="1.5rem"
 						onClick={() => {
-							router.push(`/group`);
+							router.push(`/groups`);
 						}}
 					/>
 					<Text>새 가정통신문 만들기</Text>
@@ -57,7 +57,7 @@ const DetailHeader = () => {
 						cursor="pointer"
 						size="1.5rem"
 						onClick={() => {
-							router.push(`/group`);
+							router.push(`/groups`);
 						}}
 					/>
 					<Text>새 그룹 만들기</Text>
@@ -170,20 +170,20 @@ const HeaderBox = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 3rem;
-	padding: 1rem 0rem;
-	background-color: white;
-	box-shadow: 4px 4px 14px -0.5px rgba(0, 0, 0, 0.2);
 `;
 
 const Content = styled.div`
 	display: flex;
-	width: 90%;
+	width: 100%;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1.5rem;
 	font-size: 2rem;
 	font-weight: 600;
+	padding: 1rem 3rem;
+	background-color: white;
+	height: 100%;
+	box-shadow: 4px 4px 14px -0.5px rgba(0, 0, 0, 0.2);
 `;
 
 const Text = styled.div`
