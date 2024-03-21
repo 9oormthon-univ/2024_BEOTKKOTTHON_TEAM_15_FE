@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Group } from '../home/GroupList';
+import { useRouter } from 'next/navigation';
 
 const UserGroupCard = ({ group }: { group: Group }) => {
+	const router = useRouter();
 	return (
-		<Main>
+		<Main onClick={()=>{router.push(`groups/group?key=${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
 					<ProfileImg src={group.profile} />

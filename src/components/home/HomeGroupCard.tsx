@@ -1,10 +1,12 @@
 import React from 'react';
 import { Group } from './GroupList';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 const HomeGroupCard = ({ group }: { group: Group }) => {
+	const router = useRouter();
 	return (
-		<Main>
+		<Main onClick={()=>{router.push(`groups/group?key=${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
 					<ProfileImg src={group.profile} />
@@ -25,6 +27,7 @@ const Main = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 1.5rem;
+	cursor: pointer;
 `;
 
 const Card = styled.div`
