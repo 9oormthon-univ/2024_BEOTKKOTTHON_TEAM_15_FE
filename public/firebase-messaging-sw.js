@@ -7,10 +7,13 @@ importScripts('https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging-comp
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCx0GFCssAQcT8OxA51k1ACmSkFLaqIFAY",
-  projectId: "goorm-notification",
-  messagingSenderId: "1029982305361",
-  appId: "1:1029982305361:web:6ad251e9e5fda0d5ca0c70",
+  apiKey: "AIzaSyDHvnzUbvIsO9bpumeWV-9b3PdwmOmQJAQ",
+  authDomain: "newsletter-d876c.firebaseapp.com",
+  projectId: "newsletter-d876c",
+  storageBucket: "newsletter-d876c.appspot.com",
+  messagingSenderId: "863624721528",
+  appId: "1:863624721528:web:4401b268001460f2f2e98d",
+  measurementId: "G-VHRRQB5EHF"
 };
 
 // Initialize Firebase
