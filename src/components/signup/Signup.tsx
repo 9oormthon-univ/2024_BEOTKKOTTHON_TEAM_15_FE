@@ -5,6 +5,7 @@ import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { userDeviceAtom } from '@/app/recoilContextProvider';
+import { signup } from '@/apis/login';
 
 const Signup = () => {
 	const [name, setName] = useState('');
@@ -12,6 +13,13 @@ const Signup = () => {
 	const [pw, setPw] = useState('');
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
 	const deviceToken = useRecoilValue(userDeviceAtom);
+
+	const body = {
+		username: name,
+		email: id,
+		password: pw,
+		fcmToken: deviceToken,
+	};
 
 	const router = useRouter();
 	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +34,9 @@ const Signup = () => {
 		setPw(e.target.value);
 	};
 
-	const onClick = () => {
-		router.push('/onBoarding');
+	const onClick = async () => {
+		const result = await signup(body);
+		// router.push('/onBoarding');
 	};
 
 	return (
