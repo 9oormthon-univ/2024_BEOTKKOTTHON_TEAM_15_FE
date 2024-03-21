@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ShareBtn = () => {
 	const handleShareClick = React.useCallback(async () => {
 		try {
-			await navigator.clipboard.writeText('https://huruhuru.netlify.app/');
+			await navigator.clipboard.writeText('https://goormnotification.vercel.app/');
 			alert('📜 링크 복사 완료 📜');
 		} catch (e) {
 			if (typeof e === 'object' && e instanceof Error) {
@@ -36,4 +36,5 @@ const ShareBtn1 = styled.div`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	margin-top: 3px;
 `;
