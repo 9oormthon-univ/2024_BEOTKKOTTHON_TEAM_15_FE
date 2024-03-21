@@ -23,7 +23,7 @@ const NavBar = () => {
 	return (
 		<NavBox>
 			<Tabs>
-				<Tab $active={tab === TABS.GROUP} onClick={handleClick(`/group`)}>
+				<Tab $active={tab === TABS.GROUP} onClick={handleClick(`/groups`)}>
 					<PiFolder className='icon' id='group' cursor="pointer" size="2rem"/>
                     <div className='text'>GROUP</div>
 				</Tab>

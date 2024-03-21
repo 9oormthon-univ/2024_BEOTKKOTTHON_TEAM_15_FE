@@ -22,7 +22,7 @@ const UserGroupList = ({ dataList }: { dataList: Group[] }) => {
             <Swiper {...settings} className="mySwiper">
 					{dataList.map((group, i) => (
 						<SwiperSlide key={i}>
-							<UserGroupCard key={i} group={group} />
+							<UserGroupCard key={i} group={group}/>
 						</SwiperSlide>
 					))}
 				</Swiper>

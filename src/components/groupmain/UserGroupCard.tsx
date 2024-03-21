@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Group } from '../home/GroupList';
+import { useRouter } from 'next/navigation';
 
 const UserGroupCard = ({ group }: { group: Group }) => {
+	const router = useRouter();
 	return (
-		<Main>
+		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
 					<ProfileImg src={group.profile} />
@@ -32,15 +34,14 @@ const Main = styled.div`
 const Card = styled.div`
 	width: 100%;
 	max-width: 220px;
-	height: 9rem;
+	height: 7rem;
 	display: flex;
-	align-items: start;
+	align-items: center;
 	justify-content: space-evenly;
 	background-color: #fff5e0;
 	border-radius: 20px;
 	border: 3px solid #c9bca2;
 	padding: 1rem 0.1rem;
-    padding-top: 1rem;
 	cursor: pointer;
 	#groupname {
 		font-weight: 600;
@@ -72,7 +73,6 @@ const Column = styled.div`
 	display: flex;
 	flex-direction: column;
     width: 60%;
-    padding-top: 0.5rem;
 	color: #555555;
 `;
 

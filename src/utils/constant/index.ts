@@ -5,6 +5,7 @@ export enum TABS {
 }
 
 export interface SampleType {
+	id: number;
 	title: string;
 	group: string;
 	leader: string;
