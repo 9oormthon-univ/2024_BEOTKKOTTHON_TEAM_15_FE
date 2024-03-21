@@ -72,10 +72,7 @@ const ImgSection = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 180px;
-	height: 180px;
-	overflow: hidden;
-	border-radius: 50%;
+	width: 265px;
 `;
 
 const ImgLabel = styled.label`
@@ -94,6 +91,5 @@ const ImgInput = styled.input`
 const PreviewImg = styled.img`
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-	border-radius: 50%;
+	object-fit: contain;
 `;
