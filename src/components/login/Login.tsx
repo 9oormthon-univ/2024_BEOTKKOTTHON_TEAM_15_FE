@@ -3,11 +3,14 @@ import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { userDeviceAtom } from '@/app/recoilContextProvider';
 
 const Login = () => {
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
+	const deviceToken = useRecoilValue(userDeviceAtom);
 	const router = useRouter();
 
 	const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {

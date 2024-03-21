@@ -1,9 +1,12 @@
-import React from 'react'
+import GroupAcceptPage from '@/components/groupaccept/GroupAcceptPage';
+import React from 'react';
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+	return (
+		<>
+			<GroupAcceptPage />
+		</>
+	);
+};
 
-export default page
+export default page;
