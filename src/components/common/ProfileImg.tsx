@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type ImgProps = {
 	text?: string;
 	id: string;
-	setImage: any;
+	setImage?: any;
 };
 
 const ProfileImg = (props: ImgProps) => {
