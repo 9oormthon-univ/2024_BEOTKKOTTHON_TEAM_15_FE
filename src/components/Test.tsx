@@ -14,13 +14,13 @@ const Index = () => {
 		if (permission !== 'granted') return;
 
 		const firebaseApp = initializeApp({
-      apiKey: "AIzaSyDHvnzUbvIsO9bpumeWV-9b3PdwmOmQJAQ",
-      authDomain: "newsletter-d876c.firebaseapp.com",
-      projectId: "newsletter-d876c",
-      storageBucket: "newsletter-d876c.appspot.com",
-      messagingSenderId: "863624721528",
-      appId: "1:863624721528:web:4401b268001460f2f2e98d",
-      measurementId: "G-VHRRQB5EHF"
+			apiKey: "AIzaSyCx0GFCssAQcT8OxA51k1ACmSkFLaqIFAY",
+			authDomain: "goorm-notification.firebaseapp.com",
+			projectId: "goorm-notification",
+			storageBucket: "goorm-notification.appspot.com",
+			messagingSenderId: "1029982305361",
+			appId: "1:1029982305361:web:6ad251e9e5fda0d5ca0c70",
+			measurementId: "G-3VBYE8EYJL"
 		});
 
 		const messaging = getMessaging(firebaseApp);
