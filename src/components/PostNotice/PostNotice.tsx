@@ -4,14 +4,24 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import DatePicker from './DatePick';
 import UploadImg from '../common/UploadImg';
+import Modal from '@/components/common/Modal';
 
 const PostNotice = () => {
 	const [title, setTitle] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const [time, setTime] = useState<string>('');
 
+	const [modal, setModal] = useState(false);
+
+	const onModal = () => {
+		setModal(true);
+	};
+
 	return (
 		<Wrapper>
+			{modal && (
+				<Modal homeUrl="/home" pageUrl="/groups" text1="가정통신문이 발행되었습니다!" text3="그룹페이지로 이동" />
+			)}
 			<TitleWrapper>
 				<Title>가정통신문 제목</Title>
 				<TitleInput placeholder="제목을 입력해주세요." />
@@ -30,7 +40,7 @@ const PostNotice = () => {
 				<DatePicker time={time} setTime={setTime} />
 			</DeadLineWrapper>
 			<BtnWrapper>
-				<Btn>작성하기</Btn>
+				<Btn onClick={onModal}>작성하기</Btn>
 			</BtnWrapper>
 		</Wrapper>
 	);
@@ -40,7 +50,6 @@ export default PostNotice;
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;

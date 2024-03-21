@@ -24,16 +24,16 @@ const NavBar = () => {
 		<NavBox>
 			<Tabs>
 				<Tab $active={tab === TABS.GROUP} onClick={handleClick(`/groups`)}>
-					<PiFolder className='icon' id='group' cursor="pointer" size="2rem"/>
-                    <div className='text'>GROUP</div>
+					<PiFolder className="icon" id="group" cursor="pointer" size="2rem" />
+					<div className="text">GROUP</div>
 				</Tab>
-				<Tab $active={tab === TABS.HOME}  onClick={handleClick(`/home`)}>
-					<HiOutlineHome className='icon' id='home' cursor="pointer" size="2rem"/>
-                    <div className='text'>HOME</div>
+				<Tab $active={tab === TABS.HOME} onClick={handleClick(`/home`)}>
+					<HiOutlineHome className="icon" id="home" cursor="pointer" size="2rem" />
+					<div className="text">HOME</div>
 				</Tab>
 				<Tab $active={tab === TABS.MY_PAGE} onClick={handleClick(`/mypage`)}>
-					<RxPerson className='icon' id='my' cursor="pointer" size="2rem" />
-                    <div className='text'>MY</div>
+					<RxPerson className="icon" id="my" cursor="pointer" size="2rem" />
+					<div className="text">MY</div>
 				</Tab>
 			</Tabs>
 		</NavBox>
@@ -86,23 +86,23 @@ const Tab = styled.div<{ $active: boolean }>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-    font-size: 1.7rem;
-    font-weight: 600;
+	font-size: 1.7rem;
+	font-weight: 600;
 	width: 30%;
-    cursor: pointer;
-    .text{
-        margin-left: 0.5rem;
-    }
-    .icon{
-        color: ${(props) => (props.$active ? '#F26868' : '#c6c6c6')};
-    }
-    #group{
-        stroke-width: 5px;
-    }
-    #home{
-        stroke-width: 2px;
-    }
-    #my{
-        stroke-width: 0.5px;
-    }
+	cursor: pointer;
+	.text {
+		margin-left: 0.5rem;
+	}
+	.icon {
+		color: ${(props) => (props.$active ? '#F26868' : '#c6c6c6')};
+	}
+	#group {
+		stroke-width: 5px;
+	}
+	#home {
+		stroke-width: 2px;
+	}
+	#my {
+		stroke-width: 0.5px;
+	}
 `;

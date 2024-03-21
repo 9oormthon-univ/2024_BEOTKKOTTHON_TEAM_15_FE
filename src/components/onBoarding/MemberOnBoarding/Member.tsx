@@ -3,8 +3,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
-import MemberModal from './MemberModal';
 import { LuSearch } from 'react-icons/lu';
+import Modal from '@/components/common/Modal';
 
 const Member = () => {
 	const inputText = useRef<HTMLInputElement>(null);
@@ -30,7 +30,15 @@ const Member = () => {
 
 	return (
 		<Wrapper>
-			{modal && <MemberModal />}
+			{modal && (
+				<Modal
+					homeUrl="/home"
+					pageUrl="/mypage"
+					text1="참여 요청을 전송했습니다!"
+					text2="리더가 수락하면 알림을 보내드릴게요"
+					text3="마이페이지로 이동"
+				/>
+			)}
 			<Container>
 				<TextWrapper>
 					<Text>OOO멤버님 환영합니다</Text>

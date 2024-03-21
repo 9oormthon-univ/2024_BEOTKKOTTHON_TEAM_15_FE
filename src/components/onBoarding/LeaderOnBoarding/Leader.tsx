@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import LeaderModal from './LeaderModal';
+import LeaderModal from '../../common/Modal';
 import ProfileImg from '@/components/common/ProfileImg';
+import Modal from '@/components/common/Modal';
 
 const Leader = () => {
 	const [modal, setModal] = useState(false);
@@ -16,7 +17,16 @@ const Leader = () => {
 
 	return (
 		<Wrapper>
-			{modal && <LeaderModal />}
+			{modal && (
+				<Modal
+					homeUrl="/home"
+					pageUrl="/groups"
+					text1="그룹이 생성되었습니다."
+					text2="멤버들을 초대해보세요!"
+					text3="그룹페이지로 이동"
+					share={true}
+				/>
+			)}
 			<Container>
 				<Title>그룹 생성을 위한 기본적인 정보를 입력해주세요.</Title>
 				<ProfileImg id={'imageInput'} text={'이미지 업로드'} />

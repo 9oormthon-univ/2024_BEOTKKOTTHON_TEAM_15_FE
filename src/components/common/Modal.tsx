@@ -1,50 +1,64 @@
 import React from 'react';
 import styled from 'styled-components';
+import ShareBtn from '../onBoarding/ShareBtn';
 import { useRouter } from 'next/navigation';
-import ShareBtn from '../ShareBtn';
 
-const MemberModal = () => {
+interface ModalProps {
+	homeUrl: string;
+	pageUrl: string;
+	text1: string;
+	text2?: string;
+	text3: string;
+	share?: boolean;
+}
+
+const Modal = (props: ModalProps) => {
 	const router = useRouter();
 
 	const goHome = () => {
-		router.push('/home');
+		router.push(props.homeUrl);
 	};
 
-	const goMy = () => {
-		router.push('/mypage');
+	const goPage = () => {
+		router.push(props.pageUrl);
 	};
 
 	return (
 		<ModalWrapper>
 			<ModalContainer>
 				<Confirm>
-					<div className="modal2">참여 요청을 전송했습니다!</div>
-					<div className="modal2">리더가 수락하면 알림을 보내드릴게요.</div>
+					<div className="modal2">{props.text1}</div>
+					<div className="modal2">{props.text2}</div>
+					{props.share && (
+						<ShareWrapper>
+							<div className="link">goormnotification.vercel.app</div>
+							<ShareBtn />
+						</ShareWrapper>
+					)}
 				</Confirm>
 				<ModalBtn>
 					<Btn1 onClick={goHome}>확인</Btn1>
-					<Btn2 onClick={goMy}>마이페이지로 이동</Btn2>
+					<Btn2 onClick={goPage}>{props.text3}</Btn2>
 				</ModalBtn>
 			</ModalContainer>
 		</ModalWrapper>
 	);
 };
 
-export default MemberModal;
+export default Modal;
 
 const ModalWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	position: fixed;
 	width: 100%;
+	height: 100%;
 	top: 0;
-	right: 0;
-	bottom: 0;
 	left: 0;
 	background: rgba(0, 0, 0, 0.77);
-	z-index: 1;
-	position: absolute;
+	z-index: 100;
 `;
 
 const ModalContainer = styled.div`
@@ -78,6 +92,10 @@ const Confirm = styled.div`
 	.modal2 {
 		font-size: 2rem;
 		font-weight: 600;
+	}
+	.link {
+		display: flex;
+		font-size: 1.6rem;
 	}
 `;
 
