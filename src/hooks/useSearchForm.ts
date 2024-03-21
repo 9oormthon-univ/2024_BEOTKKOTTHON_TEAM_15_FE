@@ -39,13 +39,13 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 				alert('검색어를 입력해주세요');
 				return;
 			}
-			setValues({ ...values, searchOnboardingInput: values[name], searchHeaderInput: '' });
+			setValues({ ...values, searchOnboardingInput: values[name], searchHeaderInput: values[name] });
 			router.replace(`/groups/search/?q=${values[name]}`);
 		}
 	};
 
 	useEffect(() => {
-		if (searchKeyword) setValues({ searchOnboardingInput: searchKeyword, searchHeaderInput: '' });
+		if (searchKeyword) setValues({ searchOnboardingInput: '', searchHeaderInput: searchKeyword });
 	}, [searchKeyword]);
 
 	return { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur };
