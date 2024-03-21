@@ -5,6 +5,7 @@ import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { userDeviceAtom } from '@/app/recoilContextProvider';
+import { login } from '@/apis/login';
 
 const Login = () => {
 	const [id, setId] = useState('');
@@ -21,8 +22,14 @@ const Login = () => {
 		setPw(e.target.value);
 	};
 
-	const onClick = () => {
-		router.push('/home');
+	const body = {
+		email: id,
+		password: pw,
+		fcmToken: deviceToken,
+	};
+	const onClick = async () => {
+		const result = await login(body);
+		// router.push('/home');
 	};
 
 	return (
