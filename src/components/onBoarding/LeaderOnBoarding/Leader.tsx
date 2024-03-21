@@ -6,14 +6,43 @@ import { useRouter } from 'next/navigation';
 import LeaderModal from '../../common/Modal';
 import ProfileImg from '@/components/common/ProfileImg';
 import Modal from '@/components/common/Modal';
+import { createTeam } from '@/apis/group';
 
 const Leader = () => {
+	const [description, setDescription] = useState<string>('');
+	const [groupName, setGroupName] = useState<string>('');
+	const [groupImage, setGroupImage] = useState<any>(null);
 	const [modal, setModal] = useState(false);
 	const router = useRouter();
 
 	const onModal = () => {
 		setModal(true);
 	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!groupName) {
+		  alert('그룹 이름을 적어주세요!');
+		  return;
+		}
+		if (!description) {
+		  alert('그룹 목적을 적어주세요!');
+		  return;
+		}
+	  
+		const formData = new FormData();
+		formData.append('image', groupImage);
+		formData.append('teamSaveRequestDto[name]', groupName); 
+		formData.append('teamSaveRequestDto[description]', description);
+	  
+		try {
+		  await createTeam(formData);
+		  onModal();
+		} catch (error) {
+		  console.error(error);
+		}
+	  };
+	  
 
 	return (
 		<Wrapper>
@@ -29,13 +58,25 @@ const Leader = () => {
 			)}
 			<Container>
 				<Title>그룹 생성을 위한 기본적인 정보를 입력해주세요.</Title>
-				<ProfileImg id={'imageInput'} text={'이미지 업로드'} />
+				<ProfileImg id={'imageInput'} text={'이미지 업로드'} setImage={setGroupImage} />
 				<Information>
-					<GroupName placeholder="그룹명을 입력해주세요. *(최대 20자)" />
-					<GroupPurpose placeholder="그룹 생성 목적을 입력해주세요. *(최대 50자)" />
+					<GroupName
+						id="groupName"
+						name="groupName"
+						value={groupName}
+						onChange={(e) => setGroupName(e.target.value)}
+						placeholder="그룹명을 입력해주세요. *(최대 20자)"
+					/>
+					<GroupPurpose
+						id="description"
+						name="description"
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+						placeholder="그룹 생성 목적을 입력해주세요. *(최대 50자)"
+					/>
 				</Information>
 				<BtnWrapper>
-					<JoinBtn onClick={onModal}>생성하기</JoinBtn>
+					<JoinBtn onClick={handleSubmit}>생성하기</JoinBtn>
 				</BtnWrapper>
 			</Container>
 		</Wrapper>

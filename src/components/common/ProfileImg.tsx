@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type ImgProps = {
 	text?: string;
 	id: string;
+	setImage: any;
 };
 
 const ProfileImg = (props: ImgProps) => {
@@ -18,6 +19,7 @@ const ProfileImg = (props: ImgProps) => {
 
 		const file = e.target.files[0];
 		setUploadedImage(file);
+		props.setImage(file);
 
 		let reader = new FileReader();
 
