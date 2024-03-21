@@ -3,12 +3,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import GroupNoticeSection from './GroupNoticeSection';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname} from 'next/navigation';
 
 const GroupDetailPage = () => {
 	const router = useRouter();
-	const params = useSearchParams();
-	const groupKey = params.get('key');
+	const pathname = usePathname();
 	return (
 		<Main>
 			<GroupProfile>
@@ -25,8 +24,8 @@ const GroupDetailPage = () => {
 						ooo님은 구름톤 유니브 2기의 <span id="roletext">리더</span>입니다.
 					</Info>
 					<BtnGroup>
-						<Btn onClick={()=>{router.push(`/groups/accept?key=${groupKey}`)}}>새 멤버 수락하기</Btn>
-						<Btn onClick={()=>{router.push(`/groups/setting?key=${groupKey}`)}}>그룹 설정</Btn>
+						<Btn onClick={()=>{router.push(`${pathname}/accept`)}}>새 멤버 수락하기</Btn>
+						<Btn onClick={()=>{router.push(`${pathname}/setting`)}}>그룹 설정</Btn>
 					</BtnGroup>
 				</Right>
 			</GroupProfile>

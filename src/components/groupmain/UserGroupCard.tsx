@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 const UserGroupCard = ({ group }: { group: Group }) => {
 	const router = useRouter();
 	return (
-		<Main onClick={()=>{router.push(`groups/group?key=${group.id}`)}}>
+		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
 					<ProfileImg src={group.profile} />
