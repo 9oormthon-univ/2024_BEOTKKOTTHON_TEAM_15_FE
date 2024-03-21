@@ -7,7 +7,7 @@ const baseURL = 'http://beotkkotthon-env.eba-3tgmsdgp.ap-northeast-2.elasticbean
 interface LoginInfo {
 	email: string;
 	password: string;
-	fcmToken: string;
+	token?: string;
 }
 
 interface SignupInfo extends LoginInfo {
@@ -18,19 +18,7 @@ export const signup = async (body: SignupInfo) => {
 	try {
 		const response = await axios.post(`${baseURL}/signup`, body);
 		const { username, ...loginInfo } = body;
-		const login = async (body: LoginInfo) => {
-			try {
-				const result = await axios.post(`/login`, body);
-				const token = result.data.accessToken;
-				localStorage.setItem('token', token);
-				return result;
-			} catch (error) {
-				console.log(error);
-				return false;
-			}
-		};
-		const data = login(loginInfo);
-		console.log(data);
+		const data = await login(loginInfo);
 		return data;
 	} catch (error) {
 		console.log(error);
@@ -40,13 +28,39 @@ export const signup = async (body: SignupInfo) => {
 
 export const login = async (body: LoginInfo) => {
 	try {
-		const result = await axios.post(`/login`, body);
-		const token = result.data.accessToken;
-		localStorage.setItem('access', token);
-		console.log(result.data.data);
+		const { token, ...loginInfo } = body;
+		const result = await axios.post(`${baseURL}/login`, body);
+		const accesstoken = result.data.result.accessToken;
+		localStorage.setItem('access', accesstoken);
+		const tokenBody = {
+			token: token,
+		};
+		try {
+			const accessToken = localStorage.getItem('access');
+			console.log(accessToken);
+			const response = await axios.post(`${baseURL}/notification`, tokenBody, {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
 		return result;
 	} catch (error) {
 		console.log(error);
 		return false;
 	}
 };
+
+// export const postFcm = async (token: string) => {
+// 	const accessToken = localStorage.getItem('access');
+// 	const result = await axios.post(`${baseURL}/notification`, token, {
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			Authorization: `Bearer ${accessToken}`,
+// 		},
+// 	});
+// 	return result;
+// };

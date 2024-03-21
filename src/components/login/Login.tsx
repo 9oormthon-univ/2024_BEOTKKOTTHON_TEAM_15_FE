@@ -25,8 +25,9 @@ const Login = () => {
 	const body = {
 		email: id,
 		password: pw,
-		fcmToken: deviceToken,
+		token: deviceToken,
 	};
+
 	const onClick = async () => {
 		const result = await login(body);
 		// router.push('/home');
