@@ -18,3 +18,21 @@ export const getAllMyTeamList = async () => {
 		return false;
 	}
 };
+
+// 개별 팀 조회
+export const getTeamInfo = async (teamId : string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}/teams/${teamId}`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+        console.log(response);
+		return response.data.result;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+

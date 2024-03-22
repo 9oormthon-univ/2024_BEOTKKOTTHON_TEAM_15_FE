@@ -1,17 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GroupNoticeSection from './GroupNoticeSection';
 import { useRouter, usePathname, useParams } from 'next/navigation';
 import { LuPlusCircle } from 'react-icons/lu';
+import { getTeamInfo } from '@/apis/team';
+import { TeamType } from '@/types/request';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const GroupDetailPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const params = useParams<{ id: string }>();
 	const groupId = params.id;
-	console.log(groupId);
+	const [groupInfo, setGroupInfo] = useState<TeamType>();
+	const [userRole, setUserRole] = useState<string>();
+	const userName = useRecoilValue(userNameAtom);
+
+	useEffect(() => {
+		const getDataList = async () => {
+			const result = await getTeamInfo(groupId);
+			setGroupInfo(result);
+			if(groupInfo && groupInfo.role){
+				if(groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR'){
+					setUserRole('리더');
+				} else{
+					setUserRole('멤버');
+				}
+			}
+		};
+		getDataList();
+	}, [groupId,groupInfo]);
 	return (
 		<Main>
 			<GroupProfile>
@@ -20,12 +41,12 @@ const GroupDetailPage = () => {
 				</ProfileCircle>
 				<Right>
 					<Row>
-						<Title>구름톤 유니브 2기</Title>
-						<span className="tag">리더 20명</span>
-						<span className="tag">멤버 30명</span>
+						<Title>{groupInfo?.name}</Title>
+						<span className="tag">리더 {groupInfo?.leaderCount}명</span>
+						<span className="tag">멤버 {groupInfo?.memberCount}명</span>
 					</Row>
 					<Info>
-						ooo님은 구름톤 유니브 2기의 <span id="roletext">리더</span>입니다.
+						{userName}님은 {groupInfo?.name}의 <span id="roletext">{userRole}</span>입니다.
 					</Info>
 					<BtnGroup>
 						<Btn
@@ -47,7 +68,7 @@ const GroupDetailPage = () => {
 			</GroupProfile>
 			<Section>
 				<Row2>
-					<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>{' '}
+					<SectionTitle>{groupInfo?.name}의 최근 가정통신문</SectionTitle>
 					<Btn2
 						onClick={() => {
 							router.push(`${pathname}/post`);
