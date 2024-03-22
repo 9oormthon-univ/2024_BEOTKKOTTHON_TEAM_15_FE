@@ -8,13 +8,20 @@ import { BiBell } from 'react-icons/bi';
 import { BiBellOff } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
 import { logOut } from '@/apis/login';
+import { useSetRecoilState } from 'recoil';
+import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 
 const Settings = () => {
 	const [alert, setAlert] = useState(true);
 	const router = useRouter();
+	const setEmail = useSetRecoilState(userEmailAtom);
+	const setName = useSetRecoilState(userNameAtom);
 
 	const handleLogout = () => {
 		logOut();
+		localStorage.removeItem('access');
+		setEmail('');
+		setName('');
 		router.push('/');
 	};
 

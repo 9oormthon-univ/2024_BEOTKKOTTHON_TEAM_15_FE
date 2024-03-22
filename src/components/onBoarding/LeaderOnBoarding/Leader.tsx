@@ -39,10 +39,15 @@ const Leader = () => {
 		if (!groupName) {
 			alert('그룹 이름을 적어주세요!');
 			return;
+		} else if (groupName.length > 20) {
+			alert('그룹 이름은 20자 제한입니다.😭');
+			return;
 		}
 		if (!description) {
 			alert('그룹 목적을 적어주세요!');
 			return;
+		} else if (description.length > 50) {
+			alert('그룹 목적은 50자 제한입니다.😓');
 		}
 		handleGroupImageUpload(groupImage, groupName, description);
 	};

@@ -58,7 +58,7 @@ export const login = async (body: LoginInfo) => {
 
 export const logOut = async () => {
 	const accessToken = localStorage.getItem('access');
-	const result = await axios.delete(`${baseURL}/logout`, {
+	const result = await axios.get(`${baseURL}/auth/logout`, {
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 		},
