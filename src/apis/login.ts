@@ -56,6 +56,14 @@ export const login = async (body: LoginInfo) => {
 	}
 };
 
+export const logOut = async () => {
+	const accessToken = localStorage.getItem('access');
+	const result = await axios.get(`${baseURL}/auth/logout`, {
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+};
 
 // export const postFcm = async (token: string) => {
 // 	const accessToken = localStorage.getItem('access');
