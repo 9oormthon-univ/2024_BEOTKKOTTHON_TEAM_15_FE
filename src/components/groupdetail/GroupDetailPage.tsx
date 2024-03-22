@@ -24,7 +24,7 @@ const GroupDetailPage = () => {
 			const result = await getTeamInfo(groupId);
 			setGroupInfo(result);
 			if(groupInfo && groupInfo.role){
-				if(groupInfo.role === 'READER' || groupInfo.role === 'CREATOR'){
+				if(groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR'){
 					setUserRole('리더');
 				} else{
 					setUserRole('멤버');
