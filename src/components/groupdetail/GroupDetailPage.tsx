@@ -32,7 +32,7 @@ const GroupDetailPage = () => {
 			}
 		};
 		getDataList();
-	}, [groupId,groupInfo]);
+	}, [groupId]);
 	return (
 		<Main>
 			<GroupProfile>
