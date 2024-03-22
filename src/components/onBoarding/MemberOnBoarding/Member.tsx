@@ -9,9 +9,16 @@ import { searchGroup } from '@/apis/search';
 import { useRecoilValue } from 'recoil';
 import { userNameAtom } from '@/app/recoilContextProvider';
 
+interface DataType {
+	name: string;
+	description: string;
+	id: string;
+}
+
 const Member = () => {
 	const [modal, setModal] = useState(false);
 	const [text, setText] = useState<string>('');
+	const [data, setData] = useState<DataType[]>([]);
 	const userName = useRecoilValue(userNameAtom);
 
 	const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,9 +30,19 @@ const Member = () => {
 	};
 
 	// 엔터키 눌렀을때
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
-			searchGroup(text);
+			const result = await searchGroup(text);
+			// axios 응답에서 실제 데이터를 추출합니다.
+			const data = result;
+			console.log(data);
+			// 'data'가 배열인지 확인합니다. 배열이 아니라면, 빈 배열을 대신 전달합니다.
+			if (Array.isArray(data)) {
+				setData(data);
+			} else {
+				console.error('받은 데이터가 배열 형식이 아닙니다.');
+				setData([]);
+			}
 		}
 	};
 	// 검색 아이콘 눌렀을때
@@ -56,7 +73,9 @@ const Member = () => {
 					<LuSearch size="2rem" color="#93613B" style={{ strokeWidth: 3 }} onClick={handleClick} />
 					<SearchInput className="searchInputBox" onChange={handleTextChange} onKeyDown={handleKeyDown} />
 				</SearchBox>
-				<GroupCard onModal={onModal} />
+				{data.map((result, idx) => (
+					<GroupCard key={idx} onModal={onModal} title={result.name} des={result.description} id={result.id} />
+				))}
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />
 		</Wrapper>

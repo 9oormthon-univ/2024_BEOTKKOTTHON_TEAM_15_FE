@@ -1,21 +1,33 @@
+import { requestGroup } from '@/apis/request';
 import React from 'react';
 import styled from 'styled-components';
 
 type CardProps = {
 	onModal: React.MouseEventHandler<HTMLDivElement>;
+	title: string;
+	des: string;
+	id: string;
 };
 
 const GroupCard = (props: CardProps) => {
+	const request = async (role: string, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		let body = {
+			id: props.id,
+			role: role,
+		};
+		await requestGroup(body);
+		await props.onModal(event);
+	};
 	return (
 		<Wrapper>
 			<ProfileImg alt="groupProfile" src="/img/goorm.png" />
 			<GroupWrapper>
-				<GroupTitle>구름톤 유니브 2기</GroupTitle>
-				<GroupLeader>리더: 000</GroupLeader>
+				<GroupTitle>{props.title}</GroupTitle>
+				<GroupLeader>{props.des}</GroupLeader>
 			</GroupWrapper>
 			<BtnWrapper>
-				<JoinBtn onClick={props.onModal}>리더로 참여하기</JoinBtn>
-				<JoinBtn onClick={props.onModal}>멤버로 참여하기</JoinBtn>
+				<JoinBtn onClick={(e) => request('LEADER', e)}>리더로 참여하기</JoinBtn>
+				<JoinBtn onClick={(e) => request('MEMBER', e)}>멤버로 참여하기</JoinBtn>
 			</BtnWrapper>
 		</Wrapper>
 	);

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userDeviceAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { userDeviceAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { login } from '@/apis/login';
 
 const Login = () => {
@@ -13,6 +13,7 @@ const Login = () => {
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
 	const deviceToken = useRecoilValue(userDeviceAtom);
 	const setUserName = useSetRecoilState(userNameAtom);
+	const setEmail = useSetRecoilState(userEmailAtom);
 	const router = useRouter();
 
 	const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +32,10 @@ const Login = () => {
 
 	const onClick = async () => {
 		const result = await login(body);
-		if(result){
+		if (result) {
 			setUserName(result.data.result.username);
+			setEmail(result.data.result.email);
+			console.log(result.data.result);
 		}
 		router.push('/home');
 	};

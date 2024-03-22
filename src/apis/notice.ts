@@ -2,6 +2,13 @@ import axios from 'axios';
 
 const baseURL = 'https://dev.gooromnews.shop';
 
+interface postType {
+	title: string;
+	content: string;
+	minute: string;
+	id: string;
+}
+
 // 미확인 가정통신문 전체 목록 조회
 export const getAllUnreadNoticeList = async () => {
 	const accessToken = localStorage.getItem('access');
@@ -11,7 +18,7 @@ export const getAllUnreadNoticeList = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response.data.result;
 	} catch (error) {
 		console.log(error);
@@ -28,7 +35,7 @@ export const getMyNotice = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response.data.result;
 	} catch (error) {
 		console.log(error);
@@ -45,7 +52,7 @@ export const getAllNotice = async () => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response.data.result.showNewsDtoList;
 	} catch (error) {
 		console.log(error);
@@ -54,7 +61,7 @@ export const getAllNotice = async () => {
 };
 
 // 팀별 가정통신문 조회
-export const getTeamNotice = async (teamId : string) => {
+export const getTeamNotice = async (teamId: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}/teams/${teamId}/news`, {
@@ -62,10 +69,24 @@ export const getTeamNotice = async (teamId : string) => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-        console.log(response);
+		console.log(response);
 		return response.data.result;
 	} catch (error) {
 		console.log(error);
 		return false;
+	}
+};
+
+export const postNotice = async (body: postType) => {
+	const { id, ...postInfo } = body;
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.post(`${baseURL}/teams/${id}/news`, postInfo, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+	} catch (error) {
+		console.log(error);
 	}
 };
