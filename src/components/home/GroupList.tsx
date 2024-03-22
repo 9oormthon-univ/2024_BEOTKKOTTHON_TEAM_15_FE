@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import HomeGroupCard from './HomeGroupCard';
+import { TeamType } from '@/types/request';
 
 export interface Group {
 	id: number;
@@ -9,7 +10,7 @@ export interface Group {
 	count: number;
 }
 
-const GroupList = ({ dataList }: { dataList: Group[] }) => {
+const GroupList = ({ dataList }: { dataList: TeamType[] }) => {
 	const [currentPage, setCurrentPage] = useState(0);
 	const postsPerPage = 4;
 	const startIndex = currentPage * postsPerPage;

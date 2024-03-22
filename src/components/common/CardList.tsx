@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NoticeCard from './NoticeCard';
-import { SampleType } from '@/utils/constant';
 import { FaChevronDown } from "react-icons/fa6";
+import { ContentsType } from '@/types/request';
 
-const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
+const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
 	const [selectedDataSet, setSelectedDataSet] = useState(dataList);
 	const [groupList, setGroupList] = useState<string[]>(['전체']);
 	const [selectedGroup, setSelectedGroup] = useState<string>('전체');
@@ -12,7 +12,7 @@ const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
 
 	useEffect(() => {
 		if (dataList) {
-			const groups = dataList.map((item) => item.group);
+			const groups = dataList.map((item) => item.teamName);
 			const uniqueGroups = Array.from(new Set(groups));
 			setGroupList(['전체', ...uniqueGroups]);
 		}
@@ -23,7 +23,7 @@ const CardList = ({ dataList }: { dataList?: SampleType[] }) => {
 		if (groupName === '전체') {
 			setSelectedDataSet(dataList || []);
 		} else {
-			const filteredData = dataList?.filter((item) => item.group === groupName);
+			const filteredData = dataList?.filter((item) => item.teamName === groupName);
 			setSelectedDataSet(filteredData || []);
 		}
 		setVisibleCount(4);

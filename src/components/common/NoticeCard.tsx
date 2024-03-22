@@ -1,10 +1,10 @@
-import { SampleType } from '@/utils/constant';
 import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRightCircle } from 'react-icons/lu';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { ContentsType } from '@/types/request';
 
-const NoticeCard = ({ notice }: { notice: SampleType }) => {
+const NoticeCard = ({ notice }: { notice: ContentsType }) => {
 	const router = useRouter();
 	const formatContent = (content: string) => {
 		return content.split(/\\n|\n/).map((line, index) => (
@@ -22,7 +22,7 @@ const NoticeCard = ({ notice }: { notice: SampleType }) => {
 					<Title>{notice.title}</Title>
 					<Span>
 						<span className="tag">Leader</span>
-						<span id="leader">{notice.leader}</span>
+						<span id="leader">{notice.writer}</span>
 						<span className="tag">남은 시간</span>
 						<span id="limit-time">00:45:30</span>
 					</Span>
@@ -33,8 +33,8 @@ const NoticeCard = ({ notice }: { notice: SampleType }) => {
 				</Middle>
 				<Bottom>
 					<CheckCount id="check">
-						<div>확인 {notice.check}명</div>
-						<div>미확인 {notice.no_check}명</div>
+						<div>확인 {notice.readMemberCount}명</div>
+						<div>미확인 {notice.notReadMemberCount}명</div>
 					</CheckCount>
 					<LuArrowRightCircle id="" size="2rem" color="#c9bca2" />
 				</Bottom>
