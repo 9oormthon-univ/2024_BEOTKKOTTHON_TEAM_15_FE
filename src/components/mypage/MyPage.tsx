@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import UploadImg from '../common/ProfileImg';
+import ProfileImg from '../common/ProfileImg';
 
 const MyPage = () => {
 	const isLogin = useRecoilValue(isLoginAtom);
@@ -12,12 +13,12 @@ const MyPage = () => {
 	const route = useRouter();
 	const userName = useRecoilValue(userNameAtom);
 	const userEmail = useRecoilValue(userEmailAtom);
-
+	const [image, setImage] = useState();
 	return (
 		<>
 			<Wrapper>
 				<ProfileWrapper>
-					<UploadImg id={'imageInput'} text={'이미지 변경'} />
+					<ProfileImg id={'imageInput'} text={'이미지 변경'} setImage={setImage} />
 					<Name>{userName}</Name>
 					<Email>{userEmail}</Email>
 				</ProfileWrapper>

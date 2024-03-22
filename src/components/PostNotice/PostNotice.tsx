@@ -105,6 +105,7 @@ const InfoInput = styled.textarea`
 	background-color: #fff5e0;
 	outline: none;
 	gap: 2rem;
+	resize: none;
 `;
 
 const InfoWrapper = styled.div`
