@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import DatePicker from './DatePick';
 import UploadImg from '../common/UploadImg';
 import Modal from '@/components/common/Modal';
+import { useParams } from 'next/navigation';
 
 const PostNotice = () => {
+	// 그룹 아이디 가져오기
+	const params = useParams<{id: string}>();
+	const groupId = params.id;
+	
 	const [title, setTitle] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const [time, setTime] = useState<string>('');

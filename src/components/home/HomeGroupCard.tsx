@@ -1,5 +1,4 @@
 import React from 'react';
-import { Group } from './GroupList';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { TeamType } from '@/types/request';

@@ -7,16 +7,19 @@ import GroupSection from './GroupSection';
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPeople } from "react-icons/go";
 import { useRouter } from 'next/navigation';
+import { userNameAtom } from '@/app/recoilContextProvider';
+import { useRecoilValue } from 'recoil';
 
 const GroupMainPage = () => {
 	const router = useRouter();
+	const userName = useRecoilValue(userNameAtom);
 	return (
 		<Main>
 			<Section>
-				<SectionTitle>{`{닉네임}`}님이 속해있는 그룹</SectionTitle>
+				<SectionTitle>{userName}님이 속해있는 그룹</SectionTitle>
 				<GroupSection />
 				<BtnGroup>
-                    <Btn onClick={()=>{router.push('post')}}><LuPlusCircle size='1.5rem'/>새 가정통신문 만들기</Btn>
+                    {/* <Btn onClick={()=>{router.push('post')}}><LuPlusCircle size='1.5rem'/>새 가정통신문 만들기</Btn> */}
                     <Btn onClick={()=>{router.push('new')}}><GoPeople id='people' size='1.5rem' />새 그룹 생성하기</Btn>
                 </BtnGroup>
 			</Section>
