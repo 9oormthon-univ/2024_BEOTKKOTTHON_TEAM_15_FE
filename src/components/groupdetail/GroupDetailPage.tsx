@@ -42,8 +42,8 @@ const GroupDetailPage = () => {
 				<Right>
 					<Row>
 						<Title>{groupInfo?.name}</Title>
-						<span className="tag">리더 </span>
-						<span className="tag">멤버 30명</span>
+						<span className="tag">리더 {groupInfo?.leaderCount}명</span>
+						<span className="tag">멤버 {groupInfo?.memberCount}명</span>
 					</Row>
 					<Info>
 						{userName}님은 {groupInfo?.name}의 <span id="roletext">{userRole}</span>입니다.
@@ -68,7 +68,7 @@ const GroupDetailPage = () => {
 			</GroupProfile>
 			<Section>
 				<Row2>
-					<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>
+					<SectionTitle>{groupInfo?.name}의 최근 가정통신문</SectionTitle>
 					<Btn2
 						onClick={() => {
 							router.push(`${pathname}/post`);

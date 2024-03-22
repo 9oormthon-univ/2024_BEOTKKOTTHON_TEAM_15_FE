@@ -7,7 +7,7 @@ import { ContentsType } from '@/types/request';
 const NoticeCard = ({ notice }: { notice: ContentsType }) => {
 	const router = useRouter();
 	const formatContent = (content: string) => {
-		return content.split(/\\n|\n/).map((line, index) => (
+		return content?.split(/\\n|\n/).map((line, index) => (
 			<React.Fragment key={index}>
 				{line}
 				<br />

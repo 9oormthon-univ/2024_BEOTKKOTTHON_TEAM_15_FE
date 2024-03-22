@@ -27,14 +27,19 @@ const GroupAcceptPage = () => {
 		setSelectedRole(role);
 	};
 
-	const handleAcceptBtn = async (isAccept: boolean, memberId: number) => {
-		try {
-			const result = await answerToRequest(Number(groupId), Number(memberId), isAccept);
-			alert('요청을 성공적으로 처리했습니다.');
-		} catch (error) {
-			console.error('요청 처리 중 오류가 발생했습니다:', error);
-			alert('요청 처리 중 오류가 발생했습니다.');
-		}
+	const handleAcceptBtn = async (isAccept: boolean, memberId: number, memberName: string) => {
+    const confirmationMessage = `${memberName}님의 요청을 ${isAccept ? '수락' : '거부'}하시겠습니까?`;
+		if (window.confirm(confirmationMessage)) {
+      try {
+          const result = await answerToRequest(Number(groupId), Number(memberId), isAccept);
+          alert('요청을 성공적으로 처리했습니다.');
+      } catch (error) {
+          console.error('요청 처리 중 오류가 발생했습니다:', error);
+          alert('요청 처리 중 오류가 발생했습니다.');
+      }
+  } else {
+      alert('요청 처리가 취소되었습니다.');
+  }
 	};
 
 	useEffect(() => {
@@ -60,12 +65,27 @@ const GroupAcceptPage = () => {
 						<div className="user">{request.username}</div>
 						<span>
 							<Btn className="role">{request.requestRole == 'MEMBER' ? '멤버' : '리더'}</Btn>
-							<Btn className="selectBtn" onClick={()=>{handleAcceptBtn(true,request.memberId)}}>수락</Btn>
-							<Btn className="selectBtn" onClick={()=>{handleAcceptBtn(false,request.memberId)}}>거절</Btn>
+							<Btn
+								className="selectBtn"
+								onClick={() => {
+									handleAcceptBtn(true, request.memberId, request.username);
+								}}
+							>
+								수락
+							</Btn>
+							<Btn
+								className="selectBtn"
+								onClick={() => {
+									handleAcceptBtn(false, request.memberId,request.username);
+								}}
+							>
+								거절
+							</Btn>
 						</span>
 					</Data>
 				))}
 			</CardWrapper>
+			{/* {filteredRequestList ? <></> : <Data>현재 들어온 요청이 없습니다</Data>} */}
 		</Main>
 	);
 };
@@ -94,7 +114,7 @@ const BtnGroup = styled.div`
 	justify-content: flex-start;
 	overflow-y: scroll;
 	gap: 1rem;
-  margin-top: 2rem;
+	margin-top: 2rem;
 	margin-bottom: 1.3rem;
 `;
 const GroupSortBtn = styled.div<{ $active: boolean }>`
@@ -115,16 +135,16 @@ const Data = styled.div`
 		font-size: 2rem;
 		font-weight: 600;
 	}
-  .btngroup{
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .role{
-    background-color: #4f7b59;
-	color: white;
-  }
+	.btngroup {
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+	.role {
+		background-color: #4f7b59;
+		color: white;
+	}
 	.selectBtn {
 		cursor: pointer;
 		border: 1px #4f7b59 solid;
