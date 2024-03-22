@@ -6,10 +6,13 @@ import GroupCard from './GroupCard';
 import { LuSearch } from 'react-icons/lu';
 import Modal from '@/components/common/Modal';
 import { searchGroup } from '@/apis/search';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const Member = () => {
 	const [modal, setModal] = useState(false);
 	const [text, setText] = useState<string>('');
+	const userName = useRecoilValue(userNameAtom);
 
 	const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setText(e.target.value);
@@ -46,8 +49,8 @@ const Member = () => {
 			)}
 			<Container>
 				<TextWrapper>
-					<Text>OOO멤버님 환영합니다</Text>
-					<Ask>OOO님이 속한 그룹은 어디인가요?</Ask>
+					<Text>{userName} 멤버님 환영합니다</Text>
+					<Ask>{userName}님이 속한 그룹은 어디인가요?</Ask>
 				</TextWrapper>
 				<SearchBox>
 					<LuSearch size="2rem" color="#93613B" style={{ strokeWidth: 3 }} onClick={handleClick} />

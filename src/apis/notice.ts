@@ -52,3 +52,20 @@ export const getAllNotice = async () => {
 		return false;
 	}
 };
+
+// 팀별 가정통신문 조회
+export const getTeamNotice = async (teamId : string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}/teams/${teamId}/news`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+        console.log(response);
+		return response.data.result;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};

@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FaChevronDown } from "react-icons/fa6";
 import NoticeCard from '../common/NoticeCard';
+import { ContentsType } from '@/types/request';
 
 
-const GroupCardList = ({ dataList }: { dataList?: SampleType[] }) => {
+const GroupCardList = ({ dataList }: { dataList?: ContentsType[] }) => {
     const [selectedDataSet, setSelectedDataSet] = useState(dataList);
 	const [visibleCount, setVisibleCount] = useState<number>(4);
 
@@ -14,10 +15,10 @@ const GroupCardList = ({ dataList }: { dataList?: SampleType[] }) => {
 	};
   return (
     <Main>
-    {/* <CardWrapper>
+    <CardWrapper>
         {selectedDataSet &&
             selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
-    </CardWrapper> */}
+    </CardWrapper>
     <Bottom>
         {selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
             <ShowMoreButton onClick={handleShowMore}>

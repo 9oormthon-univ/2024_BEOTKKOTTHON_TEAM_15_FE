@@ -3,8 +3,11 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const OnBoarding = () => {
+	const userName = useRecoilValue(userNameAtom);
 	const router = useRouter();
 
 	const onLeader = () => {
@@ -19,7 +22,7 @@ const OnBoarding = () => {
 			<Container>
 				<TextWrapper>
 					<Text>가정통신문에 오신 것을 환영합니다!</Text>
-					<Ask>OOO님은 가정통신문을 어떻게 활용하실 예정인가요?</Ask>
+					<Ask>{userName}님은 가정통신문을 어떻게 활용하실 예정인가요?</Ask>
 				</TextWrapper>
 				<BtnWrapper>
 					<Btn onClick={onLeader}>리더 👑</Btn>
