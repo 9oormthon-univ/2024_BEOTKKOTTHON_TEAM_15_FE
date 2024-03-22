@@ -6,19 +6,27 @@ import DatePicker from './DatePick';
 import UploadImg from '../common/UploadImg';
 import Modal from '@/components/common/Modal';
 import { useParams } from 'next/navigation';
+import { postNotice } from '@/apis/notice';
 
 const PostNotice = () => {
 	// 그룹 아이디 가져오기
-	const params = useParams<{id: string}>();
+	const params = useParams<{ id: string }>();
 	const groupId = params.id;
-	
+
 	const [title, setTitle] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const [time, setTime] = useState<string>('');
 
 	const [modal, setModal] = useState(false);
 
-	const onModal = () => {
+	let body = {
+		title: title,
+		content: info,
+		minute: time,
+		id: groupId,
+	};
+	const handleSubmit = () => {
+		postNotice(body);
 		setModal(true);
 	};
 
@@ -29,11 +37,11 @@ const PostNotice = () => {
 			)}
 			<TitleWrapper>
 				<Title>가정통신문 제목</Title>
-				<TitleInput placeholder="제목을 입력해주세요." />
+				<TitleInput placeholder="제목을 입력해주세요." onChange={(e) => setTitle(e.target.value)} />
 			</TitleWrapper>
 			<InfoWrapper>
 				<Title>가정통신문 내용</Title>
-				<InfoInput placeholder="내용을 입력해주세요." />
+				<InfoInput placeholder="내용을 입력해주세요." onChange={(e) => setInfo(e.target.value)} />
 			</InfoWrapper>
 			<Title>이미지 업로드</Title>
 			<UploadWrapper>
@@ -45,7 +53,7 @@ const PostNotice = () => {
 				<DatePicker time={time} setTime={setTime} />
 			</DeadLineWrapper>
 			<BtnWrapper>
-				<Btn onClick={onModal}>작성하기</Btn>
+				<Btn onClick={handleSubmit}>작성하기</Btn>
 			</BtnWrapper>
 		</Wrapper>
 	);
