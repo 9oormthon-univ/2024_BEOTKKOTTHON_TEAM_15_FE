@@ -6,7 +6,7 @@ import { TeamType } from '@/types/request';
 const HomeGroupCard = ({ group }: { group: TeamType }) => {
 	const router = useRouter();
 	return (
-		<Main onClick={()=>{router.push(`groups/group?key=${group.id}`)}}>
+		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
 					<ProfileImg src={group.imageUrl} />

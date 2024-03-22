@@ -63,7 +63,7 @@ export const requestTeamAccept = async (teamId: number, requestrole: 'MEMBER' | 
 };
 
 // 팀 가입요청 리스트 확인
-export const checkTeamRequestList = async (teamId: number) => {
+export const checkTeamRequestList = async (teamId: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}/teams/${teamId}/participations`, {
@@ -71,7 +71,7 @@ export const checkTeamRequestList = async (teamId: number) => {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-		return response;
+		return response.data.result;
 	} catch (error) {
 		console.log(error);
 		return false;
