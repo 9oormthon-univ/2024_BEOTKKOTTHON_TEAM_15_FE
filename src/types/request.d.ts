@@ -21,5 +21,15 @@ export type TeamType = {
       imageUrl: string,
       link: string,
       createdTime: string,
-      modifiedTime: Date
+      modifiedTime: Date,
+      role: string,
+      showNewsDtoList: ContentsType[]
+}
+export type AcceptRequest = {
+      requestId: number,
+      requestRole: string,
+      requestCreatedTime: Date,
+      memberId: number,
+      email: string,
+      username: string
 }
