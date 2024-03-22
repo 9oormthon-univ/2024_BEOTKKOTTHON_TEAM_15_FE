@@ -35,7 +35,7 @@ const Signup = () => {
 
 	const onClick = async () => {
 		const result = await signup(body);
-		// router.push('/onBoarding');
+		router.push('/onBoarding');
 	};
 
 	return (
