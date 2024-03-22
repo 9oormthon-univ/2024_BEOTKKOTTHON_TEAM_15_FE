@@ -23,6 +23,15 @@ const GroupAcceptPage = () => {
 		}
 	});
 
+	const fetchData = async () => {
+		try {
+			const result = await checkTeamRequestList(groupId);
+			setRequestList(result);
+		} catch (error) {
+			console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+		}
+	};
+
 	const handleSelectBtn = (role: string) => {
 		setSelectedRole(role);
 	};
@@ -33,6 +42,7 @@ const GroupAcceptPage = () => {
       try {
           const result = await answerToRequest(Number(groupId), Number(memberId), isAccept);
           alert('요청을 성공적으로 처리했습니다.');
+		  fetchData(); 
       } catch (error) {
           console.error('요청 처리 중 오류가 발생했습니다:', error);
           alert('요청 처리 중 오류가 발생했습니다.');
