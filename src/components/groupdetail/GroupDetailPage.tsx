@@ -30,13 +30,6 @@ const GroupDetailPage = () => {
 					<BtnGroup>
 						<Btn
 							onClick={() => {
-								router.push(`${pathname}/post`);
-							}}
-						>
-							<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
-						</Btn>
-						<Btn
-							onClick={() => {
 								router.push(`${pathname}/accept`);
 							}}
 						>
@@ -53,8 +46,17 @@ const GroupDetailPage = () => {
 				</Right>
 			</GroupProfile>
 			<Section>
-				<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>
-				<GroupNoticeSection />
+				<Row2>
+					<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>{' '}
+					<Btn2
+						onClick={() => {
+							router.push(`${pathname}/post`);
+						}}
+					>
+						<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
+					</Btn2>
+				</Row2>
+				<GroupNoticeSection groupId={groupId} />
 			</Section>
 		</Main>
 	);
@@ -68,7 +70,7 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 3rem;
+	gap: 4rem;
 `;
 const Section = styled.div`
 	width: 100%;
@@ -115,6 +117,12 @@ const Row = styled.div`
 		font-size: 1.2rem;
 	}
 `;
+const Row2 = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+`;
 const Title = styled.div`
 	font-weight: 600;
 	font-size: 2.3rem;
@@ -150,14 +158,28 @@ const Btn = styled.div`
 	cursor: pointer;
 	align-items: center;
 	padding: 1rem 1.5rem;
-	color: white;
+	color: #4f7b59;
+	font-size: 1.3rem;
+	font-weight: 600;
+	border-radius: 20px;
+	border: 1.5px solid #4f7b59;
+	display: flex;
+	gap: 5px;
+	&:hover {
+		background-color: #4f7b59;
+		color: #FFF5E0;
+	}
+`;
+
+const Btn2 = styled.div`
+	cursor: pointer;
+	align-items: center;
+	padding: 0.7rem 1rem;
 	background-color: #4f7b59;
+	color: #FFF5E0;
 	font-size: 1.3rem;
 	font-weight: 500;
 	border-radius: 20px;
 	display: flex;
 	gap: 5px;
-	#people {
-		stroke-width: 1px;
-	}
 `;
