@@ -17,11 +17,11 @@ const ProfileImg = (props: ImgProps) => {
 			return;
 		}
 
+		let reader = new FileReader();
+
 		const file = e.target.files[0];
 		setUploadedImage(file);
 		props.setImage(file);
-
-		let reader = new FileReader();
 
 		reader.onloadend = () => {
 			const previewImgUrl = reader.result;

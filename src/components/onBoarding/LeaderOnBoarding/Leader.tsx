@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import LeaderModal from '../../common/Modal';
 import ProfileImg from '@/components/common/ProfileImg';
 import Modal from '@/components/common/Modal';
 import { createTeam } from '@/apis/group';
@@ -19,30 +18,30 @@ const Leader = () => {
 		setModal(true);
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!groupName) {
-		  alert('그룹 이름을 적어주세요!');
-		  return;
-		}
-		if (!description) {
-		  alert('그룹 목적을 적어주세요!');
-		  return;
-		}
-	  
+	function handleGroupImageUpload(groupImage: File, groupName: string, description: string) {
 		const formData = new FormData();
 		formData.append('image', groupImage);
-		formData.append('teamSaveRequestDto[name]', groupName); 
-		formData.append('teamSaveRequestDto[description]', description);
-	  
-		try {
-		  await createTeam(formData);
-		  onModal();
-		} catch (error) {
-		  console.error(error);
+
+		// 객체를 JSON 문자열로 변환하여 추가
+		formData.append('name', groupName);
+		formData.append('decription', description);
+		createTeam(formData);
+		onModal();
+	}
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		console.log(groupImage);
+		if (!groupName) {
+			alert('그룹 이름을 적어주세요!');
+			return;
 		}
-	  };
-	  
+		if (!description) {
+			alert('그룹 목적을 적어주세요!');
+			return;
+		}
+		handleGroupImageUpload(groupImage, groupName, description);
+	};
 
 	return (
 		<Wrapper>

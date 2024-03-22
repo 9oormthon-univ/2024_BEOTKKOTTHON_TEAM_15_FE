@@ -2,10 +2,26 @@ import axios from 'axios';
 
 const baseURL = 'https://dev.gooromnews.shop';
 interface createTeamBody {
-	image: string;
+	image: File;
 	name: string;
 	description: string;
 }
+
+// export function blobToDataURL(blob: Blob, callback: (dataUrl: string) => void) {
+// 	const reader = new FileReader();
+// 	reader.onload = function (e) {
+// 		if (e.target) {
+// 			callback(e.target.result as string);
+// 		} else {
+// 			console.error('null');
+// 		}
+// 	};
+// 	reader.readAsDataURL(blob);
+// }
+
+// export function createBlob(file: any) {
+// 	return URL.createObjectURL(file);
+// }
 
 // 팀 생성
 export const createTeam = async (body: FormData) => {
@@ -13,8 +29,8 @@ export const createTeam = async (body: FormData) => {
 	try {
 		const response = await axios.post(`${baseURL}/teams`, body, {
 			headers: {
+				'Content-Type': 'application/json',
 				Authorization: `Bearer ${accessToken}`,
-				'Content-Type': 'multipart/form-data',
 			},
 		});
 		return response;
