@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://beotkkotthon-env.eba-3tgmsdgp.ap-northeast-2.elasticbeanstalk.com';
+const baseURL = 'https://dev.gooromnews.shop';
 interface createTeamBody {
 	image: string;
 	name: string;
