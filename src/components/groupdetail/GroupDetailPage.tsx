@@ -3,12 +3,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import GroupNoticeSection from './GroupNoticeSection';
-import { useRouter, usePathname, useParams} from 'next/navigation';
+import { useRouter, usePathname, useParams } from 'next/navigation';
+import { LuPlusCircle } from 'react-icons/lu';
 
 const GroupDetailPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const params = useParams<{ id: string}>();
+	const params = useParams<{ id: string }>();
 	const groupId = params.id;
 	console.log(groupId);
 	return (
@@ -27,14 +28,33 @@ const GroupDetailPage = () => {
 						ooo님은 구름톤 유니브 2기의 <span id="roletext">리더</span>입니다.
 					</Info>
 					<BtnGroup>
-						<Btn onClick={()=>{router.push(`${pathname}/accept`)}}>새 멤버 수락하기</Btn>
-						<Btn onClick={()=>{router.push(`${pathname}/setting`)}}>그룹 설정</Btn>
+						<Btn
+							onClick={() => {
+								router.push(`${pathname}/post`);
+							}}
+						>
+							<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
+						</Btn>
+						<Btn
+							onClick={() => {
+								router.push(`${pathname}/accept`);
+							}}
+						>
+							새 멤버 수락하기
+						</Btn>
+						<Btn
+							onClick={() => {
+								router.push(`${pathname}/setting`);
+							}}
+						>
+							그룹 설정
+						</Btn>
 					</BtnGroup>
 				</Right>
 			</GroupProfile>
 			<Section>
 				<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>
-				<GroupNoticeSection/>
+				<GroupNoticeSection />
 			</Section>
 		</Main>
 	);

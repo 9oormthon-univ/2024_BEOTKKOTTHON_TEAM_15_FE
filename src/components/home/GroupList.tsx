@@ -3,12 +3,6 @@ import styled from 'styled-components';
 import HomeGroupCard from './HomeGroupCard';
 import { TeamType } from '@/types/request';
 
-export interface Group {
-	id: number;
-	group: string;
-	profile: string;
-	count: number;
-}
 
 const GroupList = ({ dataList }: { dataList: TeamType[] }) => {
 	const [currentPage, setCurrentPage] = useState(0);
