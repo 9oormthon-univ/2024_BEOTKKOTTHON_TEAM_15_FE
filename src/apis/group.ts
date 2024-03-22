@@ -3,10 +3,8 @@ import axios from 'axios';
 const baseURL = 'https://dev.gooromnews.shop';
 interface createTeamBody {
 	image: File;
-	teamSaveRequestDto: {
-		name: string;
-		description: string;
-	};
+	name: string;
+	description: string;
 }
 
 // export function blobToDataURL(blob: Blob, callback: (dataUrl: string) => void) {

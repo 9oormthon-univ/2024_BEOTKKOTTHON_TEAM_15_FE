@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
 import { LuSearch } from 'react-icons/lu';
 import Modal from '@/components/common/Modal';
+import { searchGroup } from '@/apis/search';
 
 const Member = () => {
-	const inputText = useRef<HTMLInputElement>(null);
 	const [modal, setModal] = useState(false);
+	const [text, setText] = useState<string>('');
+
+	const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setText(e.target.value);
+	};
 
 	const onModal = () => {
 		setModal(true);
@@ -17,7 +22,7 @@ const Member = () => {
 	// 엔터키 눌렀을때
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
-			// Enter 키가 눌렸을 때 검색 함수 호출
+			searchGroup(text);
 		}
 	};
 	// 검색 아이콘 눌렀을때
@@ -46,7 +51,7 @@ const Member = () => {
 				</TextWrapper>
 				<SearchBox>
 					<LuSearch size="2rem" color="#93613B" style={{ strokeWidth: 3 }} onClick={handleClick} />
-					<SearchInput className="searchInputBox" ref={inputText} onKeyDown={handleKeyDown} />
+					<SearchInput className="searchInputBox" onChange={handleTextChange} onKeyDown={handleKeyDown} />
 				</SearchBox>
 				<GroupCard onModal={onModal} />
 			</Container>

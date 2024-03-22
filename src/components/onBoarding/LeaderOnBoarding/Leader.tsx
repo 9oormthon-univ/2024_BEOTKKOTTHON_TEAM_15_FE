@@ -23,8 +23,8 @@ const Leader = () => {
 		formData.append('image', groupImage);
 
 		// 객체를 JSON 문자열로 변환하여 추가
-		const teamSaveRequestDto = JSON.stringify({ name: groupName, description: description });
-		formData.append('teamSaveRequestDto', teamSaveRequestDto);
+		formData.append('name', groupName);
+		formData.append('decription', description);
 		createTeam(formData);
 		onModal();
 	}
