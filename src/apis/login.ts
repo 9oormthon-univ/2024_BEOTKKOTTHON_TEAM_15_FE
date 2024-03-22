@@ -29,10 +29,10 @@ export const signup = async (body: SignupInfo) => {
 export const login = async (body: LoginInfo) => {
 	try {
 		const { token, ...loginInfo } = body;
-		const accessToken = localStorage.getItem('access');
 		const deviceToken = localStorage.getItem('device');
 		const loginResponse = await axios.post(`${baseURL}/login`, body);
 		const accesstoken = loginResponse.data.result.accessToken;
+		localStorage.setItem('access', accesstoken);
 		const tokenBody = {
 			token: deviceToken,
 		};
