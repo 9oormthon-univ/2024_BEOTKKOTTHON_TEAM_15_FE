@@ -1,23 +1,48 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
 import { LuSearch } from 'react-icons/lu';
 import Modal from '@/components/common/Modal';
+import { searchGroup } from '@/apis/search';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
+
+interface DataType {
+	name: string;
+	description: string;
+	id: string;
+}
 
 const Member = () => {
-	const inputText = useRef<HTMLInputElement>(null);
 	const [modal, setModal] = useState(false);
+	const [text, setText] = useState<string>('');
+	const [data, setData] = useState<DataType[]>([]);
+	const userName = useRecoilValue(userNameAtom);
+
+	const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setText(e.target.value);
+	};
 
 	const onModal = () => {
 		setModal(true);
 	};
 
 	// 엔터키 눌렀을때
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
-			// Enter 키가 눌렸을 때 검색 함수 호출
+			const result = await searchGroup(text);
+			// axios 응답에서 실제 데이터를 추출합니다.
+			const data = result;
+			console.log(data);
+			// 'data'가 배열인지 확인합니다. 배열이 아니라면, 빈 배열을 대신 전달합니다.
+			if (Array.isArray(data)) {
+				setData(data);
+			} else {
+				console.error('받은 데이터가 배열 형식이 아닙니다.');
+				setData([]);
+			}
 		}
 	};
 	// 검색 아이콘 눌렀을때
@@ -41,14 +66,16 @@ const Member = () => {
 			)}
 			<Container>
 				<TextWrapper>
-					<Text>OOO멤버님 환영합니다</Text>
-					<Ask>OOO님이 속한 그룹은 어디인가요?</Ask>
+					<Text>{userName} 멤버님 환영합니다</Text>
+					<Ask>{userName}님이 속한 그룹은 어디인가요?</Ask>
 				</TextWrapper>
 				<SearchBox>
 					<LuSearch size="2rem" color="#93613B" style={{ strokeWidth: 3 }} onClick={handleClick} />
-					<SearchInput className="searchInputBox" ref={inputText} onKeyDown={handleKeyDown} />
+					<SearchInput className="searchInputBox" onChange={handleTextChange} onKeyDown={handleKeyDown} />
 				</SearchBox>
-				<GroupCard onModal={onModal} />
+				{data.map((result, idx) => (
+					<GroupCard key={idx} onModal={onModal} title={result.name} des={result.description} id={result.id} />
+				))}
 			</Container>
 			<Character alt={'ch'} src={'/img/PaperMan.png'} />
 		</Wrapper>

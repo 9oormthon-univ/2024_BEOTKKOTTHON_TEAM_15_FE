@@ -7,7 +7,7 @@ import ProfileImg from '@/components/common/ProfileImg';
 import Modal from '@/components/common/Modal';
 import { createTeam } from '@/apis/group';
 
-const Leader = () => {
+const Create = () => {
 	const [description, setDescription] = useState<string>('');
 	const [groupName, setGroupName] = useState<string>('');
 	const [groupImage, setGroupImage] = useState<any>(null);
@@ -39,15 +39,10 @@ const Leader = () => {
 		if (!groupName) {
 			alert('그룹 이름을 적어주세요!');
 			return;
-		} else if (groupName.length > 20) {
-			alert('그룹 이름은 20자 제한입니다.😭');
-			return;
 		}
 		if (!description) {
 			alert('그룹 목적을 적어주세요!');
 			return;
-		} else if (description.length > 50) {
-			alert('그룹 목적은 50자 제한입니다.😓');
 		}
 		handleGroupImageUpload(groupImage, groupName, description);
 	};
@@ -91,13 +86,13 @@ const Leader = () => {
 	);
 };
 
-export default Leader;
+export default Create;
 
 const Wrapper = styled.div`
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	background: linear-gradient(to bottom, #93613b 50%, #fff5e0 50%);
+	background: #fff5e0;
 `;
 
 const Container = styled.div`
@@ -112,7 +107,7 @@ const Container = styled.div`
 const Title = styled.div`
 	margin-top: 8rem;
 	font-size: 2.8rem;
-	color: white;
+	color: black;
 	font-weight: bold;
 `;
 

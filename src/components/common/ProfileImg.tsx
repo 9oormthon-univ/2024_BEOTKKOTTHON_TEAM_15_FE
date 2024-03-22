@@ -4,22 +4,24 @@ import styled from 'styled-components';
 type ImgProps = {
 	text?: string;
 	id: string;
+	setImage?: any;
 };
 
 const ProfileImg = (props: ImgProps) => {
 	const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-	const [previewImg, setPreviewImg] = useState('/img/BasicImg.png');
+	const [previewImg, setPreviewImg] = useState('/img/시계맨.png');
 
 	const insertImg = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.files || e.target.files.length === 0) {
-			setPreviewImg('/img/BasicImg.png');
+			setPreviewImg('/img/시계맨.png');
 			return;
 		}
 
+		let reader = new FileReader();
+
 		const file = e.target.files[0];
 		setUploadedImage(file);
-
-		let reader = new FileReader();
+		props.setImage(file);
 
 		reader.onloadend = () => {
 			const previewImgUrl = reader.result;

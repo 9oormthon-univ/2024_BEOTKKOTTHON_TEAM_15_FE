@@ -1,13 +1,29 @@
-import React from 'react';
-import sampleDataList from '@/utils/MOCK_DATA2.json';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardList from '../common/CardList';
+import NoneNoticeCard from '../common/NoneNoticeCard';
+import { getMyNotice } from '@/apis/notice';
 
 const IssuedNoticeSection = () => {
+	const [noticeDataList, setNoticeDataList] = useState([]);
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		const getDataList = async () => {
+			const result = await getMyNotice();
+			setNoticeDataList(result);
+			if(result.length != 0){
+				setLoading(false); // 로딩 종료
+			}
+		};
+		getDataList();
+	}, []);
 	return (
 		<Main>
-			{/* <NoneNoticeCard text='아직 발행한 가정통신문이 없어요!'/> */}
-			<CardList dataList={sampleDataList} />
+			{loading ? (
+				<NoneNoticeCard text="아직 발행한 가정통신문이 없어요!" />
+			) : (
+				<CardList dataList={noticeDataList} />
+			)}
 		</Main>
 	);
 };

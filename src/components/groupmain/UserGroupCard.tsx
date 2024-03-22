@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Group } from '../home/GroupList';
 import { useRouter } from 'next/navigation';
+import { TeamType } from '@/types/request';
 
-const UserGroupCard = ({ group }: { group: Group }) => {
+const UserGroupCard = ({ group }: { group: TeamType }) => {
 	const router = useRouter();
 	return (
 		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
-					<ProfileImg src={group.profile} />
+					<ProfileImg src={group.imageUrl} />
 				</ProfileCircle>
 				<Column>
-					<div id="groupname">{group.group}</div>
-					<Tag>+{group.count}명이 함께해요</Tag>
+					<div id="groupname">{group.name}</div>
+					<Tag>+{group.teamSize}명이 함께해요</Tag>
 				</Column>
 			</Card>
 		</Main>

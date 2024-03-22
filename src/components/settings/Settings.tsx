@@ -7,13 +7,22 @@ import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import { BiBell } from 'react-icons/bi';
 import { BiBellOff } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
+import { logOut } from '@/apis/login';
+import { useSetRecoilState } from 'recoil';
+import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 
 const Settings = () => {
 	const [alert, setAlert] = useState(true);
 	const router = useRouter();
+	const setEmail = useSetRecoilState(userEmailAtom);
+	const setName = useSetRecoilState(userNameAtom);
 
-	const logOut = () => {
-		console.log('Aa');
+	const handleLogout = () => {
+		logOut();
+		localStorage.removeItem('access');
+		setEmail('');
+		setName('');
+		router.push('/');
 	};
 
 	const onOffAlert = () => {
@@ -41,7 +50,7 @@ const Settings = () => {
 				<div>서비스 이용 문의</div>
 				<FiChevronRight size="26px" />
 			</ListBox>
-			<ListBox onClick={logOut}>
+			<ListBox onClick={handleLogout}>
 				<div>로그아웃</div>
 				<FiChevronRight size="26px" />
 			</ListBox>

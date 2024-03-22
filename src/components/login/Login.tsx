@@ -3,14 +3,17 @@ import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
-import { userDeviceAtom } from '@/app/recoilContextProvider';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userDeviceAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { login } from '@/apis/login';
 
 const Login = () => {
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
 	const deviceToken = useRecoilValue(userDeviceAtom);
+	const setUserName = useSetRecoilState(userNameAtom);
+	const setEmail = useSetRecoilState(userEmailAtom);
 	const router = useRouter();
 
 	const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +24,19 @@ const Login = () => {
 		setPw(e.target.value);
 	};
 
-	const onClick = () => {
+	const body = {
+		email: id,
+		password: pw,
+		token: deviceToken,
+	};
+
+	const onClick = async () => {
+		const result = await login(body);
+		if (result) {
+			setUserName(result.data.result.username);
+			setEmail(result.data.result.email);
+			console.log(result.data.result);
+		}
 		router.push('/home');
 	};
 

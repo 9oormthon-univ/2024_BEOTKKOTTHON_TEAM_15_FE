@@ -1,22 +1,24 @@
+import { ContentsType, TeamType } from '@/types/request';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import NoticeCard from './NoticeCard';
-import { FaChevronDown } from "react-icons/fa6";
-import { ContentsType } from '@/types/request';
+import { FaChevronDown } from 'react-icons/fa6';
+import NoticeCard from '../common/NoticeCard';
+import NoneNoticeCard from '../common/NoneNoticeCard';
 
-const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
+const AllCardList = ({ dataList, teamList }: { dataList?: ContentsType[]; teamList: TeamType[] }) => {
 	const [selectedDataSet, setSelectedDataSet] = useState(dataList);
 	const [groupList, setGroupList] = useState<string[]>(['전체']);
 	const [selectedGroup, setSelectedGroup] = useState<string>('전체');
 	const [visibleCount, setVisibleCount] = useState<number>(4);
 
 	useEffect(() => {
-		if (dataList) {
-			const groups = dataList.map((item) => item.teamName);
+		// 팀 이름 배열 생성
+		if (teamList) {
+			const groups = teamList.map((team) => team.name);
 			const uniqueGroups = Array.from(new Set(groups));
 			setGroupList(['전체', ...uniqueGroups]);
 		}
-	}, [dataList]);
+	}, [teamList]);
 
 	const handleSelectBtn = (groupName: string) => {
 		setSelectedGroup(groupName);
@@ -32,7 +34,6 @@ const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
 	const handleShowMore = () => {
 		setVisibleCount((prevCount) => prevCount + 4);
 	};
-
 	return (
 		<Main>
 			<BtnGroup>
@@ -42,23 +43,29 @@ const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
 					</GroupSortBtn>
 				))}
 			</BtnGroup>
-			<CardWrapper>
-				{selectedDataSet &&
-					selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
-			</CardWrapper>
-			<Bottom>
-				{selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
-					<ShowMoreButton onClick={handleShowMore}>
-						더보기
-						<FaChevronDown size="1.2rem" color="white" />
-					</ShowMoreButton>
-				)}
-			</Bottom>
+			{selectedDataSet ? (
+				<>
+					<CardWrapper>
+						{selectedDataSet &&
+							selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
+					</CardWrapper>
+					<Bottom>
+						{selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
+							<ShowMoreButton onClick={handleShowMore}>
+								더보기
+								<FaChevronDown size="1.2rem" color="white" />
+							</ShowMoreButton>
+						)}
+					</Bottom>
+				</>
+			) : (
+				<NoneNoticeCard text="가정통신문이 없어요!" />
+			)}
 		</Main>
 	);
 };
 
-export default CardList;
+export default AllCardList;
 
 const Main = styled.div`
 	width: 100%;

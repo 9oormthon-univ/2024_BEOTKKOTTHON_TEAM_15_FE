@@ -7,8 +7,11 @@ import InfoSection from './InfoSection';
 import IssuedNoticeSection from './IssuedNoticeSection';
 import MyGroupStateSection from './MyGroupStateSection';
 import Footer from './Footer';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const HomePage = () => {
+	const userName = useRecoilValue(userNameAtom);
 	return (
 		<Main>
 			<Section>
@@ -19,7 +22,7 @@ const HomePage = () => {
                 <InfoSection/>
 			</Section>
 			<Section>
-				<SectionTitle>미르미님이 발행한 가정통신문</SectionTitle>
+				<SectionTitle>{userName}님이 발행한 가정통신문</SectionTitle>
                 <IssuedNoticeSection/>
 			</Section>
 			<Section>

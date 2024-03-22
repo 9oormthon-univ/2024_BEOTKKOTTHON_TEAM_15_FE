@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Group } from '../home/GroupList';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import UserGroupCard from './UserGroupCard';
+import { TeamType } from '@/types/request';
 
 
 const settings = {
@@ -15,7 +15,7 @@ const settings = {
 	slidesPerView: 2.5,
 };
 
-const UserGroupList = ({ dataList }: { dataList: Group[] }) => {
+const UserGroupList = ({ dataList }: { dataList: TeamType[] }) => {
 	return (
 		<Main>
 			<SwipeSection>

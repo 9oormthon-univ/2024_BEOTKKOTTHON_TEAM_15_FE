@@ -1,23 +1,26 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { isLoginAtom } from '@/app/recoilContextProvider';
+import { isLoginAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import UploadImg from '../common/ProfileImg';
+import ProfileImg from '../common/ProfileImg';
 
 const MyPage = () => {
 	const isLogin = useRecoilValue(isLoginAtom);
 	const [modalOpen, setModalOpen] = useState(false);
 	const route = useRouter();
-
+	const userName = useRecoilValue(userNameAtom);
+	const userEmail = useRecoilValue(userEmailAtom);
+	const [image, setImage] = useState();
 	return (
 		<>
 			<Wrapper>
 				<ProfileWrapper>
-					<UploadImg id={'imageInput'} text={'이미지 변경'} />
-					<Name>[닉네임]</Name>
-					<Email>cjy3458@naver.com</Email>
+					<ProfileImg id={'imageInput'} text={'이미지 변경'} setImage={setImage} />
+					<Name>{userName}</Name>
+					<Email>{userEmail}</Email>
 				</ProfileWrapper>
 				<Line />
 				<DocWrapper>

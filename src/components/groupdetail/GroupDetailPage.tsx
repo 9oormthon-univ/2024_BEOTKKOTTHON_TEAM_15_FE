@@ -1,16 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GroupNoticeSection from './GroupNoticeSection';
-import { useRouter, usePathname, useParams} from 'next/navigation';
+import { useRouter, usePathname, useParams } from 'next/navigation';
+import { LuPlusCircle } from 'react-icons/lu';
+import { getTeamInfo } from '@/apis/team';
+import { TeamType } from '@/types/request';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const GroupDetailPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const params = useParams<{ id: string}>();
+	const params = useParams<{ id: string }>();
 	const groupId = params.id;
-	console.log(groupId);
+	const [groupInfo, setGroupInfo] = useState<TeamType>();
+	const [userRole, setUserRole] = useState<string>();
+	const userName = useRecoilValue(userNameAtom);
+
+	useEffect(() => {
+		const getDataList = async () => {
+			const result = await getTeamInfo(groupId);
+			setGroupInfo(result);
+			if(groupInfo && groupInfo.role){
+				if(groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR'){
+					setUserRole('리더');
+				} else{
+					setUserRole('멤버');
+				}
+			}
+		};
+		getDataList();
+	}, [groupId,groupInfo]);
 	return (
 		<Main>
 			<GroupProfile>
@@ -19,22 +41,43 @@ const GroupDetailPage = () => {
 				</ProfileCircle>
 				<Right>
 					<Row>
-						<Title>구름톤 유니브 2기</Title>
-						<span className="tag">리더 20명</span>
-						<span className="tag">멤버 30명</span>
+						<Title>{groupInfo?.name}</Title>
+						<span className="tag">리더 {groupInfo?.leaderCount}명</span>
+						<span className="tag">멤버 {groupInfo?.memberCount}명</span>
 					</Row>
 					<Info>
-						ooo님은 구름톤 유니브 2기의 <span id="roletext">리더</span>입니다.
+						{userName}님은 {groupInfo?.name}의 <span id="roletext">{userRole}</span>입니다.
 					</Info>
 					<BtnGroup>
-						<Btn onClick={()=>{router.push(`${pathname}/accept`)}}>새 멤버 수락하기</Btn>
-						<Btn onClick={()=>{router.push(`${pathname}/setting`)}}>그룹 설정</Btn>
+						<Btn
+							onClick={() => {
+								router.push(`${pathname}/accept`);
+							}}
+						>
+							새 멤버 수락하기
+						</Btn>
+						<Btn
+							onClick={() => {
+								router.push(`${pathname}/setting`);
+							}}
+						>
+							그룹 설정
+						</Btn>
 					</BtnGroup>
 				</Right>
 			</GroupProfile>
 			<Section>
-				<SectionTitle>구름톤 유니브 2기의 최근 가정통신문</SectionTitle>
-				<GroupNoticeSection/>
+				<Row2>
+					<SectionTitle>{groupInfo?.name}의 최근 가정통신문</SectionTitle>
+					<Btn2
+						onClick={() => {
+							router.push(`${pathname}/post`);
+						}}
+					>
+						<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
+					</Btn2>
+				</Row2>
+				<GroupNoticeSection groupId={groupId} />
 			</Section>
 		</Main>
 	);
@@ -48,7 +91,7 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 3rem;
+	gap: 4rem;
 `;
 const Section = styled.div`
 	width: 100%;
@@ -95,6 +138,12 @@ const Row = styled.div`
 		font-size: 1.2rem;
 	}
 `;
+const Row2 = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+`;
 const Title = styled.div`
 	font-weight: 600;
 	font-size: 2.3rem;
@@ -130,14 +179,28 @@ const Btn = styled.div`
 	cursor: pointer;
 	align-items: center;
 	padding: 1rem 1.5rem;
-	color: white;
+	color: #4f7b59;
+	font-size: 1.3rem;
+	font-weight: 600;
+	border-radius: 20px;
+	border: 1.5px solid #4f7b59;
+	display: flex;
+	gap: 5px;
+	&:hover {
+		background-color: #4f7b59;
+		color: #FFF5E0;
+	}
+`;
+
+const Btn2 = styled.div`
+	cursor: pointer;
+	align-items: center;
+	padding: 0.7rem 1rem;
 	background-color: #4f7b59;
+	color: #FFF5E0;
 	font-size: 1.3rem;
 	font-weight: 500;
 	border-radius: 20px;
 	display: flex;
 	gap: 5px;
-	#people {
-		stroke-width: 1px;
-	}
 `;
