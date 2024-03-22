@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import sampleDataList from '@/utils/MOCK_DATA.json';
 import CardList from '../common/CardList';
+import NoneNoticeCard from '../common/NoneNoticeCard';
 
 const UnreadNoticeSection = () => {
 	return (
 		<Main>
-			{/* <NoneNoticeCard text='가정통신문이 없어요!'/> */}
-			<CardList dataList={sampleDataList} />
+			<NoneNoticeCard text='가정통신문이 없어요!'/>
+			{/* <CardList dataList={sampleDataList} /> */}
 		</Main>
 	);
 };

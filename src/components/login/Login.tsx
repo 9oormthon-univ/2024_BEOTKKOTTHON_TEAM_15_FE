@@ -3,8 +3,8 @@ import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
-import { userDeviceAtom } from '@/app/recoilContextProvider';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userDeviceAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { login } from '@/apis/login';
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
 	const [pw, setPw] = useState('');
 	const [isSignupFailed, setIsSignupFailed] = useState(false);
 	const deviceToken = useRecoilValue(userDeviceAtom);
+	const setUserName = useSetRecoilState(userNameAtom);
 	const router = useRouter();
 
 	const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +31,10 @@ const Login = () => {
 
 	const onClick = async () => {
 		const result = await login(body);
-		// router.push('/home');
+		if(result){
+			setUserName(result.data.result.username);
+		}
+		router.push('/home');
 	};
 
 	return (
