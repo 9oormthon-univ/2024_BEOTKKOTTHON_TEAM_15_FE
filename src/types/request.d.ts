@@ -9,6 +9,7 @@ export type ContentsType = {
 	createdTime: Date;
 	modifiedTime: Date;
 	teamName: string;
+	teamId: number,
 	readMemberCount: number;
 	notReadMemberCount: number;
 	checkStatus: string;

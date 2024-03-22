@@ -47,7 +47,7 @@ export const getMyNotice = async () => {
 export const getAllNotice = async () => {
 	const accessToken = localStorage.getItem('access');
 	try {
-		const response = await axios.get(`${baseURL}/teams/news`, {
+		const response = await axios.get(`${baseURL}/teams/news?teamId=1`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
@@ -76,7 +76,7 @@ export const getTeamNotice = async (teamId: string) => {
 		return false;
 	}
 };
-
+// 가정통신문 작성
 export const postNotice = async (body: postType) => {
 	const { id, ...postInfo } = body;
 	const accessToken = localStorage.getItem('access');
@@ -88,5 +88,22 @@ export const postNotice = async (body: postType) => {
 		});
 	} catch (error) {
 		console.log(error);
+	}
+};
+
+// 가정통신문 상세 조회
+export const getNoticeDetail = async (teamId: number, newsId: number) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}/teams/${teamId}/news/${newsId}`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+		console.log(response);
+		return response.data.result;
+	} catch (error) {
+		console.log(error);
+		return false;
 	}
 };
