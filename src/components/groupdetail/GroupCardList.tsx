@@ -14,10 +14,10 @@ const GroupCardList = ({ dataList }: { dataList?: SampleType[] }) => {
 	};
   return (
     <Main>
-    <CardWrapper>
+    {/* <CardWrapper>
         {selectedDataSet &&
             selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
-    </CardWrapper>
+    </CardWrapper> */}
     <Bottom>
         {selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
             <ShowMoreButton onClick={handleShowMore}>
