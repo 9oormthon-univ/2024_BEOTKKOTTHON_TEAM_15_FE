@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const baseURL = 'http://beotkkotthon-env.eba-3tgmsdgp.ap-northeast-2.elasticbeanstalk.com';
+const baseURL = 'https://dev.gooromnews.shop';
 
 interface LoginInfo {
 	email: string;
@@ -29,30 +29,33 @@ export const signup = async (body: SignupInfo) => {
 export const login = async (body: LoginInfo) => {
 	try {
 		const { token, ...loginInfo } = body;
-		const result = await axios.post(`${baseURL}/login`, body);
-		const accesstoken = result.data.result.accessToken;
-		localStorage.setItem('access', accesstoken);
+		const accessToken = localStorage.getItem('access');
+		const deviceToken = localStorage.getItem('device');
+		const loginResponse = await axios.post(`${baseURL}/login`, body);
+		const accesstoken = loginResponse.data.result.accessToken;
 		const tokenBody = {
-			token: token,
+			token: deviceToken,
 		};
 		try {
 			const accessToken = localStorage.getItem('access');
 			console.log(accessToken);
-			const response = await axios.post(`${baseURL}/notification`, tokenBody, {
+			const notificationResponse = await axios.post(`${baseURL}/notification`, tokenBody, {
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-		} catch (error) {
-			console.log(error);
+			console.log('Notification Response:', notificationResponse.data);
+		} catch (notificationError) {
+			console.error('Notification Error:', notificationError);
 		}
-		return result;
-	} catch (error) {
-		console.log(error);
+		return loginResponse;
+	} catch (loginError) {
+		console.log(loginError);
 		return false;
 	}
 };
+
 
 // export const postFcm = async (token: string) => {
 // 	const accessToken = localStorage.getItem('access');

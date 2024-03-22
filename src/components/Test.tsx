@@ -31,7 +31,8 @@ const Index = () => {
 				if (currentToken) {
 					// 정상적으로 토큰 발급 시 콘솔 출력
 					console.log(currentToken);
-					setUserDevice(currentToken);
+					localStorage.setItem('device', currentToken);
+					// setUserDevice(currentToken);
 				} else {
 					console.log('No registration token available. Request permission to generate one.');
 				}
