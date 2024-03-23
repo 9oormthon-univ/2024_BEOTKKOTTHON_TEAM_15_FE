@@ -26,16 +26,10 @@ const Leader = () => {
 			formData.append('imageFile', 'null');
 		}
 
-		// 객체를 JSON 문자열로 변환하여 추가
 		const dto = JSON.stringify({ name: groupName, description: description });
 		const blob = new Blob([dto], { type: 'application/json' });
 		formData.append('teamSaveRequestDto', blob);
-		// formData.append('name', groupName);
-		// formData.append('decription', description);
-		// const body = {
-		// 	name: groupName,
-		// 	description: description,
-		// };
+
 		createTeam(formData);
 		onModal();
 	}

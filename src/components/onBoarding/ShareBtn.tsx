@@ -10,11 +10,8 @@ const ShareBtn = () => {
 		} catch (e) {
 			if (typeof e === 'object' && e instanceof Error) {
 				if (e.name === 'AbortError') {
-					// AbortError는 사용자가 공유 창을 닫은 경우에 발생합니다.
-					// console.log('사용자가 공유 창을 닫았습니다.');
 				}
 			} else {
-				// 다른 오류 처리
 				alert('지원하지 않는 브라우저입니다.');
 			}
 		}
