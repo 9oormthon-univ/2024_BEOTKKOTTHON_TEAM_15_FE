@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import sampleDataList from '@/utils/MOCK_DATA.json';
-import CardList from '../common/CardList';
 import NoneNoticeCard from '../common/NoneNoticeCard';
 import { getAllMyTeamList } from '@/apis/team';
 import { getAllNotice } from '@/apis/notice';
@@ -37,8 +35,8 @@ const UnreadNoticeSection = () => {
 	}, []);
 	return (
 		<Main>
-						{!loading && isZero && 	<NoneNoticeCard text="가정통신문이 없어요!!" />}
-			{!loading && !isZero && 				<AllCardList dataList={noticeDataList} teamList={myGroupDataList} />}
+			{!loading && isZero && <NoneNoticeCard text="가정통신문이 없어요!!" />}
+			{!loading && !isZero && <AllCardList dataList={noticeDataList} teamList={myGroupDataList} />}
 			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 		</Main>
 	);

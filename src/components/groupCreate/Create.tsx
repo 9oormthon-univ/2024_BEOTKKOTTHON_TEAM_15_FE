@@ -20,7 +20,11 @@ const Create = () => {
 
 	function handleGroupImageUpload(groupImage: File, groupName: string, description: string) {
 		const formData = new FormData();
-		formData.append('imageFile', groupImage);
+		if (groupImage) {
+			formData.append('imageFile', groupImage);
+		} else {
+			formData.append('imageFile', 'null');
+		}
 
 		// 객체를 JSON 문자열로 변환하여 추가
 		const dto = JSON.stringify({ name: groupName, description: description });

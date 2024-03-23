@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import UploadImg from '../common/ProfileImg';
 import ProfileImg from '../common/ProfileImg';
+import AverageCard from './AverageCard';
 
 const MyPage = () => {
 	const isLogin = useRecoilValue(isLoginAtom);
@@ -25,11 +26,14 @@ const MyPage = () => {
 				<Line />
 				<DocWrapper>
 					<Title>가정통신문</Title>
-					<Notice>N건의 미열람 가정통신문이 있어요.</Notice>
+					<Notice>2건의 미열람 가정통신문이 있어요.</Notice>
 				</DocWrapper>
 				<DocWrapper>
 					<Title>{userName}님의 공지 평균 열람 시간</Title>
-					{/* <Notice>N건의 미열람 가정통신문이 있어요.</Notice> */}
+					<CardWrapper>
+						<AverageCard title="전체" time="6분 14초" imgUrl="/img/nothingLogo.png" />
+						<AverageCard title="구름톤 유니브 2기" time="14분 2초" imgUrl="/img/goorm.png" />
+					</CardWrapper>
 				</DocWrapper>
 			</Wrapper>
 		</>
@@ -80,7 +84,7 @@ const DocWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	padding-left: 5rem;
 	gap: 2rem;
@@ -98,4 +102,10 @@ const Notice = styled.div`
 	padding: 1rem 3rem;
 	border-radius: 1rem;
 	font-size: 1.5rem;
+`;
+
+const CardWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	gap: 1rem;
 `;

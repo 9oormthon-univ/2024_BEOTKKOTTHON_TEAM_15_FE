@@ -55,7 +55,7 @@ export const getAllNotice = async () => {
 			},
 		});
 		console.log(response);
-		return response.data.result.showNewsDtoList;
+		return response.data.result;
 	} catch (error) {
 		console.log(error);
 		return false;

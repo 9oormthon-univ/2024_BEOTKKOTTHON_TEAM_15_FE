@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GroupCard from './GroupCard';
+import Modal from '../common/Modal';
 
 interface DataType {
 	name: string;
@@ -36,6 +37,15 @@ const SearchPage = () => {
 
 	return (
 		<Main>
+				{modal && (
+				<Modal
+					homeUrl="/home"
+					pageUrl="/mypage"
+					text1="참여 요청을 전송했습니다!"
+					text2="리더가 수락하면 알림을 보내드릴게요"
+					text3="마이페이지로 이동"
+				/>
+			)}
 			<Title>{`'${keyword}'`} 검색 결과</Title>
 			<CardSection>
 				{searchDataList.map((result, idx) => (
