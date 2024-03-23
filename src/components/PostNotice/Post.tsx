@@ -29,8 +29,11 @@ const Post = () => {
 		const formData = new FormData();
 		const images = [image1, image2];
 
-		images.forEach((image, index) => {
-			formData.append(`imageFiles`, image);
+		images.forEach((image) => {
+			if (image !== null) {
+				// 이미지가 null이 아닌 경우에만 실행
+				formData.append('imageFiles', image);
+			}
 		});
 
 		// 객체를 JSON 문자열로 변환하여 추가
