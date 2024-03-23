@@ -19,17 +19,20 @@ const Leader = () => {
 	};
 
 	function handleGroupImageUpload(groupImage: File, groupName: string, description: string) {
-		// const formData = new FormData();
-		// formData.append('image', groupImage);
+		const formData = new FormData();
+		formData.append('imageFile', groupImage);
 
-		// // 객체를 JSON 문자열로 변환하여 추가
+		// 객체를 JSON 문자열로 변환하여 추가
+		const dto = JSON.stringify({ name: groupName, description: description });
+		console.log(dto);
+		formData.append('teamSaveRequestDto', dto);
 		// formData.append('name', groupName);
 		// formData.append('decription', description);
-		const body = {
-			name: groupName,
-			description: description,
-		};
-		createTeam(body);
+		// const body = {
+		// 	name: groupName,
+		// 	description: description,
+		// };
+		createTeam(formData);
 		onModal();
 	}
 
