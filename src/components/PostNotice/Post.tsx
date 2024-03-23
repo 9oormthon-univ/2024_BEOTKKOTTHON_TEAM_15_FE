@@ -33,6 +33,8 @@ const Post = () => {
 			if (image !== null) {
 				// 이미지가 null이 아닌 경우에만 실행
 				formData.append('imageFiles', image);
+			} else {
+				formData.append('imageFiles', 'null');
 			}
 		});
 
