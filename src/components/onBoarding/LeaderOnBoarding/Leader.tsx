@@ -25,7 +25,8 @@ const Leader = () => {
 		// 객체를 JSON 문자열로 변환하여 추가
 		const dto = JSON.stringify({ name: groupName, description: description });
 		console.log(dto);
-		formData.append('teamSaveRequestDto', dto);
+		const blob = new Blob([dto], { type: 'application/json' });
+		formData.append('teamSaveRequestDto', blob);
 		// formData.append('name', groupName);
 		// formData.append('decription', description);
 		// const body = {

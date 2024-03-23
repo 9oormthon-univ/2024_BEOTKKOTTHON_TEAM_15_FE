@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 		siteName: '가정통신문',
 		images: [
 			{
-				url: 'https://goormnotification.vercel.app/img/og_img.png',
+				url: 'https://goormnotification.vercel.app/img/og_img.jpg',
 			},
 		],
 		type: 'website',
