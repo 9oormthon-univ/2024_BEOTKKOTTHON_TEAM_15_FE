@@ -38,6 +38,11 @@ const GroupDetailPage = () => {
 			<GroupProfile>
 				<ProfileCircle>
 					<ProfileImg src="/img/nothingLogo.png" />
+					{groupInfo?.imageUrl == '__null__' ? (
+						<ProfileImg src="/img/defaultGroupProfile.png" />
+					) : (
+						<ProfileImg src={groupInfo?.imageUrl} />
+					)}
 				</ProfileCircle>
 				<Right>
 					<Row>
@@ -56,7 +61,7 @@ const GroupDetailPage = () => {
 						</span>
 						입니다.
 					</Info>
-					{groupInfo?.role === 'CREATOR' || groupInfo?.role === 'LEADER' ?
+					{groupInfo?.role === 'CREATOR' || groupInfo?.role === 'LEADER' ? (
 						<BtnGroup>
 							<Btn
 								onClick={() => {
@@ -73,7 +78,9 @@ const GroupDetailPage = () => {
 								그룹 설정
 							</Btn>
 						</BtnGroup>
-					: <></>}
+					) : (
+						<></>
+					)}
 				</Right>
 			</GroupProfile>
 			<Section>
