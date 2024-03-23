@@ -11,22 +11,25 @@ const UnreadNoticeSection = () => {
 	const [noticeDataList, setNoticeDataList] = useState([]);
 	const [myGroupDataList, setMyGroupDataList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [isZero, setIsZero] = useState(false);
 
 	useEffect(() => {
 		const getTeamDataList = async () => {
 			setLoading(true); // 로딩 시작
 			const result = await getAllMyTeamList();
 			setMyGroupDataList(result);
-			if(result.length != 0){
-				setLoading(false); // 로딩 종료
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
 			}
 		};
 		const getNoticeList = async () => {
 			setLoading(true); // 로딩 시작
 			const result = await getAllNotice();
 			setNoticeDataList(result);
-			if(result.length != 0){
-				setLoading(false); // 로딩 종료
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
 			}
 		};
 		getTeamDataList();
@@ -34,11 +37,9 @@ const UnreadNoticeSection = () => {
 	}, []);
 	return (
 		<Main>
-			{loading ? (
-				<NoneNoticeCard text="가정통신문이 없어요!!" />
-			) : (
-				<AllCardList dataList={noticeDataList} teamList={myGroupDataList} />
-			)}
+						{!loading && isZero && 	<NoneNoticeCard text="가정통신문이 없어요!!" />}
+			{!loading && !isZero && 				<AllCardList dataList={noticeDataList} teamList={myGroupDataList} />}
+			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 		</Main>
 	);
 };
@@ -51,4 +52,9 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	min-height: 20rem;
+`;
+
+const Loading = styled.img`
+	width: 100px;
 `;
