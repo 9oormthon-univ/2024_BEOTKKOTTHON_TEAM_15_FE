@@ -8,7 +8,7 @@ const Logo = () => {
 export default Logo;
 
 const Title = styled.img`
-	width: 23%;
-	min-width: 32rem;
-	padding: 2rem 0rem;
+	width: 18%;
+	min-width: 22rem;
+	padding: 1rem 0rem;
 `;

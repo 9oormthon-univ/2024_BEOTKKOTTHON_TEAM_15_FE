@@ -21,7 +21,7 @@ export const signup = async (body: SignupInfo) => {
 		const data = await login(loginInfo);
 		return data;
 	} catch (error) {
-		console.log(error);
+		alert('중복된 ID입니다!😓');
 		return false;
 	}
 };
@@ -50,8 +50,8 @@ export const login = async (body: LoginInfo) => {
 			console.error('Notification Error:', notificationError);
 		}
 		return loginResponse;
-	} catch (loginError) {
-		console.log(loginError);
+	} catch (error) {
+		alert('ID와 PW를 확인해보세요!');
 		return false;
 	}
 };
