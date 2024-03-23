@@ -36,19 +36,29 @@ const Signup = () => {
 	};
 
 	const onClick = async () => {
-		const result = await signup(body);
-		if (result) {
-			setUserName(result.data.result.username);
-			setEmail(result.data.result.email);
+		if (id === '') {
+			alert('ID를 입력해주세요');
+		} else if (pw === '') {
+			alert('PW를 입력해주세요.');
+		} else if (name === '') {
+			alert('성함을 입력해주세요.');
+		} else {
+			const result = await signup(body);
+			if (result) {
+				setUserName(result.data.result.username);
+				setEmail(result.data.result.email);
+				router.push('/onBoarding');
+			} else {
+				setId('');
+			}
 		}
-		router.push('/onBoarding');
 	};
 
 	return (
 		<Wrapper>
 			<TitleWrapper>
 				<Logo />
-				<Explain>우리의 더 효율적인 의사소통</Explain>
+				<Explain>대학생들의 효율적인 의사소통을 위해</Explain>
 			</TitleWrapper>
 			<DivisionWrapper>
 				<div className="select">회원가입</div>
@@ -57,7 +67,7 @@ const Signup = () => {
 			</DivisionWrapper>
 			<SignupWrapper>
 				<Input onChange={handleNameChange} placeholder="성함을 입력해주세요!" />
-				<Input onChange={handleIdChange} placeholder="ID를 입력해주세요!" />
+				<Input value={id} onChange={handleIdChange} placeholder="ID를 입력해주세요!" />
 				<Input onChange={handlePwChange} placeholder="PW를 입력해주세요!" type="password" />
 			</SignupWrapper>
 			<CheckWrapper>
@@ -87,6 +97,7 @@ const TitleWrapper = styled.div`
 const Explain = styled.div`
 	font-size: 2rem;
 	font-weight: bold;
+	color: #8b5e3c;
 `;
 
 const SignupWrapper = styled.div`
@@ -109,10 +120,10 @@ const DivisionWrapper = styled.div`
 `;
 
 const Input = styled.input`
-	width: 280px;
+	width: 400px;
 	padding: 1.4rem 2rem;
 	font-size: 16px;
-	border-radius: 7px;
+	border-radius: 30px;
 	background-color: #f4e6c8;
 	border: 1px solid #f4e6c8;
 	outline: none;
