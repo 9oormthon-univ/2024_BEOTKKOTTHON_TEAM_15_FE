@@ -27,8 +27,14 @@ const Post = () => {
 
 	const handlePost = () => {
 		const formData = new FormData();
-		formData.append('imageFile1', image1);
-		formData.append('imageFile2', image2);
+		const images = [image1, image2];
+
+		images.forEach((image) => {
+			if (image !== null) {
+				// 이미지가 null이 아닌 경우에만 실행
+				formData.append('imageFiles', image);
+			}
+		});
 
 		// 객체를 JSON 문자열로 변환하여 추가
 		const dto = JSON.stringify({ title: title, content: content, minute: parseInt(minute) });
