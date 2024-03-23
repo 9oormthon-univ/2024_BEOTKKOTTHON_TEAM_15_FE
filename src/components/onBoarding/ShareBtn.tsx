@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 import styled from 'styled-components';

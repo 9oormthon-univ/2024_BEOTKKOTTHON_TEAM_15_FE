@@ -1,3 +1,5 @@
+'use client';
+
 import { requestGroup } from '@/apis/request';
 import React from 'react';
 import styled from 'styled-components';

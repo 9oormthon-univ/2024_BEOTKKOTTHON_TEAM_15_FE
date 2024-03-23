@@ -1,3 +1,5 @@
+'use client';
+
 import OnBoarding from '@/components/onBoarding/OnBoarding';
 import React from 'react';
 

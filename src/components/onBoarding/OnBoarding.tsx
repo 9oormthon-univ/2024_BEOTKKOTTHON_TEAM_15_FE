@@ -23,7 +23,7 @@ const OnBoarding = () => {
 		<Wrapper>
 			<Container>
 				<TextWrapper>
-					<Text>가정통신문에 오신 것을 환영합니다!</Text>
+					<div>가정통신문에 오신 것을 환영합니다!</div>
 					<Ask>{userName}님은 가정통신문을 어떻게 활용하실 예정인가요?</Ask>
 				</TextWrapper>
 				<BtnWrapper>
@@ -65,14 +65,11 @@ const TextWrapper = styled.div`
 	flex-direction: column;
 	gap: 10px;
 	color: white;
-`;
-
-const Text = styled.div`
 	font-size: 2rem;
 `;
 
 const Ask = styled.div`
-	font-size: 3rem;
+	font-size: 2.5rem;
 `;
 
 const BtnWrapper = styled.div`

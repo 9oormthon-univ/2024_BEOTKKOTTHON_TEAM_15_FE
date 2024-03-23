@@ -9,11 +9,11 @@ type ImgProps = {
 
 const ProfileImg = (props: ImgProps) => {
 	const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-	const [previewImg, setPreviewImg] = useState('/img/시계맨.png');
+	const [previewImg, setPreviewImg] = useState('/img/BasicImg.png');
 
 	const insertImg = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.files || e.target.files.length === 0) {
-			setPreviewImg('/img/시계맨.png');
+			setPreviewImg('/img/BasicImg.png');
 			return;
 		}
 
