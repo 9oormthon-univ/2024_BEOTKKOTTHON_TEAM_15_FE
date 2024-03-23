@@ -11,6 +11,7 @@ interface DataType {
 	description: string;
 	id: string;
 	teamSize: number;
+	imageUrl: string;
 }
 
 const SearchPage = () => {
@@ -30,6 +31,7 @@ const SearchPage = () => {
 			}
 		};
 		getDataList();
+		console
 	}, [keyword]);
 
 	return (
@@ -37,7 +39,7 @@ const SearchPage = () => {
 			<Title>{`'${keyword}'`} 검색 결과</Title>
 			<CardSection>
 				{searchDataList.map((result, idx) => (
-					<GroupCard key={idx} onModal={onModal} title={result.name} id={result.id} teamSize={result.teamSize} />
+					<GroupCard key={idx} onModal={onModal} title={result.name} id={result.id} teamSize={result.teamSize} profile={result.imageUrl} />
 				))}
 			</CardSection>
 		</Main>

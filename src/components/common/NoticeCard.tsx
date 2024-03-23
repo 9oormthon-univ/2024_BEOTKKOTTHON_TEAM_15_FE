@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { LuArrowRightCircle } from 'react-icons/lu';
 import { useRouter } from 'next/navigation';
 import { ContentsType } from '@/types/request';
 
+// 현재 시간
+const getCurrentTime = () => {
+	return new Date();
+};
+// 남은 시간
+const getRemainingTime = (limitTime: string) => {
+	const now = getCurrentTime();
+	const limit = new Date(limitTime);
+	const timeDifference = limit.getTime() - now.getTime();
+
+	if (timeDifference <= 0) {
+		return '시간 마감';
+	} else {
+		const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+		const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+		const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+		return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+	}
+};
+
 const NoticeCard = ({ notice }: { notice: ContentsType }) => {
 	const router = useRouter();
+	const [remainingTime, setRemainingTime] = useState(getRemainingTime(notice.limitTime));
+
 	const formatContent = (content: string) => {
 		return content?.split(/\\n|\n/).map((line, index) => (
 			<React.Fragment key={index}>
@@ -15,16 +38,28 @@ const NoticeCard = ({ notice }: { notice: ContentsType }) => {
 		));
 	};
 
+	useEffect(() => {
+        const timer = setInterval(() => {
+            setRemainingTime(getRemainingTime(notice.limitTime));
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [notice.limitTime]);
+
 	return (
 		<Main>
-			<Card onClick={()=>{router.push(`/notice?news=${notice.id}&team=${notice.teamId}`)}}>
+			<Card
+				onClick={() => {
+					router.push(`/notice?news=${notice.id}&team=${notice.teamId}`);
+				}}
+			>
 				<Top id="top">
 					<Title>{notice.title}</Title>
 					<Span>
 						<span className="tag">Leader</span>
 						<span id="leader">{notice.writer}</span>
 						<span className="tag">남은 시간</span>
-						<span id="limit-time">00:45:30</span>
+						<span id="limit-time">{remainingTime}</span>
 					</Span>
 				</Top>
 				<Middle id="middle">

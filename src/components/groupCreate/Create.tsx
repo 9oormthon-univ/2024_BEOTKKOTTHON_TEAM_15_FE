@@ -19,17 +19,21 @@ const Create = () => {
 	};
 
 	function handleGroupImageUpload(groupImage: File, groupName: string, description: string) {
-		// const formData = new FormData();
-		// formData.append('image', groupImage);
+		const formData = new FormData();
+		formData.append('imageFile', groupImage);
 
-		// // 객체를 JSON 문자열로 변환하여 추가
+		// 객체를 JSON 문자열로 변환하여 추가
+		const dto = JSON.stringify({ name: groupName, description: description });
+		console.log(dto);
+		const blob = new Blob([dto], { type: 'application/json' });
+		formData.append('teamSaveRequestDto', blob);
 		// formData.append('name', groupName);
 		// formData.append('decription', description);
-		const body = {
-			name: groupName,
-			description: description,
-		};
-		// createTeam(body);
+		// const body = {
+		// 	name: groupName,
+		// 	description: description,
+		// };
+		createTeam(formData);
 		onModal();
 	}
 
@@ -39,10 +43,15 @@ const Create = () => {
 		if (!groupName) {
 			alert('그룹 이름을 적어주세요!');
 			return;
+		} else if (groupName.length > 20) {
+			alert('그룹 이름은 20자 제한입니다.😭');
+			return;
 		}
 		if (!description) {
 			alert('그룹 목적을 적어주세요!');
 			return;
+		} else if (description.length > 50) {
+			alert('그룹 목적은 50자 제한입니다.😓');
 		}
 		handleGroupImageUpload(groupImage, groupName, description);
 	};
@@ -89,10 +98,10 @@ const Create = () => {
 export default Create;
 
 const Wrapper = styled.div`
-	height: 100vh;
+	height: 90vh;
 	display: flex;
 	flex-direction: column;
-	background: #fff5e0;
+	/* background: #fff5e0; */
 `;
 
 const Container = styled.div`
@@ -105,8 +114,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-	margin-top: 8rem;
-	font-size: 2.8rem;
+	margin-top: 4rem;
+	font-size: 2.4rem;
 	color: black;
 	font-weight: bold;
 `;
@@ -120,7 +129,7 @@ const Information = styled.div`
 `;
 
 const GroupName = styled.input`
-	width: 180%;
+	width: 160%;
 	border-radius: 1rem;
 	background-color: #f4e6c8;
 	padding: 1rem 7rem 1rem 2rem;
@@ -130,7 +139,7 @@ const GroupName = styled.input`
 `;
 
 const GroupPurpose = styled.input`
-	width: 180%;
+	width: 160%;
 	border-radius: 1rem;
 	background-color: #f4e6c8;
 	padding: 1rem 7rem 1rem 2rem;
@@ -140,7 +149,7 @@ const GroupPurpose = styled.input`
 `;
 
 const BtnWrapper = styled.div`
-	width: 57rem;
+	width: 54rem;
 	display: flex;
 	justify-content: flex-end;
 `;

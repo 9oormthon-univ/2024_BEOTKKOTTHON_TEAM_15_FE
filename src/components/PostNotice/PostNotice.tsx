@@ -14,20 +14,30 @@ const PostNotice = () => {
 	const groupId = params.id;
 
 	const [title, setTitle] = useState<string>('');
-	const [info, setInfo] = useState<string>('');
-	const [time, setTime] = useState<string>('');
+	const [content, setContent] = useState<string>('');
+	const [minute, setMinute] = useState<string>('');
+	const [image1, setImage1] = useState<any>(null);
+	const [image2, setImage2] = useState<any>(null);
 
 	const [modal, setModal] = useState(false);
 
-	let body = {
-		title: title,
-		content: info,
-		minute: time,
-		id: groupId,
-	};
-	const handleSubmit = () => {
-		postNotice(body);
+	const onModal = () => {
 		setModal(true);
+	};
+
+	const handlePost = () => {
+		const formData = new FormData();
+		formData.append('imageFile1', image1);
+		formData.append('imageFile2', image2);
+
+		// 객체를 JSON 문자열로 변환하여 추가
+		const dto = JSON.stringify({ title: title, content: content, minute: parseInt(minute) });
+
+		// blob 함수를 감싸서 file객체 제외한 부분에 content-type 지정해주기
+		const blob = new Blob([dto], { type: 'application/json' });
+		formData.append('newsSaveRequestDto', blob);
+		postNotice(formData, groupId);
+		onModal();
 	};
 
 	return (
@@ -41,19 +51,19 @@ const PostNotice = () => {
 			</TitleWrapper>
 			<InfoWrapper>
 				<Title>가정통신문 내용</Title>
-				<InfoInput placeholder="내용을 입력해주세요." onChange={(e) => setInfo(e.target.value)} />
+				<InfoInput placeholder="내용을 입력해주세요." onChange={(e) => setContent(e.target.value)} />
 			</InfoWrapper>
 			<Title>이미지 업로드</Title>
 			<UploadWrapper>
-				<UploadImg id={'imageInput1'} />
-				<UploadImg id={'imageInput2'} />
+				<UploadImg id={'imageInput1'} setImage={setImage1} />
+				<UploadImg id={'imageInput2'} setImage={setImage2} />
 			</UploadWrapper>
 			<DeadLineWrapper>
 				<Title>열람기한</Title>
-				<DatePicker time={time} setTime={setTime} />
+				<DatePicker time={minute} setTime={setMinute} />
 			</DeadLineWrapper>
 			<BtnWrapper>
-				<Btn onClick={handleSubmit}>작성하기</Btn>
+				<Btn onClick={() => handlePost()}>작성하기</Btn>
 			</BtnWrapper>
 		</Wrapper>
 	);

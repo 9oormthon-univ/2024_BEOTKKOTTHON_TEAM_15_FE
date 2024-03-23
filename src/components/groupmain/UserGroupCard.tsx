@@ -9,7 +9,7 @@ const UserGroupCard = ({ group }: { group: TeamType }) => {
 		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
-					<ProfileImg src={group.imageUrl} />
+					{group.imageUrl=='__null__' ? <ProfileImg src='/img/defaultGroupProfile.png' />	: <ProfileImg src={group.imageUrl} />}
 				</ProfileCircle>
 				<Column>
 					<div id="groupname">{group.name}</div>
@@ -55,7 +55,7 @@ const Card = styled.div`
 const ProfileCircle = styled.div`
     width: 25%;
     aspect-ratio: 1 / 1;
-    background-color:#c9bca2;
+    background-color:#B8B8B8;
     border-radius: 50%;
     display: flex;
     justify-content: center;
