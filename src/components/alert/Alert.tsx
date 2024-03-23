@@ -1,20 +1,53 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BiSolidBellRing } from 'react-icons/bi';
+import { getAllUnreadNoticeList } from '@/apis/notice';
+import { useRouter } from 'next/navigation';
+
+interface dataType {
+	title: string;
+	id: string;
+	teamId: string;
+}
 
 const Alert = () => {
+	const [noticeDataList, setNoticeDataList] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [isZero, setIsZero] = useState(false);
+	const [dataList, setDataList] = useState<dataType[]>();
+
+	const router = useRouter();
+
+	useEffect(() => {
+		const getDataList = async () => {
+			const result = await getAllUnreadNoticeList();
+			setNoticeDataList(result);
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
+			}
+			console.log(result);
+			setDataList(result);
+		};
+		getDataList();
+	}, []);
+
+	const handleClick = (props: dataType) => {
+		router.push(`/notice?news=${props.id}&team=${props.teamId}`);
+	};
+
 	return (
 		<>
-			<ListBox className="with-bottom">
-				<div>{'구름톤 유니브 2기에 "필독📢" 공지가 발행되었습니다.'}</div>
-				<BiSolidBellRing size="26px" className="margin-right" />
-			</ListBox>
-			<ListBox className="with-bottom">
-				<div>구름톤 유니브 2기 가입이 승인되었습니다!</div>
-				<BiSolidBellRing size="26px" className="margin-right" />
-			</ListBox>
+			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
+			{dataList &&
+				dataList.slice(0, 9).map((data, idx) => (
+					<ListBox key={idx} className="with-bottom" onClick={() => handleClick(data)}>
+						<div>{data.title}</div>
+						<BiSolidBellRing size="26px" className="margin-right" />
+					</ListBox>
+				))}
 		</>
 	);
 };
@@ -60,4 +93,8 @@ const ListBox = styled.div`
 		animation: shake 2.5s ease-in-out infinite;
 		margin-right: 2rem;
 	}
+`;
+
+const Loading = styled.img`
+	width: 100px;
 `;
