@@ -1,8 +1,8 @@
-import PostNotice from '@/components/PostNotice/PostNotice';
+import Post from '@/components/PostNotice/Post';
 import React from 'react';
 
 const page = () => {
-	return <PostNotice />;
+	return <Post />;
 };
 
 export default page;
