@@ -23,10 +23,10 @@ const AllCardList = ({ dataList, teamList }: { dataList: ContentsType[]; teamLis
 	const handleSelectBtn = (groupName: string) => {
 		setSelectedGroup(groupName);
 		if (groupName === '전체') {
-			setSelectedDataSet(dataList || []);
+			setSelectedDataSet(dataList);
 		} else {
-			const filteredData = dataList?.filter((item) => item.teamName === groupName);
-			setSelectedDataSet(filteredData || []);
+			const filteredData = dataList.filter((item) => item.teamName === groupName);
+			setSelectedDataSet(filteredData);
 		}
 		setVisibleCount(4);
 	};

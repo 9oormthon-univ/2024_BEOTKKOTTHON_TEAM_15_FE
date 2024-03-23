@@ -17,9 +17,6 @@ const UnreadNoticeSection = () => {
 			const result = await getAllMyTeamList();
 			setMyGroupDataList(result);
 			setLoading(false);
-			if (result.length == 0) {
-				setIsZero(true);
-			}
 		};
 		const getNoticeList = async () => {
 			setLoading(true); // 로딩 시작
@@ -30,8 +27,8 @@ const UnreadNoticeSection = () => {
 				setIsZero(true);
 			}
 		};
-		getTeamDataList();
 		getNoticeList();
+		getTeamDataList();
 	}, []);
 	return (
 		<Main>
