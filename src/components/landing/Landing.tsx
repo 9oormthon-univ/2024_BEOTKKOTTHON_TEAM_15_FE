@@ -50,7 +50,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Explain = styled.div`
-	font-size: 2.3rem;
+	font-size: 2rem;
 	font-weight: 400;
 	color: #93613b;
 `;
@@ -64,7 +64,7 @@ const BtnWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 2.3rem;
+	gap: 1.5rem;
 `;
 
 const TermsWrapper = styled.div`

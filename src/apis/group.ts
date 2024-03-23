@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const baseURL = 'https://dev.gooromnews.shop';
 interface createTeamBody {
-	image?: File;
-	name: string;
-	description: string;
+	image: File;
+	teamSaveRequestDto: {
+		name: string;
+		description: string;
+	};
 }
 
 // export function blobToDataURL(blob: Blob, callback: (dataUrl: string) => void) {
@@ -24,13 +26,30 @@ interface createTeamBody {
 // }
 
 // 팀 생성
-export const createTeam = async (body: createTeamBody) => {
+// export const createTeam = async (body: createTeamBody) => {
+// 	const accessToken = localStorage.getItem('access');
+// 	try {
+// 		const response = await axios.post(`${baseURL}/teams`, body, {
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 				Authorization: `Bearer ${accessToken}`,
+// 			},
+// 		});
+// 		return response;
+// 	} catch (error) {
+// 		console.log(error);
+// 		return false;
+// 	}
+// };
+
+export const createTeam = async (body: FormData) => {
 	const accessToken = localStorage.getItem('access');
+
 	try {
 		const response = await axios.post(`${baseURL}/teams`, body, {
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'multipart-form-data',
 			},
 		});
 		return response;

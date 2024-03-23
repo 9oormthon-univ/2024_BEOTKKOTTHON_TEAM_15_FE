@@ -24,10 +24,10 @@ const Btn = (props: BtnProps) => {
 export default Btn;
 
 const Wrapper = styled.div`
-	min-width: 350px;
+	min-width: 400px;
 	border-radius: 30px;
 	text-align: center;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	padding: 1rem 2rem;
 	background: ${(props) => props.color};
 	color: white;
