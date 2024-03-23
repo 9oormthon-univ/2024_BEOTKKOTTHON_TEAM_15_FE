@@ -44,7 +44,7 @@ const AllCardList = ({ dataList, teamList }: { dataList?: ContentsType[]; teamLi
 						</GroupSortBtn>
 					))}
 				</BtnGroup>
-				{selectedDataSet ? (
+				{selectedDataSet && selectedDataSet.length != 0 ? (
 					<>
 						<CardWrapper>
 							{selectedDataSet &&
