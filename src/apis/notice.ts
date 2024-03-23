@@ -125,3 +125,20 @@ export const changeReadState = async (newsId: string) => {
 		return false;
 	}
 };
+
+// 가정통신문 확인/미확인 리스트
+export const checkReadList = async (newsId: string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}/news/${newsId}/checklist`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+		console.log(response);
+		return response.data.result;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};

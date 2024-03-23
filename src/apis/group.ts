@@ -44,7 +44,6 @@ interface createTeamBody {
 
 export const createTeam = async (body: FormData) => {
 	const accessToken = localStorage.getItem('access');
-
 	try {
 		const response = await axios.post(`${baseURL}/teams`, body, {
 			headers: {

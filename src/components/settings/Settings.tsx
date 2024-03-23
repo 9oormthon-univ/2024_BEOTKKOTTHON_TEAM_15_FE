@@ -10,9 +10,10 @@ import { useRouter } from 'next/navigation';
 import { logOut } from '@/apis/login';
 import { useSetRecoilState } from 'recoil';
 import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { alertStatus } from '@/apis/setting';
 
 const Settings = () => {
-	const [alert, setAlert] = useState(true);
+	const [alert, setAlert] = useState('ALLOW');
 	const router = useRouter();
 	const setEmail = useSetRecoilState(userEmailAtom);
 	const setName = useSetRecoilState(userNameAtom);
@@ -25,18 +26,26 @@ const Settings = () => {
 		router.push('/');
 	};
 
-	const onOffAlert = () => {
-		if (alert) {
-			setAlert(false);
+	const onOffAlert = async () => {
+		if (alert === 'ALLOW') {
+			setAlert('NOT_ALLOW');
+			let body = {
+				noticeStatus: 'NOT_ALLOW',
+			};
+			await alertStatus(body);
 		} else {
-			setAlert(true);
+			setAlert('ALLOW');
+			let body = {
+				noticeStatus: 'ALLOW',
+			};
+			await alertStatus(body);
 		}
 	};
 	return (
 		<ArticleWrapper>
 			<ListBox className="with-bottom" onClick={onOffAlert}>
 				<div>웹 푸시 알람 설정</div>
-				{alert ? <BiBell size="26px" /> : <BiBellOff size="26px" />}
+				{alert === 'ALLOW' ? <BiBell size="26px" /> : <BiBellOff size="26px" />}
 			</ListBox>
 			<ListBox onClick={() => router.push('/service')}>
 				<div>서비스 이용약관</div>
@@ -47,7 +56,7 @@ const Settings = () => {
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox>
-				<div>서비스 이용 문의</div>
+				<div onClick={() => router.push('/privacy')}>서비스 이용 문의</div>
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox onClick={handleLogout}>
@@ -79,6 +88,7 @@ const ListBox = styled.div`
 	padding: 2rem 0rem 2rem 1rem;
 	font-size: 2rem;
 	font-weight: 400;
+	cursor: pointer;
 	&.with-bottom {
 		border-bottom: 1px solid rgba(240, 240, 240, 1);
 	}

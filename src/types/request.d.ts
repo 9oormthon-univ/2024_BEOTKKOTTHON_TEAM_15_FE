@@ -9,7 +9,7 @@ export type ContentsType = {
 	createdTime: string;
 	modifiedTime: string;
 	teamName: string;
-	teamId: number,
+	teamId: number;
 	readMemberCount: number;
 	notReadMemberCount: number;
 	checkStatus: string;
@@ -34,5 +34,10 @@ export type AcceptRequest = {
 	requestCreatedTime: string;
 	memberId: number;
 	email: string;
+	username: string;
+};
+export type CheckData = {
+	newsId: number;
+	checkStatus: string;
 	username: string;
 };
