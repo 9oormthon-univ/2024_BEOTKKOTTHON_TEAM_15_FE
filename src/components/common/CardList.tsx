@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import NoticeCard from './NoticeCard';
 import { FaChevronDown } from "react-icons/fa6";
 import { ContentsType } from '@/types/request';
+import { useMediaQuery } from 'react-responsive';
 
 const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
 	const [selectedDataSet, setSelectedDataSet] = useState(dataList);
 	const [groupList, setGroupList] = useState<string[]>(['전체']);
 	const [selectedGroup, setSelectedGroup] = useState<string>('전체');
 	const [visibleCount, setVisibleCount] = useState<number>(4);
+	const isMobile = useMediaQuery({ query: '(max-width: 590px)' });
 
 	useEffect(() => {
 		if (dataList) {
@@ -42,7 +44,7 @@ const CardList = ({ dataList }: { dataList?: ContentsType[] }) => {
 					</GroupSortBtn>
 				))}
 			</BtnGroup>
-			<CardWrapper>
+			<CardWrapper $mobile={isMobile}>
 				{selectedDataSet &&
 					selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
 			</CardWrapper>
@@ -68,10 +70,10 @@ const Main = styled.div`
 	justify-content: center;
 	margin-bottom: 1.5rem;
 `;
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<{$mobile:boolean}>`
 	width: 90%;
 	display: grid;
-	grid-template-columns: repeat(2, minmax(310px, 1fr));
+	grid-template-columns: ${(props) => (props.$mobile ? ' repeat(1, minmax(310px, 1fr));' : 'repeat(2, minmax(310px, 1fr));')};
 	justify-content: center;
 	padding: initial;
 	height: fit-content;
