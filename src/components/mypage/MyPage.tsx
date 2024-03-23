@@ -27,6 +27,10 @@ const MyPage = () => {
 					<Title>가정통신문</Title>
 					<Notice>N건의 미열람 가정통신문이 있어요.</Notice>
 				</DocWrapper>
+				<DocWrapper>
+					<Title>{userName}님의 공지 평균 열람 시간</Title>
+					{/* <Notice>N건의 미열람 가정통신문이 있어요.</Notice> */}
+				</DocWrapper>
 			</Wrapper>
 		</>
 	);
@@ -66,10 +70,10 @@ const Email = styled.div`
 `;
 
 const Line = styled.div`
-	background-color: #93613b;
-	height: 0.5rem;
+	background-color: #f4e6c8;
+	height: 0.3rem;
 	width: 100%;
-	margin-top: 2rem;
+	margin-bottom: 2rem;
 `;
 
 const DocWrapper = styled.div`
@@ -80,6 +84,7 @@ const DocWrapper = styled.div`
 	align-items: flex-start;
 	padding-left: 5rem;
 	gap: 2rem;
+	margin-bottom: 1.5rem;
 `;
 
 const Title = styled.div`
