@@ -17,7 +17,6 @@ const GroupMainPage = () => {
 		<Main>
 			<Section>
 				<Row>
-					{' '}
 					<SectionTitle>{userName}님이 속해있는 그룹</SectionTitle>{' '}
 					<Btn
 						onClick={() => {
@@ -32,7 +31,7 @@ const GroupMainPage = () => {
 				<BtnGroup></BtnGroup>
 			</Section>
 			<Section>
-				<SectionTitle>읽지 않은 가정통신문</SectionTitle>
+				<SectionTitle>전체 가정통신문</SectionTitle>
 				<UnreadNoticeSection />
 			</Section>
 		</Main>

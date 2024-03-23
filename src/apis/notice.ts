@@ -47,7 +47,7 @@ export const getMyNotice = async () => {
 export const getAllNotice = async () => {
 	const accessToken = localStorage.getItem('access');
 	try {
-		const response = await axios.get(`${baseURL}/teams/news?teamId=1`, {
+		const response = await axios.get(`${baseURL}/teams/news`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
@@ -96,6 +96,22 @@ export const getNoticeDetail = async (teamId: string, newsId: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}/teams/${teamId}/news/${newsId}`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+		console.log(response);
+		return response.data.result;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
+
+export const changeReadState = async (newsId: string) => {
+	const accessToken = localStorage.getItem('access');
+	try {
+		const response = await axios.get(`${baseURL}/news/${newsId}`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},

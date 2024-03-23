@@ -1,8 +1,8 @@
 'use client';
 
-import { getNoticeDetail } from '@/apis/notice';
+import { changeReadState, getNoticeDetail } from '@/apis/notice';
 import { ContentsType } from '@/types/request';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -11,6 +11,7 @@ const NoticeViewPage = () => {
 	const newsId = params.get('news');
 	const teamId = params.get('team');
 	const [data, setData] = useState<ContentsType>();
+	const router = useRouter();
 
 	const formatContent = (content?: string) => {
 		return content?.split(/\\n|\n/).map((line, index) => (
@@ -19,6 +20,20 @@ const NoticeViewPage = () => {
 				<br />
 			</React.Fragment>
 		));
+	};
+
+	const handleSubmit = async () => {
+		try {
+			if (newsId) {
+				const result = await changeReadState(newsId);
+				alert('공지 읽기 완료!');
+				setTimeout(() => {
+					router.refresh();
+				}, 1000);
+			}
+		} catch (error) {
+			console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+		}
 	};
 
 	useEffect(() => {
@@ -63,7 +78,7 @@ const NoticeViewPage = () => {
 				{data && data.imageUrl2 && <Image src={data?.imageUrl2} alt="첨부 이미지2" />}
 			</Section>
 			<Submit>
-				<SubmitBtn >확인</SubmitBtn>
+				<SubmitBtn onClick={handleSubmit}>확인</SubmitBtn>
 			</Submit>
 		</Main>
 	);
@@ -146,7 +161,9 @@ const Submit = styled.div`
 `;
 const SubmitBtn = styled.div`
 	width: fit-content;
-	padding: 3rem 1rem;
-	background-color: #4F7B59;
-	color: #FFF5E0;
+	padding: 1rem 3rem;
+	border-radius: 20px;
+	background-color: #4f7b59;
+	color: #fff5e0;
+	font-size: 1.5rem;
 `;
