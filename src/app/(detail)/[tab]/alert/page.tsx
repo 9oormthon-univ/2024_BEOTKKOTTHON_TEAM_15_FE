@@ -1,9 +1,8 @@
-import React from 'react'
+import Alert from '@/components/alert/Alert';
+import React from 'react';
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+	return <Alert />;
+};
 
-export default page
+export default page;
