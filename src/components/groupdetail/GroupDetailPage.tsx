@@ -23,10 +23,10 @@ const GroupDetailPage = () => {
 		const getDataList = async () => {
 			const result = await getTeamInfo(groupId);
 			setGroupInfo(result);
-			if(groupInfo && groupInfo.role){
-				if(groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR'){
+			if (groupInfo && groupInfo.role) {
+				if (groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR') {
 					setUserRole('리더');
-				} else{
+				} else {
 					setUserRole('멤버');
 				}
 			}
@@ -46,24 +46,34 @@ const GroupDetailPage = () => {
 						<span className="tag">멤버 {groupInfo?.memberCount}명</span>
 					</Row>
 					<Info>
-						{userName}님은 {groupInfo?.name}의 <span id="roletext">{userRole}</span>입니다.
+						{userName}님은 {groupInfo?.name}의{' '}
+						<span id="roletext">
+							{groupInfo?.role === 'MEMBER'
+								? '멤버'
+								: groupInfo?.role === 'CREATOR' || groupInfo?.role === 'LEADER'
+								? '리더'
+								: ''}
+						</span>
+						입니다.
 					</Info>
-					<BtnGroup>
-						<Btn
-							onClick={() => {
-								router.push(`${pathname}/accept`);
-							}}
-						>
-							새 멤버 수락하기
-						</Btn>
-						<Btn
-							onClick={() => {
-								router.push(`${pathname}/setting`);
-							}}
-						>
-							그룹 설정
-						</Btn>
-					</BtnGroup>
+					{groupInfo?.role === 'CREATOR' || groupInfo?.role === 'LEADER' ?
+						<BtnGroup>
+							<Btn
+								onClick={() => {
+									router.push(`${pathname}/accept`);
+								}}
+							>
+								새 멤버 수락하기
+							</Btn>
+							<Btn
+								onClick={() => {
+									router.push(`${pathname}/setting`);
+								}}
+							>
+								그룹 설정
+							</Btn>
+						</BtnGroup>
+					: <></>}
 				</Right>
 			</GroupProfile>
 			<Section>
@@ -188,7 +198,7 @@ const Btn = styled.div`
 	gap: 5px;
 	&:hover {
 		background-color: #4f7b59;
-		color: #FFF5E0;
+		color: #fff5e0;
 	}
 `;
 
@@ -197,7 +207,7 @@ const Btn2 = styled.div`
 	align-items: center;
 	padding: 0.7rem 1rem;
 	background-color: #4f7b59;
-	color: #FFF5E0;
+	color: #fff5e0;
 	font-size: 1.3rem;
 	font-weight: 500;
 	border-radius: 20px;
