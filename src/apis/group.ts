@@ -1,46 +1,6 @@
 import axios from 'axios';
 
 const baseURL = 'https://dev.gooromnews.shop';
-interface createTeamBody {
-	image: File;
-	teamSaveRequestDto: {
-		name: string;
-		description: string;
-	};
-}
-
-// export function blobToDataURL(blob: Blob, callback: (dataUrl: string) => void) {
-// 	const reader = new FileReader();
-// 	reader.onload = function (e) {
-// 		if (e.target) {
-// 			callback(e.target.result as string);
-// 		} else {
-// 			console.error('null');
-// 		}
-// 	};
-// 	reader.readAsDataURL(blob);
-// }
-
-// export function createBlob(file: any) {
-// 	return URL.createObjectURL(file);
-// }
-
-// 팀 생성
-// export const createTeam = async (body: createTeamBody) => {
-// 	const accessToken = localStorage.getItem('access');
-// 	try {
-// 		const response = await axios.post(`${baseURL}/teams`, body, {
-// 			headers: {
-// 				'Content-Type': 'application/json',
-// 				Authorization: `Bearer ${accessToken}`,
-// 			},
-// 		});
-// 		return response;
-// 	} catch (error) {
-// 		console.log(error);
-// 		return false;
-// 	}
-// };
 
 export const createTeam = async (body: FormData) => {
 	const accessToken = localStorage.getItem('access');
@@ -75,9 +35,9 @@ export const requestTeamAccept = async (teamId: number, requestrole: 'MEMBER' | 
 		);
 		return response;
 	} catch (error) {
-		console.log(error);
-		return false;
-	}
+        console.log('Error:', error);
+        return false;
+    }
 };
 
 // 팀 가입요청 리스트 확인

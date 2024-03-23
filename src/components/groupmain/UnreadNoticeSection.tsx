@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import sampleDataList from '@/utils/MOCK_DATA.json';
-import CardList from '../common/CardList';
 import NoneNoticeCard from '../common/NoneNoticeCard';
 import { getAllMyTeamList } from '@/apis/team';
 import { getAllNotice } from '@/apis/notice';
