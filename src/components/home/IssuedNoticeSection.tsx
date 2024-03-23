@@ -7,23 +7,24 @@ import { getMyNotice } from '@/apis/notice';
 const IssuedNoticeSection = () => {
 	const [noticeDataList, setNoticeDataList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [isZero, setIsZero] = useState(false);
+
 	useEffect(() => {
 		const getDataList = async () => {
 			const result = await getMyNotice();
 			setNoticeDataList(result);
-			if(result.length != 0){
-				setLoading(false); // 로딩 종료
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
 			}
 		};
 		getDataList();
 	}, []);
 	return (
 		<Main>
-			{loading ? (
-				<NoneNoticeCard text="아직 발행한 가정통신문이 없어요!" />
-			) : (
-				<CardList dataList={noticeDataList} />
-			)}
+			{!loading && isZero && <NoneNoticeCard text="아직 발행한 가정통신문이 없어요!" />}
+			{!loading && !isZero && <CardList dataList={noticeDataList} />}
+			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 		</Main>
 	);
 };
@@ -36,4 +37,9 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	min-height: 20rem;
+`;
+
+const Loading = styled.img`
+	width: 100px;
 `;
