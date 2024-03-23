@@ -88,7 +88,7 @@ const DocWrapper = styled.div`
 `;
 
 const Title = styled.div`
-	font-size: 2.2rem;
+	font-size: 1.7rem;
 	font-weight: 600;
 `;
 
