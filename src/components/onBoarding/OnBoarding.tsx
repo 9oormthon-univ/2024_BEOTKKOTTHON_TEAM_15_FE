@@ -5,8 +5,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { userNameAtom } from '@/app/recoilContextProvider';
+import { useMediaQuery } from 'react-responsive';
 
 const OnBoarding = () => {
+	const isMobile = useMediaQuery({ query: '(max-width: 590px)' });
 	const userName = useRecoilValue(userNameAtom);
 	const router = useRouter();
 
@@ -29,7 +31,7 @@ const OnBoarding = () => {
 					<Btn onClick={onMember}>멤버 🧑‍🤝‍🧑</Btn>
 				</BtnWrapper>
 			</Container>
-			<Character alt={'ch'} src={'/img/PaperMan.png'} />
+			{isMobile ? '' : <Character alt={'ch'} src={'/img/PaperMan.png'} />}
 		</Wrapper>
 	);
 };
