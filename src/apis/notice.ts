@@ -92,7 +92,7 @@ export const postNotice = async (body: postType) => {
 };
 
 // 가정통신문 상세 조회
-export const getNoticeDetail = async (teamId: number, newsId: number) => {
+export const getNoticeDetail = async (teamId: string, newsId: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
 		const response = await axios.get(`${baseURL}/teams/${teamId}/news/${newsId}`, {

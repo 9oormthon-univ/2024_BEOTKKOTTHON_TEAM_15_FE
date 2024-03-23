@@ -1,17 +1,45 @@
 'use client';
 
-import React from 'react';
+import { getNoticeDetail } from '@/apis/notice';
+import { ContentsType } from '@/types/request';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const NoticeViewPage = () => {
+	const params = useSearchParams();
+	const newsId = params.get('news');
+	const teamId = params.get('team');
+	const [data, setData] = useState<ContentsType>();
+
+	const formatContent = (content?: string) => {
+		return content?.split(/\\n|\n/).map((line, index) => (
+			<React.Fragment key={index}>
+				{line}
+				<br />
+			</React.Fragment>
+		));
+	};
+
+	useEffect(() => {
+		const getDataList = async () => {
+			if (teamId && newsId) {
+				const result = await getNoticeDetail(teamId, newsId);
+				console.log(result);
+				setData(result);
+			}
+		};
+		getDataList();
+	}, [teamId, newsId]);
+
 	return (
 		<Main>
-			<Title>{`{가정통신문 제목}`}</Title>
+			<Title>{data?.title}</Title>
 			<Line />
 			<Row>
 				<Tag>
 					<div className="tag membertag">Leader</div>
-					<div id="text">{`{공지 발행자명}`}</div>
+					<div id="text">{data?.writer}</div>
 				</Tag>
 				<Tag>
 					<div className="tag membertag">남은 시간</div>
@@ -19,14 +47,24 @@ const NoticeViewPage = () => {
 				</Tag>
 				<Tag>
 					<div className="tag leadertag">확인</div>
-					<div id="text">nn명</div>
+					<div id="text">{data?.readMemberCount}명</div>
 				</Tag>
 				<Tag>
 					<div className="tag leadertag">미확인</div>
-					<div id="text">nn명</div>
+					<div id="text">{data?.notReadMemberCount}명</div>
 				</Tag>
 			</Row>
-      <Line />
+			<Line />
+			<Section>
+				<div>{formatContent(data?.content)}</div>
+			</Section>
+			<Section>
+				{data && data.imageUrl1 && <Image src={data?.imageUrl1} alt="첨부 이미지1" />}
+				{data && data.imageUrl2 && <Image src={data?.imageUrl2} alt="첨부 이미지2" />}
+			</Section>
+			<Submit>
+				<SubmitBtn >확인</SubmitBtn>
+			</Submit>
 		</Main>
 	);
 };
@@ -44,6 +82,7 @@ const Main = styled.div`
 const Section = styled.div`
 	width: 100%;
 	height: fit-content;
+	padding: 2rem 0rem;
 `;
 
 const Title = styled.div`
@@ -62,7 +101,7 @@ const Line = styled.div`
 const Row = styled.div`
 	display: flex;
 	align-items: center;
-  padding: 1rem 0rem;
+	padding: 1rem 0rem;
 	.tag {
 		width: fit-content;
 		padding: 0.5rem 1rem;
@@ -75,7 +114,7 @@ const Row = styled.div`
 	.leadertag {
 		background-color: #4f7b59;
 		border: 1px solid #4f7b59;
-    color: white;
+		color: white;
 	}
 	#text {
 		font-weight: 600;
@@ -92,5 +131,22 @@ const Tag = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-  margin-right: 1rem;
+	margin-right: 1rem;
+`;
+
+const Image = styled.img`
+	width: 80%;
+`;
+
+const Submit = styled.div`
+	display: flex;
+	width: 80%;
+	align-items: center;
+	justify-content: end;
+`;
+const SubmitBtn = styled.div`
+	width: fit-content;
+	padding: 3rem 1rem;
+	background-color: #4F7B59;
+	color: #FFF5E0;
 `;
