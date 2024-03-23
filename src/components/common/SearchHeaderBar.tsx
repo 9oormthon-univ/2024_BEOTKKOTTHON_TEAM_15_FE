@@ -28,11 +28,12 @@ export default SearchHeaderBar;
 
 const FormWrapper = styled.form`
 	height: 50%;
-	width: 60%;`;
+	width: 60%;
+	`
 
 const Search = styled.div`
 	height: 100%;
-	width: 100%;
+	width: 94%;
 	background-color: #fff5e0;
 	border-radius: 15px;
 	border: 1.5px solid #c9bca2;
