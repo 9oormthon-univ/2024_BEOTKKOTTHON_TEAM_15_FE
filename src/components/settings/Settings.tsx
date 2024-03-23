@@ -47,7 +47,7 @@ const Settings = () => {
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox>
-				<div>서비스 이용 문의</div>
+				<div onClick={() => router.push('/privacy')}>서비스 이용 문의</div>
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox onClick={handleLogout}>
