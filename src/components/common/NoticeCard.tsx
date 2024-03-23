@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRightCircle } from 'react-icons/lu';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ContentsType } from '@/types/request';
 
 const NoticeCard = ({ notice }: { notice: ContentsType }) => {
@@ -17,7 +17,7 @@ const NoticeCard = ({ notice }: { notice: ContentsType }) => {
 
 	return (
 		<Main>
-			<Card onClick={()=>{router.push(`/notice/${notice.id}`)}}>
+			<Card onClick={()=>{router.push(`/notice?news=${notice.id}&team=${notice.teamId}`)}}>
 				<Top id="top">
 					<Title>{notice.title}</Title>
 					<Span>

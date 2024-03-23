@@ -14,6 +14,7 @@ const NewNoticeSection = () => {
 			if(result.length != 0){
 				setLoading(false); // 로딩 종료
 			}
+			console.log(result);
 		};
 		getDataList();
 	}, []);
