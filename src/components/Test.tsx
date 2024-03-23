@@ -3,11 +3,10 @@
 import React, { useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
-import { useSetRecoilState } from 'recoil';
-import { userDeviceAtom } from '@/app/recoilContextProvider';
+import { useRouter } from 'next/navigation';
 
 const Index = () => {
-	const setUserDevice = useSetRecoilState(userDeviceAtom);
+	const router = useRouter();
 	const onMessageFCM = async () => {
 		// 브라우저에 알림 권한 요청
 		const permission = await Notification.requestPermission();
@@ -32,13 +31,13 @@ const Index = () => {
 					// 정상적으로 토큰 발급 시 콘솔 출력
 					console.log(currentToken);
 					localStorage.setItem('device', currentToken);
-					// setUserDevice(currentToken);
 				} else {
 					console.log('No registration token available. Request permission to generate one.');
 				}
 			})
 			.catch((err) => {
 				console.log('An error occurred while retrieving token. ', err);
+				router.refresh();
 			});
 
 		// 브라우저를 보고 있을 때에는 콘솔로 출력
