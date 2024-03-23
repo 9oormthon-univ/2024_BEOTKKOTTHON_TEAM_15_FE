@@ -1,16 +1,20 @@
 'use client';
 
-import { changeReadState, getNoticeDetail } from '@/apis/notice';
-import { ContentsType } from '@/types/request';
+import { changeReadState, checkReadList, getNoticeDetail } from '@/apis/notice';
+import { CheckData, ContentsType } from '@/types/request';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import CheckListModal from './CheckListModal';
 
 const NoticeViewPage = () => {
 	const params = useSearchParams();
 	const newsId = params.get('news');
 	const teamId = params.get('team');
 	const [data, setData] = useState<ContentsType>();
+	const [readData, setReadData] = useState<CheckData[]>()
+	const [unreadData, setUnreadData] = useState<CheckData[]>()
+	const [modal, onModal] = useState(false)
 	const router = useRouter();
 
 	const formatContent = (content?: string) => {
@@ -44,11 +48,23 @@ const NoticeViewPage = () => {
 				setData(result);
 			}
 		};
+		const getReadDataList = async () => {
+			if (newsId) {
+				const result = await checkReadList(newsId);
+				console.log(result);
+				const readMembers = result.filter((member: CheckData)=> member.checkStatus === 'READ');
+				const unreadMembers = result.filter((member: CheckData) => member.checkStatus !== 'READ');
+				setReadData(readMembers);
+				setUnreadData(unreadMembers);
+			}
+		};
 		getDataList();
+		getReadDataList();
 	}, [teamId, newsId]);
 
 	return (
 		<Main>
+			{modal ? <CheckListModal onModal={onModal} readData={readData} unreadData={unreadData}/> : <></>}
 			<Title>{data?.title}</Title>
 			<Line />
 			<Row>
@@ -61,11 +77,11 @@ const NoticeViewPage = () => {
 					<div id="time">00:45:46</div>
 				</Tag>
 				<Tag>
-					<div className="tag leadertag">확인</div>
+					<div className="tag leadertag" onClick={()=>{onModal(true)}}>확인</div>
 					<div id="text">{data?.readMemberCount}명</div>
 				</Tag>
 				<Tag>
-					<div className="tag leadertag">미확인</div>
+					<div className="tag leadertag" onClick={()=>{onModal(true)}}>미확인</div>
 					<div id="text">{data?.notReadMemberCount}명</div>
 				</Tag>
 			</Row>
