@@ -7,6 +7,8 @@ interface postType {
 	content: string;
 	minute: string;
 	id: string;
+	image1?: File;
+	image2?: File;
 }
 
 // 미확인 가정통신문 전체 목록 조회
@@ -77,13 +79,13 @@ export const getTeamNotice = async (teamId: string) => {
 	}
 };
 // 가정통신문 작성
-export const postNotice = async (body: postType) => {
-	const { id, ...postInfo } = body;
+export const postNotice = async (body: FormData, id: string) => {
 	const accessToken = localStorage.getItem('access');
 	try {
-		const response = await axios.post(`${baseURL}/teams/${id}/news`, postInfo, {
+		const response = await axios.post(`${baseURL}/teams/${id}/news`, body, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'multipart-form-data',
 			},
 		});
 	} catch (error) {
