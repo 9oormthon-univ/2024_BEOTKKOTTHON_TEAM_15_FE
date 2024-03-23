@@ -5,7 +5,7 @@ import { FaChevronDown } from 'react-icons/fa6';
 import NoticeCard from '../common/NoticeCard';
 import NoneNoticeCard from '../common/NoneNoticeCard';
 
-const AllCardList = ({ dataList, teamList }: { dataList?: ContentsType[]; teamList: TeamType[] }) => {
+const AllCardList = ({ dataList, teamList }: { dataList: ContentsType[]; teamList: TeamType[] }) => {
 	const [selectedDataSet, setSelectedDataSet] = useState(dataList);
 	const [groupList, setGroupList] = useState<string[]>(['전체']);
 	const [selectedGroup, setSelectedGroup] = useState<string>('전체');
