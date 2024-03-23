@@ -201,7 +201,8 @@ const Row = styled.div`
 		border-radius: 15px;
 	}
 	.membertag {
-		border: 1px solid #4f7b59;
+		border: 1.5px solid #4f7b59;
+		color: #4f7b59;
 	}
 	.leadertag {
 		background-color: #4f7b59;
