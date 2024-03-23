@@ -64,8 +64,10 @@ const ProfileCircle = styled.div`
 `;
 
 const ProfileImg = styled.img`
-	width: 100%;
-	object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 `;
 
 const Tag = styled.div`

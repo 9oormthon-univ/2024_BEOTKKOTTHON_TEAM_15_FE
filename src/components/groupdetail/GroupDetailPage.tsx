@@ -37,7 +37,6 @@ const GroupDetailPage = () => {
 		<Main>
 			<GroupProfile>
 				<ProfileCircle>
-					<ProfileImg src="/img/nothingLogo.png" />
 					{groupInfo?.imageUrl == '__null__' ? (
 						<ProfileImg src="/img/defaultGroupProfile.png" />
 					) : (
@@ -125,7 +124,7 @@ const GroupProfile = styled.div`
 const ProfileCircle = styled.div`
 	width: 25%;
 	aspect-ratio: 1 / 1;
-	background-color: #c9bca2;
+    background-color:#B8B8B8;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
