@@ -16,23 +16,16 @@ const GroupDetailPage = () => {
 	const params = useParams<{ id: string }>();
 	const groupId = params.id;
 	const [groupInfo, setGroupInfo] = useState<TeamType>();
-	const [userRole, setUserRole] = useState<string>();
 	const userName = useRecoilValue(userNameAtom);
 
 	useEffect(() => {
 		const getDataList = async () => {
 			const result = await getTeamInfo(groupId);
 			setGroupInfo(result);
-			if (groupInfo && groupInfo.role) {
-				if (groupInfo.role === 'LEADER' || groupInfo.role === 'CREATOR') {
-					setUserRole('리더');
-				} else {
-					setUserRole('멤버');
-				}
-			}
 		};
 		getDataList();
 	}, [groupId]);
+
 	return (
 		<Main>
 			<GroupProfile>
