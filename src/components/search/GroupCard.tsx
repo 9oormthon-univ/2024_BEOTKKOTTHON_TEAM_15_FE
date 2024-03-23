@@ -83,6 +83,9 @@ const Card = styled.div`
 		font-size: 1.7rem;
 		font-weight: 600;
 	}
+	#groupname::-webkit-scrollbar {
+		display: none;
+	}
 `;
 
 const Row = styled.div`
