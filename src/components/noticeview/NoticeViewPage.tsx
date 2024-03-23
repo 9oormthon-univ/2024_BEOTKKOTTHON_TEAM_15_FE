@@ -37,6 +37,7 @@ const NoticeViewPage = () => {
 	const [unreadData, setUnreadData] = useState<CheckData[]>();
 	const [remainingTime, setRemainingTime] = useState<string>();
 	const [modal, onModal] = useState(false);
+	const [isMember, setIsMember] = useState(false);
 	const router = useRouter();
 
 	const formatContent = (content?: string) => {
@@ -49,7 +50,7 @@ const NoticeViewPage = () => {
 	};
 
 	const handleSubmit = async () => {
-		if(remainingTime=='시간 마감'){
+		if (remainingTime == '시간 마감') {
 			alert('이미 열람이 마감된 공지입니다!');
 			return;
 		}
@@ -80,12 +81,17 @@ const NoticeViewPage = () => {
 		};
 		const getReadDataList = async () => {
 			if (newsId) {
-				const result = await checkReadList(newsId);
-				console.log(result);
-				const readMembers = result.filter((member: CheckData) => member.checkStatus === 'READ');
-				const unreadMembers = result.filter((member: CheckData) => member.checkStatus !== 'READ');
-				setReadData(readMembers);
-				setUnreadData(unreadMembers);
+				try {
+					const result = await checkReadList(newsId);
+					console.log(result);
+					const readMembers = result.filter((member: CheckData) => member.checkStatus === 'READ');
+					const unreadMembers = result.filter((member: CheckData) => member.checkStatus !== 'READ');
+					setReadData(readMembers);
+					setUnreadData(unreadMembers);
+				} catch (error: any) {
+					setIsMember(true);
+					return;
+				}
 			}
 		};
 		getDataList();
@@ -105,7 +111,7 @@ const NoticeViewPage = () => {
 
 	return (
 		<Main>
-			{modal ? <CheckListModal onModal={onModal} readData={readData} unreadData={unreadData} /> : <></>}
+			{modal && !isMember ? <CheckListModal onModal={onModal} readData={readData} unreadData={unreadData} /> : <></>}
 			<Title>{data?.title}</Title>
 			<Line />
 			<Row>
