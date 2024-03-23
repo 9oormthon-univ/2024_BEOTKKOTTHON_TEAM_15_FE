@@ -37,8 +37,8 @@ const UnreadNoticeSection = () => {
 	}, []);
 	return (
 		<Main>
-						{!loading && isZero && 	<NoneNoticeCard text="가정통신문이 없어요!!" />}
-			{!loading && !isZero && 				<AllCardList dataList={noticeDataList} teamList={myGroupDataList} />}
+			{!loading && isZero && <NoneNoticeCard text="가정통신문이 없어요!!" />}
+			{!loading && !isZero && <AllCardList dataList={noticeDataList} teamList={myGroupDataList} />}
 			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 		</Main>
 	);

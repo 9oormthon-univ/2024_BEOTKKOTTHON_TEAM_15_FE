@@ -211,5 +211,6 @@ const Btn2 = styled.div`
 	font-weight: 500;
 	border-radius: 20px;
 	display: flex;
+	margin-bottom: 1rem;
 	gap: 5px;
 `;
