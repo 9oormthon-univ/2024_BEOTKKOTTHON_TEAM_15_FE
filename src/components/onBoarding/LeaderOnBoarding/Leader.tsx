@@ -28,7 +28,6 @@ const Leader = () => {
 
 		// 객체를 JSON 문자열로 변환하여 추가
 		const dto = JSON.stringify({ name: groupName, description: description });
-		console.log(dto);
 		const blob = new Blob([dto], { type: 'application/json' });
 		formData.append('teamSaveRequestDto', blob);
 		// formData.append('name', groupName);
@@ -43,7 +42,6 @@ const Leader = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(groupImage);
 		if (!groupName) {
 			alert('그룹 이름을 적어주세요!');
 			return;
