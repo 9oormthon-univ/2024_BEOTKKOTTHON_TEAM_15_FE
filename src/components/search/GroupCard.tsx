@@ -17,7 +17,17 @@ const GroupCard = (props: CardProps) => {
 			id: props.id,
 			role: role,
 		};
-		await requestGroup(body);
+		try {
+			await requestGroup(body);
+		} catch (error : any) {
+			if (error.message.includes('400')) {
+				alert('이미 소속된 그룹입니다❗️');
+			} else {
+				alert('알 수 없는 에러로 인해 요청이 실패되었습니다');
+			}
+			console.log(error.message);
+			return;
+		}
 		await props.onModal(event);
 	};
 	return (
@@ -25,7 +35,11 @@ const GroupCard = (props: CardProps) => {
 			<Card>
 				<Row>
 					<ProfileCircle>
-						{props.profile=='__null__' ? <ProfileImg src='/img/defaultGroupProfile.png' />	: <ProfileImg src={props.profile} />}
+						{props.profile == '__null__' ? (
+							<ProfileImg src="/img/defaultGroupProfile.png" />
+						) : (
+							<ProfileImg src={props.profile} />
+						)}
 					</ProfileCircle>
 					<Column>
 						<div id="groupname">{props.title}</div>
@@ -74,15 +88,15 @@ const Card = styled.div`
 const Row = styled.div`
 	width: 50%;
 	display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-left: 2rem;
+	align-items: center;
+	justify-content: start;
+	margin-left: 2rem;
 `;
 
 const ProfileCircle = styled.div`
 	width: 25%;
 	aspect-ratio: 1 / 1;
-    background-color:#B8B8B8;
+	background-color: #b8b8b8;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -101,7 +115,7 @@ const Column = styled.div`
 	flex-direction: column;
 	width: 60%;
 	color: #555555;
-    margin-left: 2rem;
+	margin-left: 2rem;
 `;
 
 const Tag = styled.div`
@@ -120,7 +134,7 @@ const BtnWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
-    margin-right: 2rem;
+	margin-right: 2rem;
 `;
 
 const JoinBtn = styled.div`
