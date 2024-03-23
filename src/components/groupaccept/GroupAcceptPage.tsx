@@ -11,12 +11,12 @@ const GroupAcceptPage = () => {
 	const pathname = usePathname();
 	const params = useParams<{ id: string }>();
 	const groupId = params.id;
-	const roleCategory = ['전체', '멤버', '리더'];
+	const roleCategory = ['ALL', 'MEMBER', 'LEADER'];
 	const [requestList, setRequestList] = useState<AcceptRequest[]>();
-	const [selectedRole, setSelectedRole] = useState<string>('전체');
+	const [selectedRole, setSelectedRole] = useState<string>('ALL');
 
 	const filteredRequestList = requestList?.filter((item) => {
-		if (selectedRole === '전체') {
+		if (selectedRole === 'ALL') {
 			return true;
 		} else {
 			return item.requestRole === selectedRole;
@@ -73,7 +73,7 @@ const GroupAcceptPage = () => {
 				{filteredRequestList?.map((request) => (
 					<Data key={request.requestId}>
 						<div className="user">{request.username}</div>
-						<span>
+						<Row>
 							<Btn className="role">{request.requestRole == 'MEMBER' ? '멤버' : '리더'}</Btn>
 							<Btn
 								className="selectBtn"
@@ -91,7 +91,7 @@ const GroupAcceptPage = () => {
 							>
 								거절
 							</Btn>
-						</span>
+						</Row>
 					</Data>
 				))}
 			</CardWrapper>
@@ -141,6 +141,7 @@ const Data = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 1rem;
 	.user {
 		font-size: 2rem;
 		font-weight: 600;
@@ -170,3 +171,7 @@ const Btn = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
+const Row = styled.div`
+display:flex;
+gap: 0.5rem;
+`
