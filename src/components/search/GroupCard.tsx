@@ -8,6 +8,7 @@ type CardProps = {
 	title: string;
 	id: string;
 	teamSize: number;
+	profile: string;
 };
 
 const GroupCard = (props: CardProps) => {
@@ -24,7 +25,7 @@ const GroupCard = (props: CardProps) => {
 			<Card>
 				<Row>
 					<ProfileCircle>
-						<ProfileImg src={''} />
+						{props.profile=='__null__' ? <ProfileImg src='/img/defaultGroupProfile.png' />	: <ProfileImg src={props.profile} />}
 					</ProfileCircle>
 					<Column>
 						<div id="groupname">{props.title}</div>
@@ -81,7 +82,7 @@ const Row = styled.div`
 const ProfileCircle = styled.div`
 	width: 25%;
 	aspect-ratio: 1 / 1;
-	background-color: #c9bca2;
+    background-color:#B8B8B8;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;

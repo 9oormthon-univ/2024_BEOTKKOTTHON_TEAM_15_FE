@@ -2,12 +2,12 @@ export type ContentsType = {
 	id: number;
 	title: string;
 	content: string;
-	limitTime: Date;
+	limitTime: string;
 	writer: string;
 	imageUrl1: string;
 	imageUrl2: string;
-	createdTime: Date;
-	modifiedTime: Date;
+	createdTime: string;
+	modifiedTime: string;
 	teamName: string;
 	teamId: number,
 	readMemberCount: number;
@@ -22,7 +22,7 @@ export type TeamType = {
 	imageUrl: string;
 	link: string;
 	createdTime: string;
-	modifiedTime: Date;
+	modifiedTime: string;
 	role: string;
 	leaderCount: number;
 	memberCount: number;
@@ -31,7 +31,7 @@ export type TeamType = {
 export type AcceptRequest = {
 	requestId: number;
 	requestRole: string;
-	requestCreatedTime: Date;
+	requestCreatedTime: string;
 	memberId: number;
 	email: string;
 	username: string;

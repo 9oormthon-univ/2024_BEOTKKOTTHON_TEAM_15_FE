@@ -9,7 +9,7 @@ const HomeGroupCard = ({ group }: { group: TeamType }) => {
 		<Main onClick={()=>{router.push(`groups/group/${group.id}`)}}>
 			<Card>
 				<ProfileCircle>
-					<ProfileImg src={group.imageUrl} />
+				{group.imageUrl=='__null__' ? <ProfileImg src='/img/defaultGroupProfile.png' />	: <ProfileImg src={group.imageUrl} />}
 				</ProfileCircle>
 				<div id="groupname">{group.name}</div>
 				<Tag>+{group.teamSize}</Tag>
@@ -46,14 +46,17 @@ const Card = styled.div`
     #groupname{
         font-weight: 600; 
         width: 40%;
-        overflow: scroll
+        overflow: scroll;
     }
+	#groupname::-webkit-scrollbar {
+    display: none;
+}
 `;
 
 const ProfileCircle = styled.div`
 	height: 100%;
 	aspect-ratio: 1 / 1;
-	background-color: #c9bca2;
+    background-color:#B8B8B8;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -61,8 +64,10 @@ const ProfileCircle = styled.div`
 `;
 
 const ProfileImg = styled.img`
-	width: 100%;
-	object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 `;
 
 const Tag = styled.div`
