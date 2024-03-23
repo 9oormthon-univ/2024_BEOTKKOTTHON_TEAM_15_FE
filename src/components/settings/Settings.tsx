@@ -8,15 +8,15 @@ import { BiBell } from 'react-icons/bi';
 import { BiBellOff } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
 import { logOut } from '@/apis/login';
-import { useSetRecoilState } from 'recoil';
-import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { userAlertAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { alertStatus } from '@/apis/setting';
 
 const Settings = () => {
-	const [alert, setAlert] = useState('ALLOW');
 	const router = useRouter();
 	const setEmail = useSetRecoilState(userEmailAtom);
 	const setName = useSetRecoilState(userNameAtom);
+	const [alert, setAlert] = useRecoilState(userAlertAtom);
 
 	const handleLogout = () => {
 		logOut();

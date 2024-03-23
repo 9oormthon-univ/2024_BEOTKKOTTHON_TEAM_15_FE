@@ -42,6 +42,12 @@ export const userDeviceAtom = atom({
 	effects_UNSTABLE: [persistAtom],
 });
 
+export const userAlertAtom = atom({
+	key: 'userAlert',
+	default: 'ALLOW',
+	effects_UNSTABLE: [persistAtom],
+});
+
 export default function RecoidContextProvider({ children }: { children: React.ReactNode }) {
 	return <RecoilRoot>{children}</RecoilRoot>;
 }
