@@ -34,35 +34,41 @@ const AllCardList = ({ dataList, teamList }: { dataList?: ContentsType[]; teamLi
 	const handleShowMore = () => {
 		setVisibleCount((prevCount) => prevCount + 4);
 	};
-	return (
-		<Main>
-			<BtnGroup>
-				{groupList.map((group) => (
-					<GroupSortBtn key={group} $active={selectedGroup === group} onClick={() => handleSelectBtn(group)}>
-						{group}
-					</GroupSortBtn>
-				))}
-			</BtnGroup>
-			{selectedDataSet ? (
-				<>
-					<CardWrapper>
-						{selectedDataSet &&
-							selectedDataSet.slice(0, visibleCount).map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
-					</CardWrapper>
-					<Bottom>
-						{selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
-							<ShowMoreButton onClick={handleShowMore}>
-								더보기
-								<FaChevronDown size="1.2rem" color="white" />
-							</ShowMoreButton>
-						)}
-					</Bottom>
-				</>
-			) : (
-				<NoneNoticeCard text="가정통신문이 없어요!" />
-			)}
-		</Main>
-	);
+	if (dataList && teamList) {
+		return (
+			<Main>
+				<BtnGroup>
+					{groupList.map((group) => (
+						<GroupSortBtn key={group} $active={selectedGroup === group} onClick={() => handleSelectBtn(group)}>
+							{group}
+						</GroupSortBtn>
+					))}
+				</BtnGroup>
+				{selectedDataSet ? (
+					<>
+						<CardWrapper>
+							{selectedDataSet &&
+								selectedDataSet
+									.slice(0, visibleCount)
+									.map((notice) => <NoticeCard key={notice.title} notice={notice} />)}
+						</CardWrapper>
+						<Bottom>
+							{selectedDataSet && selectedDataSet.length > 4 && visibleCount < selectedDataSet.length && (
+								<ShowMoreButton onClick={handleShowMore}>
+									더보기
+									<FaChevronDown size="1.2rem" color="white" />
+								</ShowMoreButton>
+							)}
+						</Bottom>
+					</>
+				) : (
+					<NoneNoticeCard text="가정통신문이 없어요!" />
+				)}
+			</Main>
+		);
+	} else {
+		return <></>;
+	}
 };
 
 export default AllCardList;
