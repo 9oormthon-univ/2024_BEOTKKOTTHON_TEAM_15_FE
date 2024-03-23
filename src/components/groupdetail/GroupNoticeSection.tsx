@@ -4,16 +4,18 @@ import GroupCardList from './GroupCardList';
 import { getTeamNotice } from '@/apis/notice';
 import NoneNoticeCard from '../common/NoneNoticeCard';
 
-const GroupNoticeSection = ({groupId}:{groupId:string}) => {
+const GroupNoticeSection = ({ groupId }: { groupId: string }) => {
 	const [groupNoticeList, setGroupNoticeList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [isZero, setIsZero] = useState(false);
+
 	useEffect(() => {
 		const getDataList = async () => {
-			setLoading(true); // 로딩 시작
 			const result = await getTeamNotice(groupId);
 			setGroupNoticeList(result);
-			if(result.length != 0){
-				setLoading(false); // 로딩 종료
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
 			}
 		};
 		getDataList();
@@ -21,11 +23,9 @@ const GroupNoticeSection = ({groupId}:{groupId:string}) => {
 
 	return (
 		<Main>
-				{loading ? (
-				<NoneNoticeCard text="가정통신문이 없어요!" />
-			) : (
-			<GroupCardList dataList={groupNoticeList} />
-			)}
+			{!loading && isZero && <NoneNoticeCard text="가정통신문이 없어요!" />}
+			{!loading && !isZero && <GroupCardList dataList={groupNoticeList} />}
+			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 		</Main>
 	);
 };
@@ -38,4 +38,8 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+`;
+
+const Loading = styled.img`
+	width: 100px;
 `;
