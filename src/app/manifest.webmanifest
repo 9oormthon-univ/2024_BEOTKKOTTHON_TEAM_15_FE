@@ -4,7 +4,7 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Goorm-Notification",
+    "name": "가정통신문",
     "short_name": "Notification",
     "description": "Goormthon-Notification Service",
     "icons": [

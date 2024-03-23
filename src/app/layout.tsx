@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 	publisher: '가정통신문',
 	keywords: ['가정통신문', '벚꽃톤', '구름톤', 'goorm', 'kakao', '공지', '대학생', '동아리', '알림'],
 	icons: {
-		icon: '/img/icon.png',
+		icon: '/icon.png',
 	},
 	openGraph: {
 		title: '가정통신문',

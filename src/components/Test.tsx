@@ -51,9 +51,7 @@ const Index = () => {
 	}, []);
 
 	return (
-		<div>
-			<h1>FCM 테스트</h1>
-		</div>
+<></>
 	);
 };
 

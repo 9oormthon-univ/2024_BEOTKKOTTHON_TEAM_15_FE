@@ -14,8 +14,9 @@ const GroupSection = () => {
 			setLoading(true); // 로딩 시작
 			const result = await getAllMyTeamList();
 			setMyGroupDataList(result);
-			if(result.length != 0){
-				setLoading(false); // 로딩 종료
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
 			}
 		};
 		getDataList();
