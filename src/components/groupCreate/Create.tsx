@@ -29,7 +29,7 @@ const Create = () => {
 			name: groupName,
 			description: description,
 		};
-		createTeam(body);
+		// createTeam(body);
 		onModal();
 	}
 
