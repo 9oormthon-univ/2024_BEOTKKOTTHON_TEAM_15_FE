@@ -1,12 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BiSolidBellRing } from 'react-icons/bi';
+import { getAllUnreadNoticeList } from '@/apis/notice';
 
 const Alert = () => {
+	const [noticeDataList, setNoticeDataList] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [isZero, setIsZero] = useState(false);
+	const [data, setData] = useState();
+
+	useEffect(() => {
+		const getDataList = async () => {
+			const result = await getAllUnreadNoticeList();
+			setNoticeDataList(result);
+			setLoading(false);
+			if (result.length == 0) {
+				setIsZero(true);
+			}
+			console.log(result.data);
+			setData(result.data);
+		};
+		getDataList();
+	}, []);
 	return (
 		<>
+			{loading ? <Loading src="/img/loadingSpinner.gif" alt="로딩" /> : <></>}
 			<ListBox className="with-bottom">
 				<div>{'구름톤 유니브 2기에 "필독📢" 공지가 발행되었습니다.'}</div>
 				<BiSolidBellRing size="26px" className="margin-right" />
@@ -60,4 +80,8 @@ const ListBox = styled.div`
 		animation: shake 2.5s ease-in-out infinite;
 		margin-right: 2rem;
 	}
+`;
+
+const Loading = styled.img`
+	width: 100px;
 `;
