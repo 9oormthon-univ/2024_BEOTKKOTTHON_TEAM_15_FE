@@ -56,7 +56,9 @@ const Settings = () => {
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox>
-				<div onClick={() => router.push('/privacy')}>서비스 이용 문의</div>
+				<a href="http://pf.kakao.com/_AQtmG">
+					<div>서비스 이용 문의</div>
+				</a>
 				<FiChevronRight size="26px" />
 			</ListBox>
 			<ListBox onClick={handleLogout}>
