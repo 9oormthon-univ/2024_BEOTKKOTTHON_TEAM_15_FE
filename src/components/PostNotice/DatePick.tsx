@@ -30,21 +30,18 @@ const DatePicker = ({ time, setTime }: DropDownProps) => {
 	const handleDayChange = (value: number) => {
 		setDay(value);
 		const newTime = calculateTotalMinutes(value, hour, minute).toString();
-		console.log(newTime); // 콘솔에 바로 업데이트된 newTime 출력
 		setTime(newTime);
 	};
 
 	const handleHourChange = (value: number) => {
 		setHour(value);
 		const newTime = calculateTotalMinutes(day, value, minute).toString();
-		console.log(newTime); // 콘솔에 바로 업데이트된 newTime 출력
 		setTime(newTime);
 	};
 
 	const handleMinuteChange = (value: number) => {
 		setMinute(value);
 		const newTime = calculateTotalMinutes(day, hour, value).toString();
-		console.log(newTime); // 콘솔에 바로 업데이트된 newTime 출력
 		setTime(newTime);
 	};
 

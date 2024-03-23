@@ -71,7 +71,6 @@ const NoticeViewPage = () => {
 		const getDataList = async () => {
 			if (teamId && newsId) {
 				const result = await getNoticeDetail(teamId, newsId);
-				console.log(result);
 				setData(result);
 				if (data && data.limitTime) {
 					const date = getRemainingTime(data?.limitTime);
@@ -83,7 +82,6 @@ const NoticeViewPage = () => {
 			if (newsId) {
 				try {
 					const result = await checkReadList(newsId);
-					console.log(result);
 					const readMembers = result.filter((member: CheckData) => member.checkStatus === 'READ');
 					const unreadMembers = result.filter((member: CheckData) => member.checkStatus !== 'READ');
 					setReadData(readMembers);

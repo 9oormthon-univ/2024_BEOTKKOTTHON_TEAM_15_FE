@@ -78,13 +78,17 @@ const GroupDetailPage = () => {
 			<Section>
 				<Row2>
 					<SectionTitle>{groupInfo?.name}의 최근 가정통신문</SectionTitle>
-					<Btn2
-						onClick={() => {
-							router.push(`${pathname}/post`);
-						}}
-					>
-						<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
-					</Btn2>
+					{groupInfo?.role === 'CREATOR' || groupInfo?.role === 'LEADER' ? (
+						<Btn2
+							onClick={() => {
+								router.push(`${pathname}/post`);
+							}}
+						>
+							<LuPlusCircle size="1.5rem" />새 가정통신문 만들기
+						</Btn2>
+					) : (
+						<></>
+					)}
 				</Row2>
 				<GroupNoticeSection groupId={groupId} />
 			</Section>
@@ -117,7 +121,7 @@ const GroupProfile = styled.div`
 const ProfileCircle = styled.div`
 	width: 25%;
 	aspect-ratio: 1 / 1;
-    background-color:#B8B8B8;
+	background-color: #b8b8b8;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;

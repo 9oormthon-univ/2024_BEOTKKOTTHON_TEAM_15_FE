@@ -28,8 +28,6 @@ const Index = () => {
 		getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FIREBASE_KEY_PAIR })
 			.then((currentToken) => {
 				if (currentToken) {
-					// 정상적으로 토큰 발급 시 콘솔 출력
-					console.log(currentToken);
 					localStorage.setItem('device', currentToken);
 				} else {
 					console.log('No registration token available. Request permission to generate one.');
@@ -40,7 +38,6 @@ const Index = () => {
 				router.refresh();
 			});
 
-		// 브라우저를 보고 있을 때에는 콘솔로 출력
 		onMessage(messaging, (payload) => {
 			console.log('Message received. ', payload);
 		});
@@ -50,9 +47,7 @@ const Index = () => {
 		onMessageFCM();
 	}, []);
 
-	return (
-<></>
-	);
+	return <></>;
 };
 
 export default Index;

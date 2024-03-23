@@ -19,7 +19,7 @@ const GroupCard = (props: CardProps) => {
 		};
 		try {
 			await requestGroup(body);
-		} catch (error : any) {
+		} catch (error: any) {
 			if (error.message.includes('400')) {
 				alert('이미 소속된 그룹입니다❗️');
 			} else {

@@ -17,7 +17,6 @@ const NewNoticeSection = () => {
 			if (result.length == 0) {
 				setIsZero(true);
 			}
-			console.log(result);
 		};
 		getDataList();
 	}, []);

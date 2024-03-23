@@ -32,12 +32,11 @@ const SearchPage = () => {
 			}
 		};
 		getDataList();
-		console
 	}, [keyword]);
 
 	return (
 		<Main>
-				{modal && (
+			{modal && (
 				<Modal
 					homeUrl="/home"
 					pageUrl="/mypage"
@@ -49,7 +48,14 @@ const SearchPage = () => {
 			<Title>{`'${keyword}'`} 검색 결과</Title>
 			<CardSection>
 				{searchDataList.map((result, idx) => (
-					<GroupCard key={idx} onModal={onModal} title={result.name} id={result.id} teamSize={result.teamSize} profile={result.imageUrl} />
+					<GroupCard
+						key={idx}
+						onModal={onModal}
+						title={result.name}
+						id={result.id}
+						teamSize={result.teamSize}
+						profile={result.imageUrl}
+					/>
 				))}
 			</CardSection>
 		</Main>
@@ -68,7 +74,7 @@ const Main = styled.div`
 
 const Title = styled.div`
 	font-weight: 600;
-  width: 100%;
+	width: 100%;
 	font-size: 2rem;
 	margin-bottom: 1rem;
 	color: #28282a;

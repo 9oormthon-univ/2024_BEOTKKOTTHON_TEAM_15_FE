@@ -130,7 +130,7 @@ const Input = styled.input`
 `;
 
 const CheckWrapper = styled.div`
-	width: 310px;
+	width: 420px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
