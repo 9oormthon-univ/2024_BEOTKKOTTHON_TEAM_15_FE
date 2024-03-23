@@ -7,14 +7,36 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckListModal from './CheckListModal';
 
+// 현재 시간
+const getCurrentTime = () => {
+	return new Date();
+};
+// 남은 시간
+const getRemainingTime = (limitTime: string) => {
+	const now = getCurrentTime();
+	const limit = new Date(limitTime);
+	const timeDifference = limit.getTime() - now.getTime();
+
+	if (timeDifference <= 0) {
+		return '시간 마감';
+	} else {
+		const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+		const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+		const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+		return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+	}
+};
+
 const NoticeViewPage = () => {
 	const params = useSearchParams();
 	const newsId = params.get('news');
 	const teamId = params.get('team');
 	const [data, setData] = useState<ContentsType>();
-	const [readData, setReadData] = useState<CheckData[]>()
-	const [unreadData, setUnreadData] = useState<CheckData[]>()
-	const [modal, onModal] = useState(false)
+	const [readData, setReadData] = useState<CheckData[]>();
+	const [unreadData, setUnreadData] = useState<CheckData[]>();
+	const [remainingTime, setRemainingTime] = useState<string>();
+	const [modal, onModal] = useState(false);
 	const router = useRouter();
 
 	const formatContent = (content?: string) => {
@@ -27,6 +49,10 @@ const NoticeViewPage = () => {
 	};
 
 	const handleSubmit = async () => {
+		if(remainingTime=='시간 마감'){
+			alert('이미 열람이 마감된 공지입니다!');
+			return;
+		}
 		try {
 			if (newsId) {
 				const result = await changeReadState(newsId);
@@ -46,13 +72,17 @@ const NoticeViewPage = () => {
 				const result = await getNoticeDetail(teamId, newsId);
 				console.log(result);
 				setData(result);
+				if (data && data.limitTime) {
+					const date = getRemainingTime(data?.limitTime);
+					setRemainingTime(date);
+				}
 			}
 		};
 		const getReadDataList = async () => {
 			if (newsId) {
 				const result = await checkReadList(newsId);
 				console.log(result);
-				const readMembers = result.filter((member: CheckData)=> member.checkStatus === 'READ');
+				const readMembers = result.filter((member: CheckData) => member.checkStatus === 'READ');
 				const unreadMembers = result.filter((member: CheckData) => member.checkStatus !== 'READ');
 				setReadData(readMembers);
 				setUnreadData(unreadMembers);
@@ -62,9 +92,20 @@ const NoticeViewPage = () => {
 		getReadDataList();
 	}, [teamId, newsId]);
 
+	useEffect(() => {
+		const timer = setInterval(() => {
+			if (data && data.limitTime) {
+				setRemainingTime(getRemainingTime(data.limitTime));
+			}
+		}, 1000);
+
+		// 컴포넌트가 언마운트될 때 타이머 정리
+		return () => clearInterval(timer);
+	}, [data]);
+
 	return (
 		<Main>
-			{modal ? <CheckListModal onModal={onModal} readData={readData} unreadData={unreadData}/> : <></>}
+			{modal ? <CheckListModal onModal={onModal} readData={readData} unreadData={unreadData} /> : <></>}
 			<Title>{data?.title}</Title>
 			<Line />
 			<Row>
@@ -74,28 +115,38 @@ const NoticeViewPage = () => {
 				</Tag>
 				<Tag>
 					<div className="tag membertag">남은 시간</div>
-					<div id="time">00:45:46</div>
+					<div id="time">{remainingTime}</div>
 				</Tag>
 				<Tag>
-					<div className="tag leadertag" onClick={()=>{onModal(true)}}>확인</div>
+					<div
+						className="tag leadertag"
+						onClick={() => {
+							onModal(true);
+						}}
+					>
+						확인
+					</div>
 					<div id="text">{data?.readMemberCount}명</div>
 				</Tag>
 				<Tag>
-					<div className="tag leadertag" onClick={()=>{onModal(true)}}>미확인</div>
+					<div
+						className="tag leadertag"
+						onClick={() => {
+							onModal(true);
+						}}
+					>
+						미확인
+					</div>
 					<div id="text">{data?.notReadMemberCount}명</div>
 				</Tag>
 			</Row>
 			<Line />
-			<Section>
-				<div>{formatContent(data?.content)}</div>
+			<Section id="content">{formatContent(data?.content)}</Section>
+			<Section id="imagegroup">
+				{data && data.imageUrl1 && data.imageUrl1 != '__null__' && <Image src={data?.imageUrl1} alt="첨부 이미지1" />}
+				{data && data.imageUrl2 && data.imageUrl2 != '__null__' && <Image src={data?.imageUrl2} alt="첨부 이미지2" />}
 			</Section>
-			<Section>
-				{data && data.imageUrl1 && <Image src={data?.imageUrl1} alt="첨부 이미지1" />}
-				{data && data.imageUrl2 && <Image src={data?.imageUrl2} alt="첨부 이미지2" />}
-			</Section>
-			<Submit>
-				<SubmitBtn onClick={handleSubmit}>확인</SubmitBtn>
-			</Submit>
+			<Submit>{data && data.checkStatus != 'READ' && <SubmitBtn onClick={handleSubmit}>확인</SubmitBtn>}</Submit>
 		</Main>
 	);
 };
@@ -108,10 +159,20 @@ const Main = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	#content {
+		font-size: 1.5rem;
+	}
+	#imagegroup {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const Section = styled.div`
-	width: 100%;
+	width: 90%;
 	height: fit-content;
 	padding: 2rem 0rem;
 `;
@@ -166,7 +227,7 @@ const Tag = styled.div`
 `;
 
 const Image = styled.img`
-	width: 80%;
+	width: 60%;
 `;
 
 const Submit = styled.div`
